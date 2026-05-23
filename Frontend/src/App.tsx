@@ -1,7 +1,5 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -14,7 +12,6 @@ function App() {
           {/* Hero Images */}
           <div className="flex justify-center items-center gap-6 mb-8">
             <img src={reactLogo} alt="React logo" className="w-24 h-24 hover:scale-110 transition-transform" />
-            <img src={viteLogo} alt="Vite logo" className="w-24 h-24 hover:scale-110 transition-transform" />
           </div>
 
           {/* Title */}

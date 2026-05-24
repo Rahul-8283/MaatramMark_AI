@@ -58,7 +58,7 @@ export default function Home() {
             animate="visible"
             variants={containerVariants}
           >
-            <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-slate-900/60 border border-amber-900/20 text-[#c5a880] text-sm font-medium mb-8 backdrop-blur-sm">
+            <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-black/40 text-[#c5a880] text-sm font-medium mb-8 backdrop-blur-sm">
               <Sparkles className="w-4 h-4" />
               <span>The Next Generation of AI Marketing</span>
             </motion.div>

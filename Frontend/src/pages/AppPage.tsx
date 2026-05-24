@@ -63,13 +63,13 @@ export function AppHome() {
 				</div>
 
 				{/* Daily Update Card */}
-				<div className="bg-[#121212]/50 backdrop-blur-xl rounded-2xl p-8 border border-[#c5a880]/30 shadow-2xl hover:shadow-[#c5a880]/10 hover:border-[#c5a880]/50 transition-all mb-8">
+				<div className="bg-[#121212]/50 backdrop-blur-xl rounded-lg p-8 border border-[#c5a880]/30 shadow-2xl hover:shadow-[#c5a880]/10 hover:border-[#c5a880]/50 transition-all mb-8">
 					<div className="flex items-start justify-between mb-6">
 						<div>
 							<h2 className="text-xl font-semibold text-white mb-2">Daily Content Generation</h2>
 							<p className="text-slate-400">Generate fresh ideas, captions & hashtags for today</p>
 						</div>
-						<div className="text-[#c5a880] bg-amber-950/20 p-3 rounded-xl border border-amber-900/30 shadow-inner">
+						<div className="text-[#c5a880] bg-amber-950/20 p-3 rounded-lg border border-amber-900/30 shadow-inner">
 							<FileText className="w-6 h-6" />
 						</div>
 					</div>
@@ -83,7 +83,7 @@ export function AppHome() {
 					<button
 						onClick={handleUpdateDaily}
 						disabled={loading}
-						className="w-full px-8 py-4 bg-white hover:bg-slate-200 text-black rounded-xl font-bold text-lg transition-all shadow-[0_0_25px_-5px_rgba(197,168,128,0.5)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+						className="w-full px-8 py-4 bg-white hover:bg-slate-200 text-black rounded-lg font-bold text-lg transition-all shadow-[0_0_25px_-5px_rgba(197,168,128,0.5)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
 					>
 						{loading ? (
 							<div className="flex items-center justify-center gap-2">
@@ -101,8 +101,8 @@ export function AppHome() {
 
 				{/* Quick Actions Grid */}
 				<div className="grid md:grid-cols-3 gap-6">
-					<div className="bg-[#121212]/40 backdrop-blur-md rounded-xl p-6 border border-slate-800/60 hover:border-[#c5a880]/40 hover:bg-[#161616]/60 transition-all hover:shadow-[0_10px_30px_-15px_rgba(0,0,0,0.7)]">
-						<div className="w-10 h-10 rounded-lg bg-amber-950/20 border border-amber-900/30 flex items-center justify-center text-[#c5a880] mb-3">
+					<div className="bg-[#121212]/40 backdrop-blur-md rounded-lg p-6 border border-slate-800/60 hover:border-[#c5a880]/40 hover:bg-[#161616]/60 transition-all hover:shadow-[0_10px_30px_-15px_rgba(0,0,0,0.7)]">
+						<div className="w-10 h-10 rounded-md bg-amber-950/20 border border-amber-900/30 flex items-center justify-center text-[#c5a880] mb-3">
 							<BarChart3 className="w-5 h-5" />
 						</div>
 						<h3 className="text-lg font-semibold text-white mb-1">Content Posts</h3>
@@ -110,8 +110,8 @@ export function AppHome() {
 						<p className="text-sm text-slate-400 mt-2">This month</p>
 					</div>
 
-					<div className="bg-[#121212]/40 backdrop-blur-md rounded-xl p-6 border border-slate-800/60 hover:border-[#c5a880]/40 hover:bg-[#161616]/60 transition-all hover:shadow-[0_10px_30px_-15px_rgba(0,0,0,0.7)]">
-						<div className="w-10 h-10 rounded-lg bg-amber-950/20 border border-amber-900/30 flex items-center justify-center text-[#c5a880] mb-3">
+					<div className="bg-[#121212]/40 backdrop-blur-md rounded-lg p-6 border border-slate-800/60 hover:border-[#c5a880]/40 hover:bg-[#161616]/60 transition-all hover:shadow-[0_10px_30px_-15px_rgba(0,0,0,0.7)]">
+						<div className="w-10 h-10 rounded-md bg-amber-950/20 border border-amber-900/30 flex items-center justify-center text-[#c5a880] mb-3">
 							<Lightbulb className="w-5 h-5" />
 						</div>
 						<h3 className="text-lg font-semibold text-white mb-1">Ideas Ready</h3>
@@ -119,8 +119,8 @@ export function AppHome() {
 						<p className="text-sm text-slate-400 mt-2">Unique concepts</p>
 					</div>
 
-					<div className="bg-[#121212]/40 backdrop-blur-md rounded-xl p-6 border border-slate-800/60 hover:border-[#c5a880]/40 hover:bg-[#161616]/60 transition-all hover:shadow-[0_10px_30px_-15px_rgba(0,0,0,0.7)]">
-						<div className="w-10 h-10 rounded-lg bg-amber-950/20 border border-amber-900/30 flex items-center justify-center text-[#c5a880] mb-3">
+					<div className="bg-[#121212]/40 backdrop-blur-md rounded-lg p-6 border border-slate-800/60 hover:border-[#c5a880]/40 hover:bg-[#161616]/60 transition-all hover:shadow-[0_10px_30px_-15px_rgba(0,0,0,0.7)]">
+						<div className="w-10 h-10 rounded-md bg-amber-950/20 border border-amber-900/30 flex items-center justify-center text-[#c5a880] mb-3">
 							<Target className="w-5 h-5" />
 						</div>
 						<h3 className="text-lg font-semibold text-white mb-1">Ready to Post</h3>
@@ -131,7 +131,7 @@ export function AppHome() {
 
 				{/* Features Section */}
 				<div className="mt-12 grid md:grid-cols-2 gap-6">
-					<div className="bg-[#121212]/30 backdrop-blur-md rounded-xl p-6 border border-slate-800/40">
+					<div className="bg-[#121212]/30 backdrop-blur-md rounded-lg p-6 border border-slate-800/40">
 						<h3 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
 							<Sparkles className="w-5 h-5 text-amber-500" />
 							Next Steps
@@ -150,7 +150,7 @@ export function AppHome() {
 						</button>
 					</div>
 
-					<div className="bg-[#121212]/30 backdrop-blur-md rounded-xl p-6 border border-slate-800/40">
+					<div className="bg-[#121212]/30 backdrop-blur-md rounded-lg p-6 border border-slate-800/40">
 						<h3 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
 							<Flame className="w-5 h-5 text-orange-500" />
 							Pro Tip
@@ -195,7 +195,7 @@ function DailyContentView({ daily, onBack }: { daily: DailyContent, onBack: () =
 
 				{/* Context Section */}
 				{daily.context && (
-					<div className="bg-[#121212]/50 backdrop-blur-md border border-[#c5a880]/30 rounded-xl p-6 mb-8">
+					<div className="bg-[#121212]/50 backdrop-blur-md border border-[#c5a880]/30 rounded-lg p-6 mb-8">
 						<h2 className="text-xl font-semibold text-[#c5a880] mb-3 flex items-center gap-2">
 							<Pin className="w-5 h-5" /> Today's Context
 						</h2>
@@ -211,9 +211,9 @@ function DailyContentView({ daily, onBack }: { daily: DailyContent, onBack: () =
 							{daily.ideas.map((idea, idx) => (
 								<div
 									key={idx}
-									className="bg-[#121212]/40 backdrop-blur-md border border-slate-800/60 hover:border-[#c5a880]/40 hover:bg-[#161616]/60 rounded-xl p-5 transition-all group cursor-pointer"
+									className="bg-[#121212]/40 backdrop-blur-md border border-slate-800/60 hover:border-[#c5a880]/40 hover:bg-[#161616]/60 rounded-lg p-5 transition-all group cursor-pointer"
 								>
-									<div className="w-8 h-8 rounded-lg bg-amber-950/20 border border-amber-900/30 flex items-center justify-center text-[#c5a880] mb-3">
+									<div className="w-8 h-8 rounded-md bg-amber-950/20 border border-amber-900/30 flex items-center justify-center text-[#c5a880] mb-3">
 										<Sparkles className="w-4 h-4" />
 									</div>
 									<p className="text-slate-200 group-hover:text-white transition-colors">{idea}</p>
@@ -231,7 +231,7 @@ function DailyContentView({ daily, onBack }: { daily: DailyContent, onBack: () =
 							{daily.captions.map((caption, idx) => (
 								<div
 									key={idx}
-									className="bg-[#121212]/40 backdrop-blur-md border border-slate-800/60 hover:border-[#c5a880]/40 hover:bg-[#161616]/60 rounded-xl p-5 transition-all group"
+									className="bg-[#121212]/40 backdrop-blur-md border border-slate-800/60 hover:border-[#c5a880]/40 hover:bg-[#161616]/60 rounded-lg p-5 transition-all group"
 								>
 									<div className="flex items-start justify-between">
 										<p className="text-slate-200 group-hover:text-white transition-colors flex-1">{caption}</p>
@@ -252,13 +252,13 @@ function DailyContentView({ daily, onBack }: { daily: DailyContent, onBack: () =
 				{daily.hashtags && daily.hashtags.length > 0 && (
 					<div className="mb-8">
 						<h2 className="text-xl font-semibold text-white mb-4">🏷️ Recommended Hashtags</h2>
-						<div className="bg-[#121212]/40 backdrop-blur-md border border-slate-800/60 rounded-xl p-6">
+						<div className="bg-[#121212]/40 backdrop-blur-md border border-slate-800/60 rounded-lg p-6">
 							<div className="flex flex-wrap gap-3">
 								{daily.hashtags.map((tag, idx) => (
 									<button
 										key={idx}
 										onClick={() => navigator.clipboard.writeText(tag)}
-										className="px-4 py-2 bg-amber-950/20 hover:bg-amber-900/30 text-[#c5a880] rounded-full text-sm font-medium transition-colors border border-amber-900/30 hover:border-[#c5a880]/50"
+										className="px-4 py-2 bg-amber-950/20 hover:bg-amber-900/30 text-[#c5a880] rounded-md text-sm font-medium transition-colors border border-amber-900/30 hover:border-[#c5a880]/50"
 									>
 										{tag}
 									</button>
@@ -270,7 +270,7 @@ function DailyContentView({ daily, onBack }: { daily: DailyContent, onBack: () =
 				)}
 
 				{/* CTA Section */}
-				<div className="bg-gradient-to-r from-amber-950/5 to-amber-900/5 backdrop-blur-md rounded-xl p-8 border border-[#c5a880]/20 text-center shadow-lg shadow-[#c5a880]/3">
+				<div className="bg-gradient-to-r from-amber-950/5 to-amber-900/5 backdrop-blur-md rounded-lg p-8 border border-[#c5a880]/20 text-center shadow-lg shadow-[#c5a880]/3">
 					<h3 className="text-xl font-bold text-white mb-4">Ready to create visuals?</h3>
 					<button
 						onClick={() => navigate('/app/generate-images')}
@@ -312,7 +312,7 @@ export function AppSettings() {
 				</div>
 
 				{/* Business Info Section */}
-				<div className="bg-[#121212]/40 backdrop-blur-xl rounded-2xl p-8 border border-slate-800/60 mb-8">
+				<div className="bg-[#121212]/40 backdrop-blur-xl rounded-lg border border-slate-800/60 mb-8">
 					<h2 className="text-xl font-semibold text-white mb-6">Business Information</h2>
 					<div className="space-y-5">
 						<div>
@@ -320,14 +320,14 @@ export function AppSettings() {
 							<input
 								type="text"
 								defaultValue={business?.business_name || ''}
-								className="w-full px-4 py-3 bg-slate-950/50 border border-slate-800 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-[#c5a880] focus:ring-1 focus:ring-[#c5a880]/30 transition-all"
+								className="w-full px-4 py-3 bg-slate-950/50 border border-slate-800 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-[#c5a880] focus:ring-1 focus:ring-[#c5a880]/30 transition-all"
 								placeholder="Your business name"
 							/>
 						</div>
 
 						<div>
 							<label className="block text-sm font-medium text-slate-300 mb-2">Business Type</label>
-							<select className="w-full px-4 py-3 bg-slate-950/50 border border-slate-800 rounded-xl text-white focus:outline-none focus:border-[#c5a880] focus:ring-1 focus:ring-[#c5a880]/30 transition-all">
+							<select className="w-full px-4 py-3 bg-slate-950/50 border border-slate-800 rounded-lg text-white focus:outline-none focus:border-[#c5a880] focus:ring-1 focus:ring-[#c5a880]/30 transition-all">
 								<option>Select type</option>
 								<option selected={business?.business_type === 'Retail'}>Retail</option>
 								<option selected={business?.business_type === 'Food'}>Food & Beverage</option>
@@ -343,7 +343,7 @@ export function AppSettings() {
 							<input
 								type="text"
 								defaultValue={business?.location || ''}
-								className="w-full px-4 py-3 bg-slate-950/50 border border-slate-800 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-[#c5a880] focus:ring-1 focus:ring-[#c5a880]/30 transition-all"
+								className="w-full px-4 py-3 bg-slate-950/50 border border-slate-800 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-[#c5a880] focus:ring-1 focus:ring-[#c5a880]/30 transition-all"
 								placeholder="City / Region"
 							/>
 						</div>
@@ -355,7 +355,7 @@ export function AppSettings() {
 				</div>
 
 				{/* Account Section */}
-				<div className="bg-[#121212]/40 backdrop-blur-xl rounded-2xl p-8 border border-red-500/20">
+				<div className="bg-[#121212]/40 backdrop-blur-xl rounded-lg p-8 border border-red-500/20">
 					<h2 className="text-xl font-semibold text-white mb-6">Account</h2>
 					<div className="space-y-4">
 						<p className="text-slate-400 text-sm">

@@ -168,7 +168,7 @@ export default function ImageGeneration() {
 				<StepIndicator steps={STEPS} currentStep={step} />
 
 				{error && (
-					<div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4 mb-8 text-red-200">
+					<div className="bg-red-500/10 border border-red-500/30 rounded-md p-4 mb-8 text-red-200">
 						{error}
 					</div>
 				)}
@@ -186,7 +186,7 @@ export default function ImageGeneration() {
 						<button
 							onClick={handleGenerateConcept}
 							disabled={loading}
-							className="w-full px-8 py-6 bg-white hover:bg-slate-200 text-black rounded-xl font-bold text-lg transition-all shadow-[0_0_25px_-5px_rgba(197,168,128,0.5)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+							className="w-full px-8 py-6 bg-white hover:bg-slate-200 text-black rounded-lg font-bold text-lg transition-all shadow-[0_0_25px_-5px_rgba(197,168,128,0.5)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
 						>
 							{loading ? (
 								<div className="flex items-center justify-center gap-3">
@@ -200,7 +200,7 @@ export default function ImageGeneration() {
 							)}
 						</button>
 
-						<div className="bg-[#121212]/30 backdrop-blur-md rounded-xl p-6 border border-slate-800/40">
+						<div className="bg-[#121212]/30 backdrop-blur-md rounded-lg p-6 border border-slate-800/40">
 							<h3 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
 								<HelpCircle className="w-5 h-5 text-[#c5a880]" />
 								How it works
@@ -229,9 +229,9 @@ export default function ImageGeneration() {
 									key={idx}
 									onClick={() => handleSelectConcept(c)}
 									disabled={loading}
-									className="text-left p-6 bg-[#121212]/40 backdrop-blur-md rounded-xl border border-slate-800/60 hover:border-[#c5a880]/50 hover:bg-[#161616]/60 transition-all hover:shadow-[0_15px_35px_-10px_rgba(0,0,0,0.6)] disabled:opacity-50 disabled:cursor-not-allowed group"
+									className="text-left p-6 bg-[#121212]/40 backdrop-blur-md rounded-lg border border-slate-800/60 hover:border-[#c5a880]/50 hover:bg-[#161616]/60 transition-all hover:shadow-[0_15px_35px_-10px_rgba(0,0,0,0.6)] disabled:opacity-50 disabled:cursor-not-allowed group"
 								>
-									<div className="w-10 h-10 rounded-lg bg-amber-950/20 border border-amber-900/30 flex items-center justify-center text-[#c5a880] mb-3">
+									<div className="w-10 h-10 rounded-md bg-amber-950/20 border border-amber-900/30 flex items-center justify-center text-[#c5a880] mb-3">
 										<Target className="w-5 h-5" />
 									</div>
 									<p className="text-slate-200 group-hover:text-white transition-colors leading-relaxed">
@@ -252,17 +252,17 @@ export default function ImageGeneration() {
 						</div>
 
 						{/* Image Preview */}
-						<div className="bg-[#121212]/50 backdrop-blur-xl rounded-2xl p-8 border border-[#c5a880]/20">
+						<div className="bg-[#121212]/50 backdrop-blur-xl rounded-lg p-8 border border-[#c5a880]/20">
 							<div className="mb-6">
 								<p className="text-sm text-slate-400 mb-3">Current Image</p>
 								{imageUrl ? (
 									<img
 										src={imageUrl}
 										alt="Generated"
-										className="w-full h-96 object-cover rounded-xl border border-slate-700 shadow-lg"
+										className="w-full h-96 object-cover rounded-lg border border-slate-700 shadow-lg"
 									/>
 								) : (
-									<div className="w-full h-96 bg-slate-900 rounded-xl border border-slate-700 flex items-center justify-center">
+									<div className="w-full h-96 bg-slate-900 rounded-lg border border-slate-700 flex items-center justify-center">
 										<div className="text-slate-500">Image will appear here</div>
 									</div>
 								)}
@@ -274,7 +274,7 @@ export default function ImageGeneration() {
 									<p className="text-sm text-slate-400 mb-3">Refinements Applied</p>
 									<div className="space-y-2">
 										{refinementHistory.map((h, idx) => (
-											<div key={idx} className="bg-slate-900/50 rounded-lg p-3 text-slate-300 text-sm border border-slate-700/50">
+											<div key={idx} className="bg-slate-900/50 rounded-md p-3 text-slate-300 text-sm border border-slate-700/50">
 												✓ {h}
 											</div>
 										))}
@@ -288,14 +288,14 @@ export default function ImageGeneration() {
 									value={refinementPrompt}
 									onChange={(e) => setRefinementPrompt(e.target.value)}
 									placeholder="e.g., Make it brighter, add more colors, change the background..."
-									className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:border-[#c5a880] focus:outline-none focus:ring-2 focus:ring-[#c5a880]/20 transition-all resize-none h-20"
+									className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-md text-white placeholder-slate-500 focus:border-[#c5a880] focus:outline-none focus:ring-2 focus:ring-[#c5a880]/20 transition-all resize-none h-20"
 								/>
 
 								<div className="flex gap-4">
 									<button
 										onClick={handleRefineImage}
 										disabled={loading || !refinementPrompt.trim()}
-										className="flex-1 px-6 py-3 bg-white hover:bg-slate-200 text-black rounded-lg font-bold transition-all shadow-[0_0_20px_-5px_rgba(197,168,128,0.4)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+										className="flex-1 px-6 py-3 bg-white hover:bg-slate-200 text-black rounded-md font-bold transition-all shadow-[0_0_20px_-5px_rgba(197,168,128,0.4)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
 									>
 										{loading ? 'Refining...' : (
 											<span className="flex items-center justify-center gap-2">
@@ -306,7 +306,7 @@ export default function ImageGeneration() {
 									<button
 										onClick={handleProceedToConfirm}
 										disabled={loading}
-										className="flex-1 px-6 py-3 bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 rounded-lg font-semibold transition-all"
+										className="flex-1 px-6 py-3 bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 rounded-md font-semibold transition-all"
 									>
 										→ Next
 									</button>
@@ -325,12 +325,12 @@ export default function ImageGeneration() {
 						</div>
 
 						{/* Image Preview */}
-						<div className="bg-[#121212]/50 backdrop-blur-xl rounded-2xl p-8 border border-[#c5a880]/20 mb-8">
+						<div className="bg-[#121212]/50 backdrop-blur-xl rounded-md p-8 border border-[#c5a880]/20 mb-8">
 							{imageUrl && (
 								<img
 									src={imageUrl}
 									alt="Final"
-									className="w-full h-96 object-cover rounded-xl border border-slate-700 shadow-lg"
+									className="w-full h-96 object-cover rounded-md border border-slate-700 shadow-lg"
 								/>
 							)}
 						</div>
@@ -339,13 +339,13 @@ export default function ImageGeneration() {
 						<div className="grid md:grid-cols-2 gap-6 mb-8">
 							<button
 								onClick={() => setPostType('poster')}
-								className={`p-6 rounded-xl border-2 transition-all ${
+								className={`p-6 rounded-md border-2 transition-all ${
 									postType === 'poster'
 										? 'border-[#c5a880] bg-[#c5a880]/5 shadow-lg shadow-[#c5a880]/10'
 										: 'border-slate-800 bg-[#121212]/40 backdrop-blur-md hover:border-slate-700'
 								}`}
 							>
-								<div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white mb-4 mx-auto">
+								<div className="w-12 h-12 rounded-md bg-white/5 border border-white/10 flex items-center justify-center text-white mb-4 mx-auto">
 									<Smartphone className="w-6 h-6" />
 								</div>
 								<h3 className="text-lg font-semibold text-white mb-1">Social Media Poster</h3>
@@ -354,13 +354,13 @@ export default function ImageGeneration() {
 
 							<button
 								onClick={() => setPostType('logo')}
-								className={`p-6 rounded-xl border-2 transition-all ${
+								className={`p-6 rounded-md border-2 transition-all ${
 									postType === 'logo'
 										? 'border-[#c5a880] bg-[#c5a880]/5 shadow-lg shadow-[#c5a880]/10'
 										: 'border-slate-800 bg-[#121212]/40 backdrop-blur-md hover:border-slate-700'
 								}`}
 							>
-								<div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white mb-4 mx-auto">
+								<div className="w-12 h-12 rounded-md bg-white/5 border border-white/10 flex items-center justify-center text-white mb-4 mx-auto">
 									<Award className="w-6 h-6" />
 								</div>
 								<h3 className="text-lg font-semibold text-white mb-1">Business Logo</h3>
@@ -371,7 +371,7 @@ export default function ImageGeneration() {
 						<button
 							onClick={handleConfirmPost}
 							disabled={loading}
-							className="w-full px-8 py-4 bg-white hover:bg-slate-200 text-black rounded-xl font-bold text-lg transition-all shadow-[0_0_25px_-5px_rgba(197,168,128,0.5)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+							className="w-full px-8 py-4 bg-white hover:bg-slate-200 text-black rounded-md font-bold text-lg transition-all shadow-[0_0_25px_-5px_rgba(197,168,128,0.5)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
 						>
 							{loading ? 'Confirming...' : (
 								<span className="flex items-center justify-center gap-2">
@@ -390,7 +390,7 @@ export default function ImageGeneration() {
 							<p className="text-slate-400">Help us improve our image generation</p>
 						</div>
 
-						<div className="bg-[#121212]/50 backdrop-blur-xl rounded-2xl p-8 border border-[#c5a880]/20 space-y-8">
+						<div className="bg-[#121212]/50 backdrop-blur-xl rounded-md p-8 border border-[#c5a880]/20 space-y-8">
 							{/* Rating */}
 							<div>
 								<label className="block text-lg font-semibold text-white mb-4">How satisfied are you?</label>
@@ -427,7 +427,7 @@ export default function ImageGeneration() {
 									value={feedbackText}
 									onChange={(e) => setFeedbackText(e.target.value)}
 									placeholder="What could we improve? What did you love?"
-									className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:border-[#c5a880] focus:outline-none focus:ring-2 focus:ring-[#c5a880]/20 transition-all resize-none h-24"
+									className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-md text-white placeholder-slate-500 focus:border-[#c5a880] focus:outline-none focus:ring-2 focus:ring-[#c5a880]/20 transition-all resize-none h-24"
 								/>
 							</div>
 
@@ -435,7 +435,7 @@ export default function ImageGeneration() {
 							<button
 								onClick={handleSubmitFeedback}
 								disabled={loading}
-								className="w-full px-8 py-4 bg-white hover:bg-slate-200 text-black rounded-xl font-bold text-lg transition-all shadow-[0_0_25px_-5px_rgba(197,168,128,0.5)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+								className="w-full px-8 py-4 bg-white hover:bg-slate-200 text-black rounded-lg font-bold text-lg transition-all shadow-[0_0_25px_-5px_rgba(197,168,128,0.5)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
 							>
 								{loading ? 'Submitting...' : (
 									<span className="flex items-center justify-center gap-2">

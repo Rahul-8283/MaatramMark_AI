@@ -12,16 +12,16 @@ function StepIndicator({ steps, currentStep }: { steps: string[], currentStep: n
 				<div key={idx} className="flex items-center">
 					<div className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold text-sm transition-all ${
 						idx < currentStep 
-							? 'bg-white text-black shadow-lg shadow-white/10' 
+							? 'bg-[#c5a880] text-black shadow-lg shadow-[#c5a880]/20' 
 							: idx === currentStep 
-							? 'bg-white text-black ring-4 ring-white/10 shadow-lg' 
+							? 'bg-[#c5a880] text-black ring-4 ring-[#c5a880]/20 shadow-lg shadow-[#c5a880]/30' 
 							: 'bg-slate-700 text-slate-400'
 					}`}>
 						{idx + 1}
 					</div>
 					{idx < steps.length - 1 && (
 						<div className={`w-12 h-1 mx-2 rounded-full transition-colors ${
-							idx < currentStep ? 'bg-white' : 'bg-slate-700'
+							idx < currentStep ? 'bg-[#c5a880]' : 'bg-slate-700'
 						}`} />
 					)}
 				</div>
@@ -186,7 +186,7 @@ export default function ImageGeneration() {
 						<button
 							onClick={handleGenerateConcept}
 							disabled={loading}
-							className="w-full px-8 py-6 bg-white hover:bg-slate-200 text-black rounded-xl font-bold text-lg transition-all shadow-[0_0_25px_-5px_rgba(255,255,255,0.4)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+							className="w-full px-8 py-6 bg-white hover:bg-slate-200 text-black rounded-xl font-bold text-lg transition-all shadow-[0_0_25px_-5px_rgba(197,168,128,0.5)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
 						>
 							{loading ? (
 								<div className="flex items-center justify-center gap-3">
@@ -202,7 +202,7 @@ export default function ImageGeneration() {
 
 						<div className="bg-[#121212]/30 backdrop-blur-md rounded-xl p-6 border border-slate-800/40">
 							<h3 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
-								<HelpCircle className="w-5 h-5 text-cyan-400" />
+								<HelpCircle className="w-5 h-5 text-[#c5a880]" />
 								How it works
 							</h3>
 							<ul className="space-y-2 text-slate-300 text-sm">
@@ -229,9 +229,9 @@ export default function ImageGeneration() {
 									key={idx}
 									onClick={() => handleSelectConcept(c)}
 									disabled={loading}
-									className="text-left p-6 bg-[#121212]/40 backdrop-blur-md rounded-xl border border-slate-800/60 hover:border-white/40 hover:bg-[#161616]/60 transition-all hover:shadow-[0_15px_35px_-10px_rgba(0,0,0,0.6)] disabled:opacity-50 disabled:cursor-not-allowed group"
+									className="text-left p-6 bg-[#121212]/40 backdrop-blur-md rounded-xl border border-slate-800/60 hover:border-[#c5a880]/50 hover:bg-[#161616]/60 transition-all hover:shadow-[0_15px_35px_-10px_rgba(0,0,0,0.6)] disabled:opacity-50 disabled:cursor-not-allowed group"
 								>
-									<div className="w-10 h-10 rounded-lg bg-cyan-950/50 border border-cyan-800/30 flex items-center justify-center text-cyan-400 mb-3">
+									<div className="w-10 h-10 rounded-lg bg-amber-950/20 border border-amber-900/30 flex items-center justify-center text-[#c5a880] mb-3">
 										<Target className="w-5 h-5" />
 									</div>
 									<p className="text-slate-200 group-hover:text-white transition-colors leading-relaxed">
@@ -252,7 +252,7 @@ export default function ImageGeneration() {
 						</div>
 
 						{/* Image Preview */}
-						<div className="bg-gradient-to-br from-slate-800/80 to-slate-900/40 rounded-2xl p-8 border border-cyan-500/20">
+						<div className="bg-[#121212]/50 backdrop-blur-xl rounded-2xl p-8 border border-[#c5a880]/20">
 							<div className="mb-6">
 								<p className="text-sm text-slate-400 mb-3">Current Image</p>
 								{imageUrl ? (
@@ -288,14 +288,14 @@ export default function ImageGeneration() {
 									value={refinementPrompt}
 									onChange={(e) => setRefinementPrompt(e.target.value)}
 									placeholder="e.g., Make it brighter, add more colors, change the background..."
-									className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:border-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/20 transition-all resize-none h-20"
+									className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:border-[#c5a880] focus:outline-none focus:ring-2 focus:ring-[#c5a880]/20 transition-all resize-none h-20"
 								/>
 
 								<div className="flex gap-4">
 									<button
 										onClick={handleRefineImage}
 										disabled={loading || !refinementPrompt.trim()}
-										className="flex-1 px-6 py-3 bg-white hover:bg-slate-200 text-black rounded-lg font-bold transition-all shadow-[0_0_15px_-5px_rgba(255,255,255,0.4)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+										className="flex-1 px-6 py-3 bg-white hover:bg-slate-200 text-black rounded-lg font-bold transition-all shadow-[0_0_20px_-5px_rgba(197,168,128,0.4)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
 									>
 										{loading ? 'Refining...' : (
 											<span className="flex items-center justify-center gap-2">
@@ -325,7 +325,7 @@ export default function ImageGeneration() {
 						</div>
 
 						{/* Image Preview */}
-						<div className="bg-gradient-to-br from-slate-800/80 to-slate-900/40 rounded-2xl p-8 border border-cyan-500/20 mb-8">
+						<div className="bg-[#121212]/50 backdrop-blur-xl rounded-2xl p-8 border border-[#c5a880]/20 mb-8">
 							{imageUrl && (
 								<img
 									src={imageUrl}
@@ -341,7 +341,7 @@ export default function ImageGeneration() {
 								onClick={() => setPostType('poster')}
 								className={`p-6 rounded-xl border-2 transition-all ${
 									postType === 'poster'
-										? 'border-white bg-white/5 shadow-lg shadow-white/5'
+										? 'border-[#c5a880] bg-[#c5a880]/5 shadow-lg shadow-[#c5a880]/10'
 										: 'border-slate-800 bg-[#121212]/40 backdrop-blur-md hover:border-slate-700'
 								}`}
 							>
@@ -356,7 +356,7 @@ export default function ImageGeneration() {
 								onClick={() => setPostType('logo')}
 								className={`p-6 rounded-xl border-2 transition-all ${
 									postType === 'logo'
-										? 'border-white bg-white/5 shadow-lg shadow-white/5'
+										? 'border-[#c5a880] bg-[#c5a880]/5 shadow-lg shadow-[#c5a880]/10'
 										: 'border-slate-800 bg-[#121212]/40 backdrop-blur-md hover:border-slate-700'
 								}`}
 							>
@@ -371,7 +371,7 @@ export default function ImageGeneration() {
 						<button
 							onClick={handleConfirmPost}
 							disabled={loading}
-							className="w-full px-8 py-4 bg-white hover:bg-slate-200 text-black rounded-xl font-bold text-lg transition-all shadow-[0_0_20px_-5px_rgba(255,255,255,0.4)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+							className="w-full px-8 py-4 bg-white hover:bg-slate-200 text-black rounded-xl font-bold text-lg transition-all shadow-[0_0_25px_-5px_rgba(197,168,128,0.5)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
 						>
 							{loading ? 'Confirming...' : (
 								<span className="flex items-center justify-center gap-2">
@@ -390,7 +390,7 @@ export default function ImageGeneration() {
 							<p className="text-slate-400">Help us improve our image generation</p>
 						</div>
 
-						<div className="bg-gradient-to-br from-slate-800/80 to-slate-900/40 rounded-2xl p-8 border border-cyan-500/20 space-y-8">
+						<div className="bg-[#121212]/50 backdrop-blur-xl rounded-2xl p-8 border border-[#c5a880]/20 space-y-8">
 							{/* Rating */}
 							<div>
 								<label className="block text-lg font-semibold text-white mb-4">How satisfied are you?</label>
@@ -427,7 +427,7 @@ export default function ImageGeneration() {
 									value={feedbackText}
 									onChange={(e) => setFeedbackText(e.target.value)}
 									placeholder="What could we improve? What did you love?"
-									className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:border-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/20 transition-all resize-none h-24"
+									className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:border-[#c5a880] focus:outline-none focus:ring-2 focus:ring-[#c5a880]/20 transition-all resize-none h-24"
 								/>
 							</div>
 
@@ -435,7 +435,7 @@ export default function ImageGeneration() {
 							<button
 								onClick={handleSubmitFeedback}
 								disabled={loading}
-								className="w-full px-8 py-4 bg-white hover:bg-slate-200 text-black rounded-xl font-bold text-lg transition-all shadow-[0_0_20px_-5px_rgba(255,255,255,0.4)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+								className="w-full px-8 py-4 bg-white hover:bg-slate-200 text-black rounded-xl font-bold text-lg transition-all shadow-[0_0_25px_-5px_rgba(197,168,128,0.5)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
 							>
 								{loading ? 'Submitting...' : (
 									<span className="flex items-center justify-center gap-2">

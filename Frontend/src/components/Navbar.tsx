@@ -33,7 +33,7 @@ export default function Navbar() {
         {/* Brand / Logo */}
         <div className="flex items-center gap-4">
           <Link to="/" className="text-2xl font-bold tracking-tight text-white hover:opacity-80 transition-opacity">
-            Maatram<span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500">MARK</span>
+            Maatram<span className="bg-clip-text text-transparent bg-gradient-to-r from-[#c5a880] to-[#ebdcb9]">MARK</span>
           </Link>
           {business?.business_name && (
             <div className="hidden md:flex items-center gap-2 pl-4 border-l border-slate-700">
@@ -82,7 +82,7 @@ export default function Navbar() {
               </Link>
               <Link 
                 to="/signup" 
-                className="flex items-center gap-2 px-5 py-2 text-sm font-medium text-black bg-white hover:bg-slate-200 rounded-lg transition-all shadow-[0_0_20px_-5px_rgba(255,255,255,0.4)]"
+                className="flex items-center gap-2 px-5 py-2 text-sm font-medium text-black bg-white hover:bg-slate-200 rounded-lg transition-all shadow-[0_0_25px_-5px_rgba(197,168,128,0.5)]"
               >
                 <UserPlus className="w-4 h-4" />
                 Get Started

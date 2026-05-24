@@ -24,7 +24,7 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0d0d0d] text-slate-200 overflow-hidden relative selection:bg-cyan-500/30">
+    <div className="min-h-screen bg-[#0d0d0d] text-slate-200 overflow-hidden relative selection:bg-amber-500/20">
       <div className="relative z-10">
         
         {/* --- HERO SECTION --- */}
@@ -44,8 +44,8 @@ export default function Home() {
             }}
           />
           {/* Subtle Glow Effects inside Hero */}
-          <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-cyan-600/10 rounded-full blur-[120px] pointer-events-none z-0" />
-          <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-purple-600/10 rounded-full blur-[120px] pointer-events-none z-0" />
+          <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-[#c5a880]/5 rounded-full blur-[120px] pointer-events-none z-0" />
+          <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-[#c5a880]/5 rounded-full blur-[120px] pointer-events-none z-0" />
 
           {/* Fade out transition at the bottom to blend with the rest of the dark page */}
           <div 
@@ -58,14 +58,14 @@ export default function Home() {
             animate="visible"
             variants={containerVariants}
           >
-            <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-800/50 border border-slate-700/50 text-cyan-400 text-sm font-medium mb-8 backdrop-blur-sm">
+            <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900/60 border border-amber-900/20 text-[#c5a880] text-sm font-medium mb-8 backdrop-blur-sm">
               <Sparkles className="w-4 h-4" />
               <span>The Next Generation of AI Marketing</span>
             </motion.div>
 
             <motion.h1 variants={itemVariants} className="text-4xl md:text-6xl font-bold tracking-tight mb-6 text-white">
               Elevate Your Brand with <br className="hidden md:block" />
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500">
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#c5a880] via-[#ebdcb9] to-[#9e825e]">
                 MaatramMARK
               </span>
             </motion.h1>
@@ -83,7 +83,7 @@ export default function Home() {
                   {isLoggedIn ? 'Open Workspace' : 'Start Creating for Free'}
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-cyan-300 to-white opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#e6d5bc] to-white opacity-0 group-hover:opacity-100 transition-opacity" />
               </Link>
               
               <a 
@@ -113,7 +113,7 @@ export default function Home() {
         {/* --- FEATURES SECTION --- */}
         <section id="features" className="py-24 px-6 relative overflow-hidden bg-[#0d0d0d] border-t border-slate-900/30">
           {/* Subtle background glow */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60%] h-[60%] bg-purple-900/5 rounded-full blur-[150px] pointer-events-none z-0" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60%] h-[60%] bg-[#c5a880]/3 rounded-full blur-[150px] pointer-events-none z-0" />
           <div className="max-w-7xl mx-auto relative z-10">
             <div className="text-center mb-16">
               <h2 className="text-2xl md:text-4xl font-semibold text-white mb-4">Intelligent Capabilities</h2>
@@ -128,10 +128,10 @@ export default function Home() {
               variants={containerVariants}
             >
               {[
-                { icon: <LineChart className="w-8 h-8 text-cyan-400" />, title: 'Trend Detection', desc: 'Auto-detects local events, festivals, and trending topics to keep your content highly relevant.' },
-                { icon: <BrainCircuit className="w-8 h-8 text-purple-400" />, title: 'LLM Strategy Agents', desc: 'Autonomous agents research your niche and construct a cohesive brand strategy and voice.' },
-                { icon: <ImageIcon className="w-8 h-8 text-blue-400" />, title: 'Visual Generation', desc: 'Instantly generate and refine stunning social media posters, promotional flyers, and business logos.' },
-                { icon: <RefreshCw className="w-8 h-8 text-emerald-400" />, title: 'Feedback Learning', desc: 'Stores content and analytics, continuously learning from your preferences to improve future outputs.' }
+                { icon: <LineChart className="w-8 h-8 text-[#c5a880]" />, title: 'Trend Detection', desc: 'Auto-detects local events, festivals, and trending topics to keep your content highly relevant.' },
+                { icon: <BrainCircuit className="w-8 h-8 text-[#c5a880]" />, title: 'LLM Strategy Agents', desc: 'Autonomous agents research your niche and construct a cohesive brand strategy and voice.' },
+                { icon: <ImageIcon className="w-8 h-8 text-[#c5a880]" />, title: 'Visual Generation', desc: 'Instantly generate and refine stunning social media posters, promotional flyers, and business logos.' },
+                { icon: <RefreshCw className="w-8 h-8 text-[#c5a880]" />, title: 'Feedback Learning', desc: 'Stores content and analytics, continuously learning from your preferences to improve future outputs.' }
               ].map((feature, idx) => (
                 <motion.div 
                   key={idx}
@@ -155,7 +155,7 @@ export default function Home() {
         {/* --- HOW IT WORKS SECTION --- */}
         <section id="how-it-works" className="py-24 px-6 relative overflow-hidden bg-[#090909] border-t border-slate-900/50">
           {/* Subtle background glow */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60%] h-[60%] bg-cyan-900/5 rounded-full blur-[150px] pointer-events-none z-0" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60%] h-[60%] bg-[#c5a880]/3 rounded-full blur-[150px] pointer-events-none z-0" />
           <div className="max-w-5xl mx-auto relative z-10">
             <div className="text-center mb-16">
               <h2 className="text-2xl md:text-4xl font-semibold text-white mb-4">How It Works</h2>
@@ -182,7 +182,7 @@ export default function Home() {
                   <div className="flex-1">
                     <h3 className="text-xl font-semibold text-white mb-2 flex items-center gap-3">
                       {item.title}
-                      <span className="text-cyan-500">{item.icon}</span>
+                      <span className="text-[#c5a880]">{item.icon}</span>
                     </h3>
                     <p className="text-slate-400 text-lg">{item.desc}</p>
                   </div>

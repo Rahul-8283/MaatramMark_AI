@@ -38,10 +38,10 @@ export default function Login() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0d0d0d] text-slate-200 flex flex-col relative overflow-hidden selection:bg-cyan-500/30">
+    <div className="min-h-screen bg-[#0d0d0d] text-slate-200 flex flex-col relative overflow-hidden selection:bg-amber-500/20">
       {/* Background Effects */}
-      <div className="absolute top-[-20%] right-[-10%] w-[50%] h-[50%] bg-purple-600/10 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-[-20%] left-[-10%] w-[50%] h-[50%] bg-blue-600/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-[-20%] right-[-10%] w-[50%] h-[50%] bg-[#c5a880]/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-[-20%] left-[-10%] w-[50%] h-[50%] bg-[#c5a880]/5 rounded-full blur-[120px] pointer-events-none" />
 
       {/* Back Button */}
       <div className="p-6 relative z-10">
@@ -84,7 +84,7 @@ export default function Login() {
                         passwordRef.current?.focus()
                       }
                     }}
-                    className="w-full pl-11 pr-4 py-3 bg-slate-950/50 border border-slate-800 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all"
+                    className="w-full pl-11 pr-4 py-3 bg-slate-950/50 border border-slate-800 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-[#c5a880] focus:ring-1 focus:ring-[#c5a880]/30 transition-all"
                     placeholder="name@company.com"
                   />
                 </div>
@@ -93,7 +93,7 @@ export default function Login() {
               <div className="space-y-1">
                 <div className="flex items-center justify-between ml-1">
                   <label className="text-sm font-medium text-slate-300">Password</label>
-                  <a href="#" className="text-xs text-cyan-400 hover:text-cyan-300 transition-colors">Forgot password?</a>
+                  <a href="#" className="text-xs text-[#c5a880] hover:text-[#ebdcb9] transition-colors">Forgot password?</a>
                 </div>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-500">
@@ -104,7 +104,7 @@ export default function Login() {
                     ref={passwordRef}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full pl-11 pr-4 py-3 bg-slate-950/50 border border-slate-800 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all"
+                    className="w-full pl-11 pr-4 py-3 bg-slate-950/50 border border-slate-800 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-[#c5a880] focus:ring-1 focus:ring-[#c5a880]/30 transition-all"
                     placeholder="••••••••"
                   />
                 </div>
@@ -113,7 +113,7 @@ export default function Login() {
               <button 
                 type="submit" 
                 disabled={loading}
-                className="w-full py-3.5 bg-white hover:bg-slate-200 text-black rounded-xl font-bold shadow-[0_0_20px_-5px_rgba(255,255,255,0.4)] transition-all disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2 mt-4"
+                className="w-full py-3.5 bg-white hover:bg-slate-200 text-black rounded-xl font-bold shadow-[0_0_25px_-5px_rgba(197,168,128,0.5)] transition-all disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2 mt-4"
               >
                 {loading ? <><Loader2 className="w-5 h-5 animate-spin text-slate-600" /> Authenticating...</> : 'Sign In'}
               </button>
@@ -122,7 +122,7 @@ export default function Login() {
             <div className="mt-8 text-center">
               <p className="text-slate-400 text-sm">
                 Don't have an account?{' '}
-                <Link to="/signup" className="text-cyan-400 hover:text-cyan-300 font-medium transition-colors">
+                <Link to="/signup" className="text-[#c5a880] hover:text-[#ebdcb9] font-medium transition-colors">
                   Create one now
                 </Link>
               </p>

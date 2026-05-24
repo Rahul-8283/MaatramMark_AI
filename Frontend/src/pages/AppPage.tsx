@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Outlet, useNavigate, Link } from 'react-router-dom'
 import useStore from '../store/useStore.ts'
 import api from '../lib/api.ts'
-import { ArrowLeft, FileText, BarChart3, Lightbulb, Target, Sparkles, Save, LogOut } from 'lucide-react'
+import { ArrowLeft, FileText, BarChart3, Lightbulb, Target, Sparkles, Save, LogOut, Zap, Flame, Pin, ArrowRight } from 'lucide-react'
 
 export default function AppPage() {
 	return (
@@ -83,15 +83,18 @@ export function AppHome() {
 					<button
 						onClick={handleUpdateDaily}
 						disabled={loading}
-						className="w-full px-8 py-4 bg-white hover:bg-slate-200 text-black rounded-xl font-bold text-lg transition-all shadow-[0_0_25px_-5px_rgba(255,255,255,0.4)] disabled:opacity-50 disabled:cursor-not-allowed"
+						className="w-full px-8 py-4 bg-white hover:bg-slate-200 text-black rounded-xl font-bold text-lg transition-all shadow-[0_0_25px_-5px_rgba(255,255,255,0.4)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
 					>
 						{loading ? (
 							<div className="flex items-center justify-center gap-2">
-								<div className="animate-spin w-5 h-5 border-2 border-white border-t-transparent rounded-full" />
+								<div className="animate-spin w-5 h-5 border-2 border-black border-t-transparent rounded-full" />
 								Generating...
 							</div>
 						) : (
-							'🚀 Update for Today'
+							<span className="flex items-center gap-2 justify-center">
+								<Zap className="w-5 h-5 text-amber-500 fill-amber-500 animate-pulse" />
+								Update for Today
+							</span>
 						)}
 					</button>
 				</div>
@@ -129,7 +132,10 @@ export function AppHome() {
 				{/* Features Section */}
 				<div className="mt-12 grid md:grid-cols-2 gap-6">
 					<div className="bg-[#121212]/30 backdrop-blur-md rounded-xl p-6 border border-slate-800/40">
-						<h3 className="text-lg font-semibold text-white mb-3">✨ Next Steps</h3>
+						<h3 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
+							<Sparkles className="w-5 h-5 text-yellow-400" />
+							Next Steps
+						</h3>
 						<ul className="space-y-2 text-slate-300 text-sm mb-4">
 							<li>✓ Generate today's content ideas</li>
 							<li>✓ Review & refine captions</li>
@@ -145,7 +151,10 @@ export function AppHome() {
 					</div>
 
 					<div className="bg-[#121212]/30 backdrop-blur-md rounded-xl p-6 border border-slate-800/40">
-						<h3 className="text-lg font-semibold text-white mb-3">🔥 Pro Tip</h3>
+						<h3 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
+							<Flame className="w-5 h-5 text-orange-500" />
+							Pro Tip
+						</h3>
 						<p className="text-slate-300 text-sm">
 							Generate content daily to maintain consistency and boost your engagement. Our AI learns from your business to create better content over time.
 						</p>
@@ -178,16 +187,18 @@ function DailyContentView({ daily, onBack }: { daily: DailyContent, onBack: () =
 					</div>
 					<button
 						onClick={onBack}
-						className="px-6 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg text-sm font-medium transition-colors"
+						className="px-6 py-2 bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 rounded-lg text-sm font-medium transition-colors flex items-center gap-2"
 					>
-						← Back
+						<ArrowLeft className="w-4 h-4" /> Back
 					</button>
 				</div>
 
 				{/* Context Section */}
 				{daily.context && (
 					<div className="bg-[#121212]/50 backdrop-blur-md border border-cyan-500/30 rounded-xl p-6 mb-8">
-						<h2 className="text-xl font-semibold text-cyan-400 mb-3">📌 Today's Context</h2>
+						<h2 className="text-xl font-semibold text-cyan-400 mb-3 flex items-center gap-2">
+							<Pin className="w-5 h-5" /> Today's Context
+						</h2>
 						<p className="text-slate-200 leading-relaxed">{daily.context}</p>
 					</div>
 				)}
@@ -263,9 +274,9 @@ function DailyContentView({ daily, onBack }: { daily: DailyContent, onBack: () =
 					<h3 className="text-xl font-bold text-white mb-4">Ready to create visuals?</h3>
 					<button
 						onClick={() => navigate('/app/generate-images')}
-						className="px-8 py-3 bg-white hover:bg-slate-200 text-black rounded-lg font-bold transition-all shadow-[0_0_20px_-5px_rgba(255,255,255,0.4)]"
+						className="px-8 py-3 bg-white hover:bg-slate-200 text-black rounded-lg font-bold transition-all shadow-[0_0_20px_-5px_rgba(255,255,255,0.4)] flex items-center justify-center gap-2 mx-auto"
 					>
-						Generate Images →
+						Generate Images <ArrowRight className="w-4 h-4" />
 					</button>
 				</div>
 			</div>

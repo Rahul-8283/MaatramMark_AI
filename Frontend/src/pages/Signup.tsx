@@ -59,13 +59,10 @@ export default function Signup() {
 
       <div className="flex-1 flex items-center justify-center p-6 relative z-10">
         <div className="w-full max-w-md">
-          {/* Logo / Brand */}
+          {/* Brand */}
           <div className="text-center mb-10">
-            <div className="w-12 h-12 mx-auto rounded-xl bg-gradient-to-br from-cyan-400 to-blue-600 flex items-center justify-center text-white text-xl font-black shadow-lg shadow-cyan-500/20 mb-4">
-              M
-            </div>
-            <h1 className="text-3xl font-bold text-white mb-2">Create an Account</h1>
-            <p className="text-slate-400">Join MaatramMark AI and elevate your brand.</p>
+            <h1 className="text-2xl font-semibold text-white mb-2">Create an Account</h1>
+            <p className="text-slate-400">Join MaatramMARK and elevate your brand.</p>
           </div>
 
           {/* Card */}

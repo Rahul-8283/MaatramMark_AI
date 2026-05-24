@@ -32,13 +32,8 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         {/* Brand / Logo */}
         <div className="flex items-center gap-4">
-          <Link to="/" className="text-2xl font-bold text-white tracking-tight flex items-center gap-2 hover:opacity-80 transition-opacity">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-400 to-blue-600 flex items-center justify-center text-white text-sm font-black shadow-lg shadow-cyan-500/20">
-              M
-            </div>
-            <span>
-              MaatramMark <span className="text-cyan-400 font-light">AI</span>
-            </span>
+          <Link to="/" className="text-2xl font-bold tracking-tight text-white hover:opacity-80 transition-opacity">
+            Maatram<span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500">MARK</span>
           </Link>
           {business?.business_name && (
             <div className="hidden md:flex items-center gap-2 pl-4 border-l border-slate-700">

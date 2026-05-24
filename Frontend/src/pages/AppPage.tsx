@@ -53,7 +53,7 @@ export function AppHome() {
 			<div className="max-w-5xl mx-auto mb-12">
 				{/* Hero Section */}
 				<div className="text-center mb-12">
-					<h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent mb-4">
+					<h1 className="text-3xl md:text-5xl font-semibold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent mb-4">
 						Welcome, {business?.business_name || 'Creator'}
 					</h1>
 					<p className="text-xl text-slate-300 max-w-2xl mx-auto">
@@ -65,7 +65,7 @@ export function AppHome() {
 				<div className="bg-[#121212]/50 backdrop-blur-xl rounded-2xl p-8 border border-cyan-500/30 shadow-2xl hover:shadow-cyan-500/20 hover:border-cyan-500/50 transition-all mb-8">
 					<div className="flex items-start justify-between mb-6">
 						<div>
-							<h2 className="text-2xl font-bold text-white mb-2">Daily Content Generation</h2>
+							<h2 className="text-xl font-semibold text-white mb-2">Daily Content Generation</h2>
 							<p className="text-slate-400">Generate fresh ideas, captions & hashtags for today</p>
 						</div>
 						<div className="text-4xl">📝</div>
@@ -164,7 +164,7 @@ function DailyContentView({ daily, onBack }: { daily: DailyContent, onBack: () =
 				{/* Header */}
 				<div className="flex items-center justify-between mb-8">
 					<div>
-						<h1 className="text-4xl font-bold text-white mb-2">Today's Content</h1>
+						<h1 className="text-2xl md:text-3xl font-semibold text-white mb-2">Today's Content</h1>
 						<p className="text-slate-400">AI-generated strategy for maximum impact</p>
 					</div>
 					<button
@@ -186,7 +186,7 @@ function DailyContentView({ daily, onBack }: { daily: DailyContent, onBack: () =
 				{/* Ideas Section */}
 				{daily.ideas && daily.ideas.length > 0 && (
 					<div className="mb-8">
-						<h2 className="text-2xl font-bold text-white mb-4">💡 Content Ideas</h2>
+						<h2 className="text-xl font-semibold text-white mb-4">💡 Content Ideas</h2>
 						<div className="grid md:grid-cols-2 gap-4">
 							{daily.ideas.map((idea, idx) => (
 								<div
@@ -204,7 +204,7 @@ function DailyContentView({ daily, onBack }: { daily: DailyContent, onBack: () =
 				{/* Captions Section */}
 				{daily.captions && daily.captions.length > 0 && (
 					<div className="mb-8">
-						<h2 className="text-2xl font-bold text-white mb-4">📝 Ready-to-Use Captions</h2>
+						<h2 className="text-xl font-semibold text-white mb-4">📝 Ready-to-Use Captions</h2>
 						<div className="space-y-4">
 							{daily.captions.map((caption, idx) => (
 								<div
@@ -229,7 +229,7 @@ function DailyContentView({ daily, onBack }: { daily: DailyContent, onBack: () =
 				{/* Hashtags Section */}
 				{daily.hashtags && daily.hashtags.length > 0 && (
 					<div className="mb-8">
-						<h2 className="text-2xl font-bold text-white mb-4">🏷️ Recommended Hashtags</h2>
+						<h2 className="text-xl font-semibold text-white mb-4">🏷️ Recommended Hashtags</h2>
 						<div className="bg-[#121212]/40 backdrop-blur-md border border-slate-800/60 rounded-xl p-6">
 							<div className="flex flex-wrap gap-3">
 								{daily.hashtags.map((tag, idx) => (
@@ -277,13 +277,13 @@ export function AppSettings() {
 			<div className="max-w-2xl mx-auto">
 				{/* Header */}
 				<div className="mb-12">
-					<h1 className="text-4xl font-bold text-white mb-2">Settings</h1>
+					<h1 className="text-2xl md:text-3xl font-semibold text-white mb-2">Settings</h1>
 					<p className="text-slate-400">Manage your account and business information</p>
 				</div>
 
 				{/* Business Info Section */}
 				<div className="bg-[#121212]/40 backdrop-blur-xl rounded-2xl p-8 border border-slate-800/60 mb-8">
-					<h2 className="text-2xl font-semibold text-white mb-6">Business Information</h2>
+					<h2 className="text-xl font-semibold text-white mb-6">Business Information</h2>
 					<div className="space-y-5">
 						<div>
 							<label className="block text-sm font-medium text-slate-300 mb-2">Business Name</label>
@@ -326,7 +326,7 @@ export function AppSettings() {
 
 				{/* Account Section */}
 				<div className="bg-[#121212]/40 backdrop-blur-xl rounded-2xl p-8 border border-red-500/20">
-					<h2 className="text-2xl font-semibold text-white mb-6">Account</h2>
+					<h2 className="text-xl font-semibold text-white mb-6">Account</h2>
 					<div className="space-y-4">
 						<p className="text-slate-400 text-sm">
 							Logging out will clear your session. You'll need to log in again to access your dashboard.

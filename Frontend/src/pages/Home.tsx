@@ -63,10 +63,10 @@ export default function Home() {
               <span>The Next Generation of AI Marketing</span>
             </motion.div>
 
-            <motion.h1 variants={itemVariants} className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 text-white">
+            <motion.h1 variants={itemVariants} className="text-4xl md:text-6xl font-bold tracking-tight mb-6 text-white">
               Elevate Your Brand with <br className="hidden md:block" />
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500">
-                MaatramMark AI
+                MaatramMARK
               </span>
             </motion.h1>
 
@@ -116,7 +116,7 @@ export default function Home() {
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60%] h-[60%] bg-purple-900/5 rounded-full blur-[150px] pointer-events-none z-0" />
           <div className="max-w-7xl mx-auto relative z-10">
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">Intelligent Capabilities</h2>
+              <h2 className="text-2xl md:text-4xl font-semibold text-white mb-4">Intelligent Capabilities</h2>
               <p className="text-slate-400 max-w-2xl mx-auto">Everything you need to automate your social media presence, powered by advanced LLMs and image generation models.</p>
             </div>
 
@@ -141,7 +141,7 @@ export default function Home() {
                   <div className="w-14 h-14 rounded-xl bg-slate-800 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                     {feature.icon}
                   </div>
-                  <h3 className="text-xl font-bold text-white mb-3">{feature.title}</h3>
+                  <h3 className="text-lg font-semibold text-white mb-3">{feature.title}</h3>
                   <p className="text-slate-400 leading-relaxed text-sm">
                     {feature.desc}
                   </p>
@@ -158,7 +158,7 @@ export default function Home() {
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60%] h-[60%] bg-cyan-900/5 rounded-full blur-[150px] pointer-events-none z-0" />
           <div className="max-w-5xl mx-auto relative z-10">
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">How It Works</h2>
+              <h2 className="text-2xl md:text-4xl font-semibold text-white mb-4">How It Works</h2>
               <p className="text-slate-400 max-w-2xl mx-auto">A seamless workflow from setup to deployment.</p>
             </div>
 
@@ -180,7 +180,7 @@ export default function Home() {
                     {item.step}
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-2xl font-bold text-white mb-2 flex items-center gap-3">
+                    <h3 className="text-xl font-semibold text-white mb-2 flex items-center gap-3">
                       {item.title}
                       <span className="text-cyan-500">{item.icon}</span>
                     </h3>

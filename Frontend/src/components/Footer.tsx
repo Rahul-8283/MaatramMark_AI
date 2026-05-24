@@ -8,7 +8,7 @@ export default function Footer() {
         <div className="md:col-span-2">
           <h2 className="text-2xl font-bold text-white mb-4">
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500">
-              MaatramMark AI
+              MaatramMARK
             </span>
           </h2>
           <p className="text-slate-400 max-w-sm leading-relaxed mb-6">
@@ -49,7 +49,7 @@ export default function Footer() {
       </div>
 
       <div className="max-w-7xl mx-auto pt-8 border-t border-slate-800/50 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-slate-500">
-        <p>© {new Date().getFullYear()} MaatramMark AI. All rights reserved.</p>
+        <p>© {new Date().getFullYear()} MaatramMARK. All rights reserved.</p>
         <p className="flex items-center gap-1">Crafted with <span className="text-cyan-400 font-semibold">precision</span> by <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent font-bold">Team MaatramMARK</span></p>
       </div>
     </footer>

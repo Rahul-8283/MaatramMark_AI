@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import useStore from '../store/useStore.ts'
 import api from '../lib/api.ts'
-import { HelpCircle, Target, Smartphone, Award, Star } from 'lucide-react'
+import { HelpCircle, Target, Smartphone, Award, Star, Palette, Check, Send, Sparkles } from 'lucide-react'
 
 // Step Indicator
 function StepIndicator({ steps, currentStep }: { steps: string[], currentStep: number }) {
@@ -186,15 +186,17 @@ export default function ImageGeneration() {
 						<button
 							onClick={handleGenerateConcept}
 							disabled={loading}
-							className="w-full px-8 py-6 bg-white hover:bg-slate-200 text-black rounded-xl font-bold text-lg transition-all shadow-[0_0_25px_-5px_rgba(255,255,255,0.4)] disabled:opacity-50 disabled:cursor-not-allowed"
+							className="w-full px-8 py-6 bg-white hover:bg-slate-200 text-black rounded-xl font-bold text-lg transition-all shadow-[0_0_25px_-5px_rgba(255,255,255,0.4)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
 						>
 							{loading ? (
 								<div className="flex items-center justify-center gap-3">
-									<div className="animate-spin w-6 h-6 border-2 border-white border-t-transparent rounded-full" />
+									<div className="animate-spin w-6 h-6 border-2 border-black border-t-transparent rounded-full" />
 									Generating Concepts...
 								</div>
 							) : (
-								'🎨 Generate Image Concepts'
+								<span className="flex items-center justify-center gap-2">
+									<Palette className="w-5 h-5" /> Generate Image Concepts
+								</span>
 							)}
 						</button>
 
@@ -293,9 +295,13 @@ export default function ImageGeneration() {
 									<button
 										onClick={handleRefineImage}
 										disabled={loading || !refinementPrompt.trim()}
-										className="flex-1 px-6 py-3 bg-white hover:bg-slate-200 text-black rounded-lg font-bold transition-all shadow-[0_0_15px_-5px_rgba(255,255,255,0.4)] disabled:opacity-50 disabled:cursor-not-allowed"
+										className="flex-1 px-6 py-3 bg-white hover:bg-slate-200 text-black rounded-lg font-bold transition-all shadow-[0_0_15px_-5px_rgba(255,255,255,0.4)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
 									>
-										{loading ? 'Refining...' : '✨ Apply Refinement'}
+										{loading ? 'Refining...' : (
+											<span className="flex items-center justify-center gap-2">
+												<Sparkles className="w-4 h-4" /> Apply Refinement
+											</span>
+										)}
 									</button>
 									<button
 										onClick={handleProceedToConfirm}
@@ -365,9 +371,13 @@ export default function ImageGeneration() {
 						<button
 							onClick={handleConfirmPost}
 							disabled={loading}
-							className="w-full px-8 py-4 bg-white hover:bg-slate-200 text-black rounded-xl font-bold text-lg transition-all shadow-[0_0_20px_-5px_rgba(255,255,255,0.4)] disabled:opacity-50 disabled:cursor-not-allowed"
+							className="w-full px-8 py-4 bg-white hover:bg-slate-200 text-black rounded-xl font-bold text-lg transition-all shadow-[0_0_20px_-5px_rgba(255,255,255,0.4)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
 						>
-							{loading ? 'Confirming...' : '✅ Confirm & Continue'}
+							{loading ? 'Confirming...' : (
+								<span className="flex items-center justify-center gap-2">
+									<Check className="w-5 h-5 text-emerald-500" /> Confirm & Continue
+								</span>
+							)}
 						</button>
 					</div>
 				)}
@@ -425,9 +435,13 @@ export default function ImageGeneration() {
 							<button
 								onClick={handleSubmitFeedback}
 								disabled={loading}
-								className="w-full px-8 py-4 bg-white hover:bg-slate-200 text-black rounded-xl font-bold text-lg transition-all shadow-[0_0_20px_-5px_rgba(255,255,255,0.4)] disabled:opacity-50 disabled:cursor-not-allowed"
+								className="w-full px-8 py-4 bg-white hover:bg-slate-200 text-black rounded-xl font-bold text-lg transition-all shadow-[0_0_20px_-5px_rgba(255,255,255,0.4)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
 							>
-								{loading ? 'Submitting...' : '🚀 Submit Feedback & Return'}
+								{loading ? 'Submitting...' : (
+									<span className="flex items-center justify-center gap-2">
+										<Send className="w-5 h-5" /> Submit Feedback & Return
+									</span>
+								)}
 							</button>
 						</div>
 

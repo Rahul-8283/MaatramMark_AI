@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import useStore from '../store/useStore.ts'
 import { motion, type Variants } from 'framer-motion'
 import { Sparkles, BrainCircuit, Image as ImageIcon, LineChart, ArrowRight, Zap, RefreshCw, BarChart } from 'lucide-react'
+import Footer from '../components/Footer.tsx'
 
 export default function Home() {
   const userId = useStore((s) => s.userId)
@@ -177,9 +178,7 @@ export default function Home() {
         </section>
 
         {/* --- FOOTER --- */}
-        <footer className="py-8 text-center border-t border-slate-800 text-slate-500 bg-[#0a0a0a]">
-          <p>© {new Date().getFullYear()} MaatramMark AI. Built for the Hackathon.</p>
-        </footer>
+        <Footer />
 
       </div>
     </div>

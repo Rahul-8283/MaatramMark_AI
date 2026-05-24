@@ -117,7 +117,7 @@ export default function Onboarding() {
               />
             </div>
 
-            <Button className="w-full py-3.5 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white rounded-xl font-semibold shadow-lg shadow-cyan-500/25 transition-all" disabled={loading}>
+            <Button className="w-full py-3.5 bg-white hover:bg-slate-200 text-black rounded-xl font-bold shadow-[0_0_20px_-5px_rgba(255,255,255,0.4)] transition-all disabled:opacity-70 disabled:cursor-not-allowed" disabled={loading}>
               {loading ? 'Setting up...' : 'Continue'}
             </Button>
           </form>

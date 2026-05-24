@@ -11,16 +11,16 @@ function StepIndicator({ steps, currentStep }: { steps: string[], currentStep: n
 				<div key={idx} className="flex items-center">
 					<div className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold text-sm transition-all ${
 						idx < currentStep 
-							? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg' 
+							? 'bg-white text-black shadow-lg shadow-white/10' 
 							: idx === currentStep 
-							? 'bg-cyan-500 text-white ring-4 ring-cyan-500/30 shadow-lg' 
+							? 'bg-white text-black ring-4 ring-white/10 shadow-lg' 
 							: 'bg-slate-700 text-slate-400'
 					}`}>
 						{idx + 1}
 					</div>
 					{idx < steps.length - 1 && (
 						<div className={`w-12 h-1 mx-2 rounded-full transition-colors ${
-							idx < currentStep ? 'bg-gradient-to-r from-cyan-500 to-blue-600' : 'bg-slate-700'
+							idx < currentStep ? 'bg-white' : 'bg-slate-700'
 						}`} />
 					)}
 				</div>
@@ -185,7 +185,7 @@ export default function ImageGeneration() {
 						<button
 							onClick={handleGenerateConcept}
 							disabled={loading}
-							className="w-full px-8 py-6 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 disabled:from-slate-600 disabled:to-slate-700 text-white rounded-xl font-semibold text-lg transition-all shadow-xl hover:shadow-cyan-500/50 disabled:cursor-not-allowed"
+							className="w-full px-8 py-6 bg-white hover:bg-slate-200 text-black rounded-xl font-bold text-lg transition-all shadow-[0_0_25px_-5px_rgba(255,255,255,0.4)] disabled:opacity-50 disabled:cursor-not-allowed"
 						>
 							{loading ? (
 								<div className="flex items-center justify-center gap-3">
@@ -223,7 +223,7 @@ export default function ImageGeneration() {
 									key={idx}
 									onClick={() => handleSelectConcept(c)}
 									disabled={loading}
-									className="text-left p-6 bg-gradient-to-br from-slate-800/60 to-slate-900/30 rounded-xl border border-slate-700/50 hover:border-cyan-500/50 transition-all hover:shadow-lg hover:shadow-cyan-500/20 disabled:opacity-50 disabled:cursor-not-allowed group"
+									className="text-left p-6 bg-[#121212]/40 backdrop-blur-md rounded-xl border border-slate-800/60 hover:border-white/40 hover:bg-[#161616]/60 transition-all hover:shadow-[0_15px_35px_-10px_rgba(0,0,0,0.6)] disabled:opacity-50 disabled:cursor-not-allowed group"
 								>
 									<div className="text-3xl mb-3">🎯</div>
 									<p className="text-slate-200 group-hover:text-white transition-colors leading-relaxed">
@@ -287,14 +287,14 @@ export default function ImageGeneration() {
 									<button
 										onClick={handleRefineImage}
 										disabled={loading || !refinementPrompt.trim()}
-										className="flex-1 px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 disabled:from-slate-600 disabled:to-slate-700 text-white rounded-lg font-semibold transition-all shadow-lg disabled:cursor-not-allowed"
+										className="flex-1 px-6 py-3 bg-white hover:bg-slate-200 text-black rounded-lg font-bold transition-all shadow-[0_0_15px_-5px_rgba(255,255,255,0.4)] disabled:opacity-50 disabled:cursor-not-allowed"
 									>
 										{loading ? 'Refining...' : '✨ Apply Refinement'}
 									</button>
 									<button
 										onClick={handleProceedToConfirm}
 										disabled={loading}
-										className="flex-1 px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 disabled:from-slate-600 disabled:to-slate-700 text-white rounded-lg font-semibold transition-all shadow-lg disabled:cursor-not-allowed"
+										className="flex-1 px-6 py-3 bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 rounded-lg font-semibold transition-all"
 									>
 										→ Next
 									</button>
@@ -329,8 +329,8 @@ export default function ImageGeneration() {
 								onClick={() => setPostType('poster')}
 								className={`p-6 rounded-xl border-2 transition-all ${
 									postType === 'poster'
-										? 'border-cyan-500 bg-cyan-500/10 shadow-lg shadow-cyan-500/20'
-										: 'border-slate-700 bg-gradient-to-br from-slate-800/60 to-slate-900/30 hover:border-cyan-500/50'
+										? 'border-white bg-white/5 shadow-lg shadow-white/5'
+										: 'border-slate-800 bg-[#121212]/40 backdrop-blur-md hover:border-slate-700'
 								}`}
 							>
 								<div className="text-4xl mb-3">📱</div>
@@ -342,8 +342,8 @@ export default function ImageGeneration() {
 								onClick={() => setPostType('logo')}
 								className={`p-6 rounded-xl border-2 transition-all ${
 									postType === 'logo'
-										? 'border-purple-500 bg-purple-500/10 shadow-lg shadow-purple-500/20'
-										: 'border-slate-700 bg-gradient-to-br from-slate-800/60 to-slate-900/30 hover:border-purple-500/50'
+										? 'border-white bg-white/5 shadow-lg shadow-white/5'
+										: 'border-slate-800 bg-[#121212]/40 backdrop-blur-md hover:border-slate-700'
 								}`}
 							>
 								<div className="text-4xl mb-3">🏢</div>
@@ -355,7 +355,7 @@ export default function ImageGeneration() {
 						<button
 							onClick={handleConfirmPost}
 							disabled={loading}
-							className="w-full px-8 py-4 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 disabled:from-slate-600 disabled:to-slate-700 text-white rounded-xl font-semibold text-lg transition-all shadow-lg disabled:cursor-not-allowed"
+							className="w-full px-8 py-4 bg-white hover:bg-slate-200 text-black rounded-xl font-bold text-lg transition-all shadow-[0_0_20px_-5px_rgba(255,255,255,0.4)] disabled:opacity-50 disabled:cursor-not-allowed"
 						>
 							{loading ? 'Confirming...' : '✅ Confirm & Continue'}
 						</button>
@@ -411,7 +411,7 @@ export default function ImageGeneration() {
 							<button
 								onClick={handleSubmitFeedback}
 								disabled={loading}
-								className="w-full px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 disabled:from-slate-600 disabled:to-slate-700 text-white rounded-xl font-semibold text-lg transition-all shadow-lg hover:shadow-cyan-500/50 disabled:cursor-not-allowed"
+								className="w-full px-8 py-4 bg-white hover:bg-slate-200 text-black rounded-xl font-bold text-lg transition-all shadow-[0_0_20px_-5px_rgba(255,255,255,0.4)] disabled:opacity-50 disabled:cursor-not-allowed"
 							>
 								{loading ? 'Submitting...' : '🚀 Submit Feedback & Return'}
 							</button>

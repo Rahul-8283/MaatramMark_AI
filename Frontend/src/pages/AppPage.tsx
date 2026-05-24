@@ -1,7 +1,8 @@
 import { useState } from 'react'
-import { Outlet, useNavigate } from 'react-router-dom'
+import { Outlet, useNavigate, Link } from 'react-router-dom'
 import useStore from '../store/useStore.ts'
 import api from '../lib/api.ts'
+import { ArrowLeft } from 'lucide-react'
 
 export default function AppPage() {
 	return (
@@ -80,7 +81,7 @@ export function AppHome() {
 					<button
 						onClick={handleUpdateDaily}
 						disabled={loading}
-						className="w-full px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 disabled:from-slate-600 disabled:to-slate-700 text-white rounded-xl font-semibold text-lg transition-all shadow-lg hover:shadow-cyan-500/50 disabled:cursor-not-allowed"
+						className="w-full px-8 py-4 bg-white hover:bg-slate-200 text-black rounded-xl font-bold text-lg transition-all shadow-[0_0_25px_-5px_rgba(255,255,255,0.4)] disabled:opacity-50 disabled:cursor-not-allowed"
 					>
 						{loading ? (
 							<div className="flex items-center justify-center gap-2">
@@ -129,7 +130,7 @@ export function AppHome() {
 						</ul>
 						<button
 							onClick={() => navigate('/app/generate-images')}
-							className="w-full px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white rounded-lg text-sm font-medium transition-all shadow-lg"
+							className="w-full px-4 py-2 bg-white hover:bg-slate-200 text-black rounded-lg text-sm font-semibold transition-all shadow-[0_0_15px_-5px_rgba(255,255,255,0.4)]"
 						>
 							🎨 Generate Visuals
 						</button>
@@ -252,7 +253,7 @@ function DailyContentView({ daily, onBack }: { daily: DailyContent, onBack: () =
 					<h3 className="text-xl font-bold text-white mb-4">Ready to create visuals?</h3>
 					<button
 						onClick={() => navigate('/app/generate-images')}
-						className="px-8 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white rounded-lg font-semibold transition-all shadow-lg hover:shadow-cyan-500/50"
+						className="px-8 py-3 bg-white hover:bg-slate-200 text-black rounded-lg font-bold transition-all shadow-[0_0_20px_-5px_rgba(255,255,255,0.4)]"
 					>
 						Generate Images →
 					</button>
@@ -275,10 +276,18 @@ export function AppSettings() {
 	return (
 		<div className="container mx-auto px-6 py-12">
 			<div className="max-w-2xl mx-auto">
-				{/* Header */}
-				<div className="mb-12">
-					<h1 className="text-2xl md:text-3xl font-semibold text-white mb-2">Settings</h1>
-					<p className="text-slate-400">Manage your account and business information</p>
+				{/* Header with Top-Right Back Link */}
+				<div className="mb-12 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+					<div>
+						<h1 className="text-2xl md:text-3xl font-semibold text-white mb-2">Settings</h1>
+						<p className="text-slate-400">Manage your account and business information</p>
+					</div>
+					<div className="sm:pt-2">
+						<Link to="/app" className="inline-flex items-center gap-2 text-slate-400 hover:text-white transition-colors group">
+							<ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+							<span>Back to Workspace</span>
+						</Link>
+					</div>
 				</div>
 
 				{/* Business Info Section */}
@@ -318,7 +327,7 @@ export function AppSettings() {
 							/>
 						</div>
 
-						<button className="w-full px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white rounded-lg font-semibold transition-all shadow-lg hover:shadow-cyan-500/50">
+						<button className="w-full px-6 py-3 bg-white hover:bg-slate-200 text-black rounded-lg font-bold transition-all shadow-[0_0_20px_-5px_rgba(255,255,255,0.4)]">
 							💾 Save Changes
 						</button>
 					</div>

@@ -28,7 +28,7 @@ export default function Home() {
       <div className="relative z-10">
         
         {/* --- HERO SECTION --- */}
-        <section className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-20 pb-12 overflow-hidden bg-[#0d0d0d]">
+        <section className="relative min-h-screen -mt-20 flex flex-col items-center justify-center px-6 pt-20 pb-20 overflow-hidden bg-[#0d0d0d]">
           {/* Stripe Background Layer (exact pattern from photo, at 135deg angle) */}
           <div 
             className="absolute inset-0 z-0 pointer-events-none"

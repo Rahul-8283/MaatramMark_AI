@@ -1,5 +1,7 @@
 import { Link, useLocation } from 'react-router-dom'
 import useStore from '../store/useStore.ts'
+import { supabase } from '../lib/supabaseClient.ts'
+import { LogOut, LayoutDashboard, Settings, UserPlus, LogIn } from 'lucide-react'
 
 export default function Navbar() {
   const business = useStore((s) => s.business)
@@ -13,22 +15,86 @@ export default function Navbar() {
     return null
   }
 
+  const handleLogout = async () => {
+    try {
+      await supabase.auth.signOut()
+    } catch (e) {
+      console.error('Error logging out of Supabase', e)
+    }
+    localStorage.removeItem('userId')
+    localStorage.clear()
+    // Force reload to completely reset global Zustand state and redirect to home
+    window.location.href = '/'
+  }
+
   return (
-    <header className="w-full bg-slate-800/60 backdrop-blur sticky top-0 z-40">
-      <div className="container flex items-center justify-between py-4">
-        <div className="flex items-center gap-3">
-          <Link to="/" className="text-xl font-bold text-white">MaatramMark AI</Link>
+    <header className="w-full bg-[#0a0a0a]/80 backdrop-blur-md border-b border-slate-800/50 sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+        {/* Brand / Logo */}
+        <div className="flex items-center gap-4">
+          <Link to="/" className="text-2xl font-bold text-white tracking-tight flex items-center gap-2 hover:opacity-80 transition-opacity">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-400 to-blue-600 flex items-center justify-center text-white text-sm font-black shadow-lg shadow-cyan-500/20">
+              M
+            </div>
+            <span>
+              MaatramMark <span className="text-cyan-400 font-light">AI</span>
+            </span>
+          </Link>
           {business?.business_name && (
-            <span className="text-slate-300 text-sm">— {business.business_name}</span>
+            <div className="hidden md:flex items-center gap-2 pl-4 border-l border-slate-700">
+              <span className="text-slate-400 text-sm bg-slate-800/50 px-3 py-1 rounded-full border border-slate-700/50">
+                {business.business_name}
+              </span>
+            </div>
           )}
         </div>
 
-        {isLoggedIn && (
-          <nav className="space-x-4">
-            <Link to="/app" className="text-slate-200 hover:text-cyan-300">Dashboard</Link>
-            <Link to="/app/settings" className="text-slate-200 hover:text-cyan-300">Settings</Link>
-          </nav>
-        )}
+        {/* Navigation & Auth */}
+        <div className="flex items-center gap-4">
+          {isLoggedIn ? (
+            <nav className="flex items-center gap-2 sm:gap-4">
+              <Link 
+                to="/app" 
+                className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition-all"
+              >
+                <LayoutDashboard className="w-4 h-4" />
+                <span className="hidden sm:inline">Workspace</span>
+              </Link>
+              <Link 
+                to="/app/settings" 
+                className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition-all"
+              >
+                <Settings className="w-4 h-4" />
+                <span className="hidden sm:inline">Settings</span>
+              </Link>
+              <div className="w-px h-6 bg-slate-700 mx-1 hidden sm:block"></div>
+              <button 
+                onClick={handleLogout}
+                className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-red-400 hover:text-red-300 hover:bg-red-950/30 border border-transparent hover:border-red-900/50 rounded-lg transition-all"
+              >
+                <LogOut className="w-4 h-4" />
+                <span className="hidden sm:inline">Logout</span>
+              </button>
+            </nav>
+          ) : (
+            <nav className="flex items-center gap-3">
+              <Link 
+                to="/login" 
+                className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition-all"
+              >
+                <LogIn className="w-4 h-4" />
+                Sign In
+              </Link>
+              <Link 
+                to="/signup" 
+                className="flex items-center gap-2 px-5 py-2 text-sm font-medium text-black bg-white hover:bg-slate-200 rounded-lg transition-all shadow-[0_0_20px_-5px_rgba(255,255,255,0.4)]"
+              >
+                <UserPlus className="w-4 h-4" />
+                Get Started
+              </Link>
+            </nav>
+          )}
+        </div>
       </div>
     </header>
   )

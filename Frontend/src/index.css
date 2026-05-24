@@ -1,1 +1,13 @@
 @import "tailwindcss";
+
+/* App-level defaults */
+html, body, #root {
+	height: 100%;
+}
+body {
+	@apply bg-slate-900 text-slate-100 antialiased;
+}
+
+.container {
+	@apply max-w-4xl mx-auto px-4;
+}

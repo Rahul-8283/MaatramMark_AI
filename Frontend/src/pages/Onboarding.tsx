@@ -67,60 +67,64 @@ export default function Onboarding() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 to-slate-800">
-      <Card className="max-w-md w-full mx-4">
+    <div className="min-h-screen bg-[#0d0d0d] text-slate-200 flex items-center justify-center relative overflow-hidden selection:bg-cyan-500/30">
+      {/* Background Glows */}
+      <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-cyan-600/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-purple-600/10 rounded-full blur-[120px] pointer-events-none" />
+
+      <Card className="max-w-md w-full mx-4 relative z-10">
         <h1 className="text-2xl font-bold text-white mb-2 text-center">Setup Your Business</h1>
         <p className="text-slate-400 text-center mb-6">Step {step} of 2</p>
 
         {error && (
-          <div className="mb-4 p-3 bg-red-500/20 border border-red-500 text-red-200 rounded">
+          <div className="mb-4 p-3 bg-red-500/10 border border-red-500/20 text-red-400 rounded-xl text-sm text-center">
             {error}
           </div>
         )}
 
         {step === 1 ? (
-          <form onSubmit={handleContinue} className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-slate-200 mb-1">Business Name</label>
+          <form onSubmit={handleContinue} className="space-y-5">
+            <div className="space-y-1">
+              <label className="text-sm font-medium text-slate-300 ml-1">Business Name</label>
               <input
                 type="text"
                 value={businessName}
                 onChange={(e) => setBusinessName(e.target.value)}
-                className="w-full px-3 py-2 bg-slate-600 text-white rounded focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                className="w-full px-4 py-3 bg-slate-950/50 border border-slate-800 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all"
                 placeholder="e.g., Sweet Crumbs"
               />
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-slate-200 mb-1">Business Type</label>
+            <div className="space-y-1">
+              <label className="text-sm font-medium text-slate-300 ml-1">Business Type</label>
               <input
                 type="text"
                 value={businessType}
                 onChange={(e) => setBusinessType(e.target.value)}
-                className="w-full px-3 py-2 bg-slate-600 text-white rounded focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                className="w-full px-4 py-3 bg-slate-950/50 border border-slate-800 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all"
                 placeholder="e.g., Bakery"
               />
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-slate-200 mb-1">Location</label>
+            <div className="space-y-1">
+              <label className="text-sm font-medium text-slate-300 ml-1">Location</label>
               <input
                 type="text"
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
-                className="w-full px-3 py-2 bg-slate-600 text-white rounded focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                className="w-full px-4 py-3 bg-slate-950/50 border border-slate-800 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all"
                 placeholder="e.g., Chennai, India"
               />
             </div>
 
-            <Button className="w-full" disabled={loading}>
+            <Button className="w-full py-3.5 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white rounded-xl font-semibold shadow-lg shadow-cyan-500/25 transition-all" disabled={loading}>
               {loading ? 'Setting up...' : 'Continue'}
             </Button>
           </form>
         ) : (
-          <div className="text-center">
+          <div className="text-center py-6">
             <Loading />
-            <p className="text-slate-300">AI is analyzing your business...</p>
+            <p className="text-slate-300 font-medium mt-4">AI is analyzing your business...</p>
             <p className="text-slate-400 text-sm mt-2">Running strategy, research & branding agents</p>
           </div>
         )}

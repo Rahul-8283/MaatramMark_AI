@@ -5,7 +5,9 @@ html, body, #root {
 	height: 100%;
 }
 body {
-	@apply bg-slate-900 text-slate-100 antialiased;
+	background-color: #0d0d0d;
+	color: #e2e8f0;
+	@apply antialiased;
 }
 
 .container {

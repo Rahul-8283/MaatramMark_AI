@@ -5,8 +5,13 @@ import api from '../lib/api.ts'
 
 export default function AppPage() {
 	return (
-		<div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-			<Outlet />
+		<div className="min-h-screen bg-[#0d0d0d] text-slate-200 relative overflow-hidden selection:bg-cyan-500/30">
+			{/* Background Glows */}
+			<div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-cyan-600/5 rounded-full blur-[150px] pointer-events-none" />
+			<div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-purple-600/5 rounded-full blur-[150px] pointer-events-none" />
+			<div className="relative z-10">
+				<Outlet />
+			</div>
 		</div>
 	)
 }
@@ -57,7 +62,7 @@ export function AppHome() {
 				</div>
 
 				{/* Daily Update Card */}
-				<div className="bg-gradient-to-br from-slate-800/80 to-slate-900/40 rounded-2xl p-8 border border-cyan-500/20 shadow-2xl hover:shadow-cyan-500/10 transition-shadow mb-8">
+				<div className="bg-[#121212]/50 backdrop-blur-xl rounded-2xl p-8 border border-cyan-500/30 shadow-2xl hover:shadow-cyan-500/20 hover:border-cyan-500/50 transition-all mb-8">
 					<div className="flex items-start justify-between mb-6">
 						<div>
 							<h2 className="text-2xl font-bold text-white mb-2">Daily Content Generation</h2>
@@ -90,21 +95,21 @@ export function AppHome() {
 
 				{/* Quick Actions Grid */}
 				<div className="grid md:grid-cols-3 gap-6">
-					<div className="bg-gradient-to-br from-slate-800/60 to-slate-900/30 rounded-xl p-6 border border-slate-700/50 hover:border-cyan-500/30 transition-colors">
+					<div className="bg-[#121212]/40 backdrop-blur-md rounded-xl p-6 border border-slate-800/60 hover:border-cyan-500/40 hover:bg-[#161616]/60 transition-all hover:shadow-[0_10px_30px_-15px_rgba(0,0,0,0.7)]">
 						<div className="text-3xl mb-3">📊</div>
 						<h3 className="text-lg font-semibold text-white mb-1">Content Posts</h3>
 						<p className="text-3xl font-bold text-cyan-400">{daily?.ideas?.length || 0}</p>
 						<p className="text-sm text-slate-400 mt-2">This month</p>
 					</div>
 
-					<div className="bg-gradient-to-br from-slate-800/60 to-slate-900/30 rounded-xl p-6 border border-slate-700/50 hover:border-cyan-500/30 transition-colors">
+					<div className="bg-[#121212]/40 backdrop-blur-md rounded-xl p-6 border border-slate-800/60 hover:border-cyan-500/40 hover:bg-[#161616]/60 transition-all hover:shadow-[0_10px_30px_-15px_rgba(0,0,0,0.7)]">
 						<div className="text-3xl mb-3">💡</div>
 						<h3 className="text-lg font-semibold text-white mb-1">Ideas Ready</h3>
 						<p className="text-3xl font-bold text-blue-400">{daily?.ideas?.length || 0}</p>
 						<p className="text-sm text-slate-400 mt-2">Unique concepts</p>
 					</div>
 
-					<div className="bg-gradient-to-br from-slate-800/60 to-slate-900/30 rounded-xl p-6 border border-slate-700/50 hover:border-cyan-500/30 transition-colors">
+					<div className="bg-[#121212]/40 backdrop-blur-md rounded-xl p-6 border border-slate-800/60 hover:border-cyan-500/40 hover:bg-[#161616]/60 transition-all hover:shadow-[0_10px_30px_-15px_rgba(0,0,0,0.7)]">
 						<div className="text-3xl mb-3">🎯</div>
 						<h3 className="text-lg font-semibold text-white mb-1">Ready to Post</h3>
 						<p className="text-3xl font-bold text-purple-400">0</p>
@@ -114,7 +119,7 @@ export function AppHome() {
 
 				{/* Features Section */}
 				<div className="mt-12 grid md:grid-cols-2 gap-6">
-					<div className="bg-gradient-to-br from-slate-800/40 to-slate-900/20 rounded-xl p-6 border border-slate-700/30">
+					<div className="bg-[#121212]/30 backdrop-blur-md rounded-xl p-6 border border-slate-800/40">
 						<h3 className="text-lg font-semibold text-white mb-3">✨ Next Steps</h3>
 						<ul className="space-y-2 text-slate-300 text-sm mb-4">
 							<li>✓ Generate today's content ideas</li>
@@ -130,7 +135,7 @@ export function AppHome() {
 						</button>
 					</div>
 
-					<div className="bg-gradient-to-br from-slate-800/40 to-slate-900/20 rounded-xl p-6 border border-slate-700/30">
+					<div className="bg-[#121212]/30 backdrop-blur-md rounded-xl p-6 border border-slate-800/40">
 						<h3 className="text-lg font-semibold text-white mb-3">🔥 Pro Tip</h3>
 						<p className="text-slate-300 text-sm">
 							Generate content daily to maintain consistency and boost your engagement. Our AI learns from your business to create better content over time.
@@ -172,7 +177,7 @@ function DailyContentView({ daily, onBack }: { daily: DailyContent, onBack: () =
 
 				{/* Context Section */}
 				{daily.context && (
-					<div className="bg-gradient-to-br from-slate-800/80 to-slate-900/40 rounded-xl p-6 border border-cyan-500/20 mb-8">
+					<div className="bg-[#121212]/50 backdrop-blur-md border border-cyan-500/30 rounded-xl p-6 mb-8">
 						<h2 className="text-xl font-semibold text-cyan-400 mb-3">📌 Today's Context</h2>
 						<p className="text-slate-200 leading-relaxed">{daily.context}</p>
 					</div>
@@ -186,7 +191,7 @@ function DailyContentView({ daily, onBack }: { daily: DailyContent, onBack: () =
 							{daily.ideas.map((idea, idx) => (
 								<div
 									key={idx}
-									className="bg-gradient-to-br from-slate-800/60 to-slate-900/30 rounded-xl p-5 border border-slate-700/50 hover:border-cyan-500/30 transition-colors group cursor-pointer"
+									className="bg-[#121212]/40 backdrop-blur-md border border-slate-800/60 hover:border-cyan-500/40 hover:bg-[#161616]/60 rounded-xl p-5 transition-all group cursor-pointer"
 								>
 									<div className="text-3xl mb-3">✨</div>
 									<p className="text-slate-200 group-hover:text-white transition-colors">{idea}</p>
@@ -204,7 +209,7 @@ function DailyContentView({ daily, onBack }: { daily: DailyContent, onBack: () =
 							{daily.captions.map((caption, idx) => (
 								<div
 									key={idx}
-									className="bg-gradient-to-r from-slate-800/60 to-slate-900/30 rounded-xl p-5 border border-slate-700/50 hover:border-blue-500/30 transition-colors group"
+									className="bg-[#121212]/40 backdrop-blur-md border border-slate-800/60 hover:border-blue-500/40 hover:bg-[#161616]/60 rounded-xl p-5 transition-all group"
 								>
 									<div className="flex items-start justify-between">
 										<p className="text-slate-200 group-hover:text-white transition-colors flex-1">{caption}</p>
@@ -225,7 +230,7 @@ function DailyContentView({ daily, onBack }: { daily: DailyContent, onBack: () =
 				{daily.hashtags && daily.hashtags.length > 0 && (
 					<div className="mb-8">
 						<h2 className="text-2xl font-bold text-white mb-4">🏷️ Recommended Hashtags</h2>
-						<div className="bg-gradient-to-br from-slate-800/60 to-slate-900/30 rounded-xl p-6 border border-slate-700/50">
+						<div className="bg-[#121212]/40 backdrop-blur-md border border-slate-800/60 rounded-xl p-6">
 							<div className="flex flex-wrap gap-3">
 								{daily.hashtags.map((tag, idx) => (
 									<button
@@ -243,7 +248,7 @@ function DailyContentView({ daily, onBack }: { daily: DailyContent, onBack: () =
 				)}
 
 				{/* CTA Section */}
-				<div className="bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-xl p-8 border border-cyan-500/30 text-center">
+				<div className="bg-gradient-to-r from-cyan-500/10 to-blue-500/10 backdrop-blur-md rounded-xl p-8 border border-cyan-500/30 text-center shadow-lg shadow-cyan-500/5">
 					<h3 className="text-xl font-bold text-white mb-4">Ready to create visuals?</h3>
 					<button
 						onClick={() => navigate('/app/generate-images')}
@@ -277,7 +282,7 @@ export function AppSettings() {
 				</div>
 
 				{/* Business Info Section */}
-				<div className="bg-gradient-to-br from-slate-800/80 to-slate-900/40 rounded-2xl p-8 border border-cyan-500/20 mb-8">
+				<div className="bg-[#121212]/40 backdrop-blur-xl rounded-2xl p-8 border border-slate-800/60 mb-8">
 					<h2 className="text-2xl font-semibold text-white mb-6">Business Information</h2>
 					<div className="space-y-5">
 						<div>
@@ -285,14 +290,14 @@ export function AppSettings() {
 							<input
 								type="text"
 								defaultValue={business?.business_name || ''}
-								className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:border-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/20 transition-all"
+								className="w-full px-4 py-3 bg-slate-950/50 border border-slate-800 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all"
 								placeholder="Your business name"
 							/>
 						</div>
 
 						<div>
 							<label className="block text-sm font-medium text-slate-300 mb-2">Business Type</label>
-							<select className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg text-white focus:border-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/20 transition-all">
+							<select className="w-full px-4 py-3 bg-slate-950/50 border border-slate-800 rounded-xl text-white focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all">
 								<option>Select type</option>
 								<option selected={business?.business_type === 'Retail'}>🏪 Retail</option>
 								<option selected={business?.business_type === 'Food'}>🍽️ Food & Beverage</option>
@@ -308,7 +313,7 @@ export function AppSettings() {
 							<input
 								type="text"
 								defaultValue={business?.location || ''}
-								className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:border-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/20 transition-all"
+								className="w-full px-4 py-3 bg-slate-950/50 border border-slate-800 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all"
 								placeholder="City / Region"
 							/>
 						</div>
@@ -320,7 +325,7 @@ export function AppSettings() {
 				</div>
 
 				{/* Account Section */}
-				<div className="bg-gradient-to-br from-slate-800/80 to-slate-900/40 rounded-2xl p-8 border border-red-500/20">
+				<div className="bg-[#121212]/40 backdrop-blur-xl rounded-2xl p-8 border border-red-500/20">
 					<h2 className="text-2xl font-semibold text-white mb-6">Account</h2>
 					<div className="space-y-4">
 						<p className="text-slate-400 text-sm">

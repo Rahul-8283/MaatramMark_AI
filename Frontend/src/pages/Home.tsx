@@ -24,25 +24,36 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-[#111] text-slate-200 overflow-hidden relative selection:bg-cyan-500/30">
-      {/* Background Diagonal Stripes (matching user reference) */}
-      <div 
-        className="fixed inset-0 z-0 opacity-40 pointer-events-none"
-        style={{
-          background: 'repeating-linear-gradient(45deg, #111 0px, #111 40px, #1a1a1a 40px, #1a1a1a 80px, #0a0a0a 80px, #0a0a0a 120px)'
-        }}
-      />
-      
-      {/* Subtle Glow Effects */}
-      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-cyan-600/20 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-purple-600/20 rounded-full blur-[120px] pointer-events-none" />
-
+    <div className="min-h-screen bg-[#0d0d0d] text-slate-200 overflow-hidden relative selection:bg-cyan-500/30">
       <div className="relative z-10">
         
         {/* --- HERO SECTION --- */}
-        <section className="min-h-screen flex flex-col items-center justify-center px-6 pt-20 pb-12">
+        <section className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-20 pb-12 overflow-hidden bg-[#0d0d0d]">
+          {/* Stripe Background Layer (exact pattern from photo, at 135deg angle) */}
+          <div 
+            className="absolute inset-0 z-0 pointer-events-none"
+            style={{
+              background: 'linear-gradient(135deg, #333333 0%, #333333 31.2%, #000000 31.2%, #000000 40.2%, #1a1a1a 40.2%, #1a1a1a 49.2%, #000000 49.2%, #000000 49.7%, #333333 49.7%, #333333 58.8%, #4d4d4d 58.8%, #4d4d4d 67.8%, #000000 67.8%, #000000 68.3%, #333333 68.3%, #333333 100%)',
+            }}
+          />
+          {/* Soft Spotlight Radial Overlay to give depth and rich texture */}
+          <div 
+            className="absolute inset-0 z-0 pointer-events-none"
+            style={{
+              background: 'radial-gradient(circle at 50% 50%, rgba(13, 13, 13, 0.15) 0%, rgba(13, 13, 13, 0.85) 100%)',
+            }}
+          />
+          {/* Subtle Glow Effects inside Hero */}
+          <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-cyan-600/10 rounded-full blur-[120px] pointer-events-none z-0" />
+          <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-purple-600/10 rounded-full blur-[120px] pointer-events-none z-0" />
+
+          {/* Fade out transition at the bottom to blend with the rest of the dark page */}
+          <div 
+            className="absolute bottom-0 left-0 right-0 h-48 z-0 pointer-events-none bg-gradient-to-t from-[#0d0d0d] to-transparent"
+          />
+
           <motion.div 
-            className="max-w-4xl w-full text-center"
+            className="max-w-4xl w-full text-center relative z-10"
             initial="hidden"
             animate="visible"
             variants={containerVariants}
@@ -91,7 +102,7 @@ export default function Home() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.5, duration: 1 }}
-            className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center text-slate-500"
+            className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center text-slate-500 z-10"
           >
             <span className="text-xs uppercase tracking-widest mb-2 font-medium">Scroll to explore</span>
             <div className="w-[1px] h-12 bg-gradient-to-b from-slate-500 to-transparent" />
@@ -100,8 +111,10 @@ export default function Home() {
 
 
         {/* --- FEATURES SECTION --- */}
-        <section className="py-24 px-6 relative">
-          <div className="max-w-7xl mx-auto">
+        <section id="features" className="py-24 px-6 relative overflow-hidden bg-[#0d0d0d] border-t border-slate-900/30">
+          {/* Subtle background glow */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60%] h-[60%] bg-purple-900/5 rounded-full blur-[150px] pointer-events-none z-0" />
+          <div className="max-w-7xl mx-auto relative z-10">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">Intelligent Capabilities</h2>
               <p className="text-slate-400 max-w-2xl mx-auto">Everything you need to automate your social media presence, powered by advanced LLMs and image generation models.</p>
@@ -123,7 +136,7 @@ export default function Home() {
                 <motion.div 
                   key={idx}
                   variants={itemVariants}
-                  className="bg-slate-900/40 backdrop-blur-md border border-slate-800 p-8 rounded-2xl hover:bg-slate-800/60 hover:border-slate-600 transition-all group"
+                  className="bg-[#121212]/40 backdrop-blur-md border border-slate-800/60 p-8 rounded-2xl hover:bg-[#161616]/60 hover:border-slate-700 transition-all group hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.8)]"
                 >
                   <div className="w-14 h-14 rounded-xl bg-slate-800 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                     {feature.icon}
@@ -140,8 +153,10 @@ export default function Home() {
 
 
         {/* --- HOW IT WORKS SECTION --- */}
-        <section className="py-24 px-6 bg-black/40 backdrop-blur-sm border-t border-slate-800/50">
-          <div className="max-w-5xl mx-auto">
+        <section id="how-it-works" className="py-24 px-6 relative overflow-hidden bg-[#090909] border-t border-slate-900/50">
+          {/* Subtle background glow */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60%] h-[60%] bg-cyan-900/5 rounded-full blur-[150px] pointer-events-none z-0" />
+          <div className="max-w-5xl mx-auto relative z-10">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">How It Works</h2>
               <p className="text-slate-400 max-w-2xl mx-auto">A seamless workflow from setup to deployment.</p>
@@ -159,9 +174,9 @@ export default function Home() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: idx * 0.2 }}
-                  className="flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-12 bg-slate-900/30 p-6 md:p-8 rounded-3xl border border-slate-800/50 hover:border-slate-700 transition-colors"
+                  className="flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-12 bg-[#121212]/30 p-6 md:p-8 rounded-3xl border border-slate-800/40 hover:border-slate-700 transition-all hover:shadow-[0_15px_35px_-10px_rgba(0,0,0,0.6)]"
                 >
-                  <div className="flex-shrink-0 w-20 h-20 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center text-2xl font-black text-slate-500 shadow-inner">
+                  <div className="flex-shrink-0 w-20 h-20 rounded-full bg-[#181818] border border-slate-800 flex items-center justify-center text-2xl font-black text-slate-600 shadow-inner">
                     {item.step}
                   </div>
                   <div className="flex-1">

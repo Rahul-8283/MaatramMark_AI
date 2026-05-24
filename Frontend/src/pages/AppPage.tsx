@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Outlet, useNavigate, Link } from 'react-router-dom'
 import useStore from '../store/useStore.ts'
 import api from '../lib/api.ts'
-import { ArrowLeft } from 'lucide-react'
+import { ArrowLeft, FileText, BarChart3, Lightbulb, Target, Sparkles, Save, LogOut } from 'lucide-react'
 
 export default function AppPage() {
 	return (
@@ -69,7 +69,9 @@ export function AppHome() {
 							<h2 className="text-xl font-semibold text-white mb-2">Daily Content Generation</h2>
 							<p className="text-slate-400">Generate fresh ideas, captions & hashtags for today</p>
 						</div>
-						<div className="text-4xl">📝</div>
+						<div className="text-cyan-400 bg-cyan-950/40 p-3 rounded-xl border border-cyan-800/30 shadow-inner">
+							<FileText className="w-6 h-6" />
+						</div>
 					</div>
 
 					{error && (
@@ -97,21 +99,27 @@ export function AppHome() {
 				{/* Quick Actions Grid */}
 				<div className="grid md:grid-cols-3 gap-6">
 					<div className="bg-[#121212]/40 backdrop-blur-md rounded-xl p-6 border border-slate-800/60 hover:border-cyan-500/40 hover:bg-[#161616]/60 transition-all hover:shadow-[0_10px_30px_-15px_rgba(0,0,0,0.7)]">
-						<div className="text-3xl mb-3">📊</div>
+						<div className="w-10 h-10 rounded-lg bg-cyan-950/50 border border-cyan-800/30 flex items-center justify-center text-cyan-400 mb-3">
+							<BarChart3 className="w-5 h-5" />
+						</div>
 						<h3 className="text-lg font-semibold text-white mb-1">Content Posts</h3>
 						<p className="text-3xl font-bold text-cyan-400">{daily?.ideas?.length || 0}</p>
 						<p className="text-sm text-slate-400 mt-2">This month</p>
 					</div>
 
 					<div className="bg-[#121212]/40 backdrop-blur-md rounded-xl p-6 border border-slate-800/60 hover:border-cyan-500/40 hover:bg-[#161616]/60 transition-all hover:shadow-[0_10px_30px_-15px_rgba(0,0,0,0.7)]">
-						<div className="text-3xl mb-3">💡</div>
+						<div className="w-10 h-10 rounded-lg bg-blue-950/50 border border-blue-800/30 flex items-center justify-center text-blue-400 mb-3">
+							<Lightbulb className="w-5 h-5" />
+						</div>
 						<h3 className="text-lg font-semibold text-white mb-1">Ideas Ready</h3>
 						<p className="text-3xl font-bold text-blue-400">{daily?.ideas?.length || 0}</p>
 						<p className="text-sm text-slate-400 mt-2">Unique concepts</p>
 					</div>
 
 					<div className="bg-[#121212]/40 backdrop-blur-md rounded-xl p-6 border border-slate-800/60 hover:border-cyan-500/40 hover:bg-[#161616]/60 transition-all hover:shadow-[0_10px_30px_-15px_rgba(0,0,0,0.7)]">
-						<div className="text-3xl mb-3">🎯</div>
+						<div className="w-10 h-10 rounded-lg bg-purple-950/50 border border-purple-800/30 flex items-center justify-center text-purple-400 mb-3">
+							<Target className="w-5 h-5" />
+						</div>
 						<h3 className="text-lg font-semibold text-white mb-1">Ready to Post</h3>
 						<p className="text-3xl font-bold text-purple-400">0</p>
 						<p className="text-sm text-slate-400 mt-2">Images generated</p>
@@ -194,7 +202,9 @@ function DailyContentView({ daily, onBack }: { daily: DailyContent, onBack: () =
 									key={idx}
 									className="bg-[#121212]/40 backdrop-blur-md border border-slate-800/60 hover:border-cyan-500/40 hover:bg-[#161616]/60 rounded-xl p-5 transition-all group cursor-pointer"
 								>
-									<div className="text-3xl mb-3">✨</div>
+									<div className="w-8 h-8 rounded-lg bg-cyan-950/50 border border-cyan-800/30 flex items-center justify-center text-cyan-400 mb-3">
+										<Sparkles className="w-4 h-4" />
+									</div>
 									<p className="text-slate-200 group-hover:text-white transition-colors">{idea}</p>
 								</div>
 							))}
@@ -308,12 +318,12 @@ export function AppSettings() {
 							<label className="block text-sm font-medium text-slate-300 mb-2">Business Type</label>
 							<select className="w-full px-4 py-3 bg-slate-950/50 border border-slate-800 rounded-xl text-white focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all">
 								<option>Select type</option>
-								<option selected={business?.business_type === 'Retail'}>🏪 Retail</option>
-								<option selected={business?.business_type === 'Food'}>🍽️ Food & Beverage</option>
-								<option selected={business?.business_type === 'Services'}>💼 Services</option>
-								<option selected={business?.business_type === 'Technology'}>💻 Technology</option>
-								<option selected={business?.business_type === 'Health'}>⚕️ Health & Wellness</option>
-								<option selected={business?.business_type === 'Entertainment'}>🎭 Entertainment</option>
+								<option selected={business?.business_type === 'Retail'}>Retail</option>
+								<option selected={business?.business_type === 'Food'}>Food & Beverage</option>
+								<option selected={business?.business_type === 'Services'}>Services</option>
+								<option selected={business?.business_type === 'Technology'}>Technology</option>
+								<option selected={business?.business_type === 'Health'}>Health & Wellness</option>
+								<option selected={business?.business_type === 'Entertainment'}>Entertainment</option>
 							</select>
 						</div>
 
@@ -327,8 +337,8 @@ export function AppSettings() {
 							/>
 						</div>
 
-						<button className="w-full px-6 py-3 bg-white hover:bg-slate-200 text-black rounded-lg font-bold transition-all shadow-[0_0_20px_-5px_rgba(255,255,255,0.4)]">
-							💾 Save Changes
+						<button className="w-full px-6 py-3 bg-white hover:bg-slate-200 text-black rounded-lg font-bold transition-all shadow-[0_0_20px_-5px_rgba(255,255,255,0.4)] flex items-center justify-center gap-2">
+							<Save className="w-4 h-4" /> Save Changes
 						</button>
 					</div>
 				</div>
@@ -342,9 +352,9 @@ export function AppSettings() {
 						</p>
 						<button
 							onClick={handleLogout}
-							className="w-full px-6 py-3 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white rounded-lg font-semibold transition-all shadow-lg hover:shadow-red-500/30"
+							className="w-full px-6 py-3 bg-red-950/30 hover:bg-red-900/40 text-red-400 border border-red-900/40 rounded-lg font-semibold transition-all flex items-center justify-center gap-2"
 						>
-							🚪 Logout
+							<LogOut className="w-4 h-4" /> Logout
 						</button>
 					</div>
 				</div>

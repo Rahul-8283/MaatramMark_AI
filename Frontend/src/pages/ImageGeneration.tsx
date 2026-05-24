@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import useStore from '../store/useStore.ts'
 import api from '../lib/api.ts'
+import { HelpCircle, Target, Smartphone, Award, Star } from 'lucide-react'
 
 // Step Indicator
 function StepIndicator({ steps, currentStep }: { steps: string[], currentStep: number }) {
@@ -197,8 +198,11 @@ export default function ImageGeneration() {
 							)}
 						</button>
 
-						<div className="bg-gradient-to-br from-slate-800/40 to-slate-900/20 rounded-xl p-6 border border-slate-700/30">
-							<h3 className="text-lg font-semibold text-white mb-3">💡 How it works</h3>
+						<div className="bg-[#121212]/30 backdrop-blur-md rounded-xl p-6 border border-slate-800/40">
+							<h3 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
+								<HelpCircle className="w-5 h-5 text-cyan-400" />
+								How it works
+							</h3>
 							<ul className="space-y-2 text-slate-300 text-sm">
 								<li>✓ AI analyzes your business and daily content</li>
 								<li>✓ Generates multiple visual concepts</li>
@@ -225,7 +229,9 @@ export default function ImageGeneration() {
 									disabled={loading}
 									className="text-left p-6 bg-[#121212]/40 backdrop-blur-md rounded-xl border border-slate-800/60 hover:border-white/40 hover:bg-[#161616]/60 transition-all hover:shadow-[0_15px_35px_-10px_rgba(0,0,0,0.6)] disabled:opacity-50 disabled:cursor-not-allowed group"
 								>
-									<div className="text-3xl mb-3">🎯</div>
+									<div className="w-10 h-10 rounded-lg bg-cyan-950/50 border border-cyan-800/30 flex items-center justify-center text-cyan-400 mb-3">
+										<Target className="w-5 h-5" />
+									</div>
 									<p className="text-slate-200 group-hover:text-white transition-colors leading-relaxed">
 										{c}
 									</p>
@@ -333,7 +339,9 @@ export default function ImageGeneration() {
 										: 'border-slate-800 bg-[#121212]/40 backdrop-blur-md hover:border-slate-700'
 								}`}
 							>
-								<div className="text-4xl mb-3">📱</div>
+								<div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white mb-4 mx-auto">
+									<Smartphone className="w-6 h-6" />
+								</div>
 								<h3 className="text-lg font-semibold text-white mb-1">Social Media Poster</h3>
 								<p className="text-slate-400 text-sm">Share on Instagram, Facebook, etc.</p>
 							</button>
@@ -346,7 +354,9 @@ export default function ImageGeneration() {
 										: 'border-slate-800 bg-[#121212]/40 backdrop-blur-md hover:border-slate-700'
 								}`}
 							>
-								<div className="text-4xl mb-3">🏢</div>
+								<div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white mb-4 mx-auto">
+									<Award className="w-6 h-6" />
+								</div>
 								<h3 className="text-lg font-semibold text-white mb-1">Business Logo</h3>
 								<p className="text-slate-400 text-sm">Use for branding & promotions</p>
 							</button>
@@ -379,20 +389,24 @@ export default function ImageGeneration() {
 										<button
 											key={star}
 											onClick={() => setRating(star)}
-											className={`text-4xl transition-transform hover:scale-125 ${
-												star <= rating ? '⭐' : '☆'
-											}`}
+											className="transition-all hover:scale-125 focus:outline-none"
 										>
-											{star <= rating ? '⭐' : '☆'}
+											<Star 
+												className={`w-8 h-8 transition-colors ${
+													star <= rating 
+														? 'fill-yellow-400 text-yellow-400' 
+														: 'text-slate-600 hover:text-slate-500'
+												}`} 
+											/>
 										</button>
 									))}
 								</div>
 								<p className="text-sm text-slate-400">
-									{rating === 5 && '🎉 Excellent! We\'re thrilled!'}
-									{rating === 4 && '😊 Great! Thanks for your feedback'}
-									{rating === 3 && '👍 Good! We\'ll improve'}
-									{rating === 2 && '🤔 We can do better'}
-									{rating === 1 && '😞 We\'ll work hard to improve'}
+									{rating === 5 && "Excellent! We're thrilled!"}
+									{rating === 4 && "Great! Thanks for your feedback"}
+									{rating === 3 && "Good! We'll improve"}
+									{rating === 2 && "We can do better"}
+									{rating === 1 && "We'll work hard to improve"}
 								</p>
 							</div>
 

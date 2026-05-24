@@ -312,7 +312,7 @@ export function AppSettings() {
 				</div>
 
 				{/* Business Info Section */}
-				<div className="bg-[#121212]/40 backdrop-blur-xl rounded-lg border border-slate-800/60 mb-8">
+				<div className="bg-[#121212]/40 backdrop-blur-xl rounded-lg p-8 border border-slate-800/60 mb-8">
 					<h2 className="text-xl font-semibold text-white mb-6">Business Information</h2>
 					<div className="space-y-5">
 						<div>

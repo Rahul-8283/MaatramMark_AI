@@ -58,7 +58,7 @@ export default function Home() {
             animate="visible"
             variants={containerVariants}
           >
-            <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900/60 border border-amber-900/20 text-[#c5a880] text-sm font-medium mb-8 backdrop-blur-sm">
+            <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-slate-900/60 border border-amber-900/20 text-[#c5a880] text-sm font-medium mb-8 backdrop-blur-sm">
               <Sparkles className="w-4 h-4" />
               <span>The Next Generation of AI Marketing</span>
             </motion.div>
@@ -77,20 +77,17 @@ export default function Home() {
             <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link 
                 to={isLoggedIn ? '/app' : '/login'} 
-                className="group relative px-8 py-4 bg-white text-black rounded-full font-bold text-lg overflow-hidden transition-all hover:scale-105 hover:shadow-[0_0_40px_-10px_rgba(255,255,255,0.5)]"
+                className="px-8 py-3 bg-white hover:bg-slate-200 text-black rounded-md font-bold text-base flex items-center gap-2 transition-colors"
               >
-                <span className="relative z-10 flex items-center gap-2">
-                  {isLoggedIn ? 'Open Workspace' : 'Start Creating for Free'}
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-[#e6d5bc] to-white opacity-0 group-hover:opacity-100 transition-opacity" />
+                <span>{isLoggedIn ? 'Open Workspace' : 'Start Creating for Free'}</span>
+                <ArrowRight className="w-5 h-5" />
               </Link>
               
               <a 
                 href="https://github.com/Rahul-8283/MaatramMark_AI" 
                 target="_blank" 
                 rel="noreferrer" 
-                className="px-8 py-4 rounded-full font-semibold text-slate-300 border border-slate-700 hover:border-slate-400 hover:bg-slate-800/50 backdrop-blur-sm transition-all"
+                className="px-8 py-3 rounded-md font-semibold text-slate-300 border border-amber-900/40 hover:border-[#c5a880]/60 hover:bg-[#c5a880]/5 backdrop-blur-sm transition-all text-base"
               >
                 View Repository
               </a>
@@ -136,9 +133,9 @@ export default function Home() {
                 <motion.div 
                   key={idx}
                   variants={itemVariants}
-                  className="bg-[#121212]/40 backdrop-blur-md border border-slate-800/60 p-8 rounded-2xl hover:bg-[#161616]/60 hover:border-slate-700 transition-all group hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.8)]"
+                  className="bg-[#121212]/40 backdrop-blur-md border border-slate-800/60 p-8 rounded-lg hover:bg-[#161616]/60 hover:border-slate-700 transition-all group hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.8)]"
                 >
-                  <div className="w-14 h-14 rounded-xl bg-slate-800 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                  <div className="w-14 h-14 rounded-md bg-slate-800 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                     {feature.icon}
                   </div>
                   <h3 className="text-lg font-semibold text-white mb-3">{feature.title}</h3>
@@ -174,7 +171,7 @@ export default function Home() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: idx * 0.2 }}
-                  className="flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-12 bg-[#121212]/30 p-6 md:p-8 rounded-3xl border border-slate-800/40 hover:border-slate-700 transition-all hover:shadow-[0_15px_35px_-10px_rgba(0,0,0,0.6)]"
+                  className="flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-12 bg-[#121212]/30 p-6 md:p-8 rounded-lg border border-slate-800/40 hover:border-slate-700 transition-all hover:shadow-[0_15px_35px_-10px_rgba(0,0,0,0.6)]"
                 >
                   <div className="flex-shrink-0 w-20 h-20 rounded-full bg-[#181818] border border-slate-800 flex items-center justify-center text-2xl font-black text-slate-600 shadow-inner">
                     {item.step}

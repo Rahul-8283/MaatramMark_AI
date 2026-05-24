@@ -17,6 +17,7 @@ export function AppHome() {
 	const setDaily = useStore((s) => s.setDaily)
 	const userId = useStore((s) => s.userId)
 	const storedUserId = localStorage.getItem('userId')
+	const navigate = useNavigate()
 
 	const [loading, setLoading] = useState(false)
 	const [error, setError] = useState('')
@@ -115,12 +116,18 @@ export function AppHome() {
 				<div className="mt-12 grid md:grid-cols-2 gap-6">
 					<div className="bg-gradient-to-br from-slate-800/40 to-slate-900/20 rounded-xl p-6 border border-slate-700/30">
 						<h3 className="text-lg font-semibold text-white mb-3">✨ Next Steps</h3>
-						<ul className="space-y-2 text-slate-300 text-sm">
+						<ul className="space-y-2 text-slate-300 text-sm mb-4">
 							<li>✓ Generate today's content ideas</li>
 							<li>✓ Review & refine captions</li>
 							<li>✓ Create stunning visuals</li>
 							<li>✓ Post to social media</li>
 						</ul>
+						<button
+							onClick={() => navigate('/app/generate-images')}
+							className="w-full px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white rounded-lg text-sm font-medium transition-all shadow-lg"
+						>
+							🎨 Generate Visuals
+						</button>
 					</div>
 
 					<div className="bg-gradient-to-br from-slate-800/40 to-slate-900/20 rounded-xl p-6 border border-slate-700/30">
@@ -239,7 +246,7 @@ function DailyContentView({ daily, onBack }: { daily: DailyContent, onBack: () =
 				<div className="bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-xl p-8 border border-cyan-500/30 text-center">
 					<h3 className="text-xl font-bold text-white mb-4">Ready to create visuals?</h3>
 					<button
-						onClick={() => navigate('/app')}
+						onClick={() => navigate('/app/generate-images')}
 						className="px-8 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white rounded-lg font-semibold transition-all shadow-lg hover:shadow-cyan-500/50"
 					>
 						Generate Images →

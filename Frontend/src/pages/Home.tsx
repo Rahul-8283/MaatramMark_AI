@@ -1,7 +1,12 @@
 import { Link } from 'react-router-dom'
 import reactLogo from '../assets/react.svg'
+import useStore from '../store/useStore'
 
 export default function Home() {
+  const userId = useStore((s) => s.userId)
+  const storedUserId = localStorage.getItem('userId')
+  const isLoggedIn = userId || storedUserId
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 to-slate-800">
       <div className="max-w-3xl text-center px-6">
@@ -10,8 +15,15 @@ export default function Home() {
         <p className="text-slate-300 mb-8">AI-powered content generator for local businesses — strategy, creative, images, and feedback learning.</p>
 
         <div className="flex justify-center gap-4">
-          <Link to="/app" className="px-6 py-3 bg-cyan-500 hover:bg-cyan-600 text-white rounded-lg">Open Demo App</Link>
-          <a href="https://github.com/Rahul-8283/MaatramMark_AI" target="_blank" rel="noreferrer" className="px-6 py-3 border border-slate-600 text-slate-200 rounded-lg">Repository</a>
+          <Link 
+            to={isLoggedIn ? '/app' : '/login'} 
+            className="px-6 py-3 bg-cyan-500 hover:bg-cyan-600 text-white rounded-lg"
+          >
+            {isLoggedIn ? 'Open App' : 'Get Started'}
+          </Link>
+          <a href="https://github.com/Rahul-8283/MaatramMark_AI" target="_blank" rel="noreferrer" className="px-6 py-3 border border-slate-600 text-slate-200 rounded-lg hover:border-slate-400">
+            Repository
+          </a>
         </div>
 
         <div className="mt-8 text-slate-400">

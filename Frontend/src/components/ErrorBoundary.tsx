@@ -12,9 +12,9 @@ export default class ErrorBoundary extends React.Component<{ children?: React.Re
     return { hasError: true }
   }
 
-  componentDidCatch(error: Error, info: any) {
+  componentDidCatch(_error: Error, _info: any) {
     // You can log errors to a service here
-    // console.error(error, info)
+    // console.error(_error, _info)
   }
 
   render() {

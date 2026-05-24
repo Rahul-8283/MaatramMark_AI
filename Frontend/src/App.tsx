@@ -1,12 +1,12 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Home from './pages/Home.tsx';
-import Login from './pages/Login';
-import Signup from './pages/Signup';
-import Onboarding from './pages/Onboarding';
-import AppPage, { AppHome, AppSettings } from './pages/AppPage';
-import ProtectedRoute from './components/ProtectedRoute';
-import ErrorBoundary from './components/ErrorBoundary';
-import Navbar from './components/Navbar';
+import Login from './pages/Login.tsx';
+import Signup from './pages/Signup.tsx';
+import Onboarding from './pages/Onboarding.tsx';
+import AppPage, { AppHome, AppSettings } from './pages/AppPage.tsx';
+import ProtectedRoute from './components/ProtectedRoute.tsx';
+import ErrorBoundary from './components/ErrorBoundary.tsx';
+import Navbar from './components/Navbar.tsx';
 
 export default function App() {
 	return (

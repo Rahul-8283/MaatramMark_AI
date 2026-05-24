@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import Button from '../components/Button'
-import Card from '../components/Card'
-import Loading from '../components/Loading'
-import api from '../lib/api'
-import useStore from '../store/useStore'
+import Button from '../components/Button.tsx'
+import Card from '../components/Card.tsx'
+import Loading from '../components/Loading.tsx'
+import api from '../lib/api.ts'
+import useStore from '../store/useStore.ts'
 
 export default function Onboarding() {
   const navigate = useNavigate()

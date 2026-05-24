@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom'
-import useStore from '../store/useStore'
+import useStore from '../store/useStore.ts'
 
 type Props = {
   children: React.ReactNode

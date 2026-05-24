@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
-import Button from '../components/Button'
-import Card from '../components/Card'
-import useStore from '../store/useStore'
+import Button from '../components/Button.tsx'
+import Card from '../components/Card.tsx'
+import useStore from '../store/useStore.ts'
 
 export default function Signup() {
   const navigate = useNavigate()

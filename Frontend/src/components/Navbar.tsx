@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom'
-import useStore from '../store/useStore'
+import useStore from '../store/useStore.ts'
 
 export default function Navbar() {
   const business = useStore((s) => s.business)

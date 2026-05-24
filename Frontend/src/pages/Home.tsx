@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import reactLogo from '../assets/react.svg'
-import useStore from '../store/useStore'
+import useStore from '../store/useStore.ts'
 
 export default function Home() {
   const userId = useStore((s) => s.userId)

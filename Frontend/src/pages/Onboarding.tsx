@@ -32,7 +32,12 @@ export default function Onboarding() {
     setError('')
 
     try {
-      // Call /onboard-business endpoint
+      // 1. Ensure user exists in public.users table to satisfy foreign key constraint
+      await api.post('/check-user', {
+        user_id: userId,
+      })
+
+      // 2. Call /onboard-business endpoint
       await api.post('/onboard-business', {
         user_id: userId,
         business_name: businessName,

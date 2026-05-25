@@ -25,7 +25,6 @@ export default function Signup() {
       setError('Passwords do not match')
       return
     }
-
     setLoading(true)
     setError('')
 

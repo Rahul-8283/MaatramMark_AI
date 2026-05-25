@@ -11,6 +11,7 @@ import ImageGeneration from './pages/ImageGeneration.tsx';
 import ProtectedRoute from './components/ProtectedRoute.tsx';
 import ErrorBoundary from './components/ErrorBoundary.tsx';
 import Navbar from './components/Navbar.tsx';
+import ScrollToTop from './components/ScrollToTop.tsx';
 
 export default function App() {
   const setSession = useStore((s) => s.setSession)
@@ -47,6 +48,7 @@ export default function App() {
 	return (
 		<ErrorBoundary>
 			<BrowserRouter>
+				<ScrollToTop />
 				<Navbar />
 				<Routes>
 					{/* Public routes */}

@@ -38,12 +38,12 @@ export default function Signup() {
         throw authError
       }
 
-      if (data.user && !data.session) {
-        // Email confirmation is required
+      // If Supabase gave us a session immediately, they are logged in.
+      if (data.session) {
+        navigate('/app')
+      } else {
+        // If there's no session, it means email confirmation is required.
         setIsSubmitted(true)
-      } else if (data.user) {
-        // Navigating to onboarding if no email confirmation required
-        navigate('/onboarding')
       }
     } catch (err: any) {
       setError(err?.message || 'Signup failed')

@@ -72,20 +72,20 @@ export default function Navbar() {
               </button>
             </nav>
           ) : (
-            <nav className="flex items-center gap-3">
+            <nav className="flex items-center gap-2 sm:gap-3">
               <Link 
                 to="/login" 
-                className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition-all"
+                className="flex items-center gap-1 sm:gap-2 px-3 sm:px-4 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition-all"
               >
                 <LogIn className="w-4 h-4" />
-                Sign In
+                <span className="hidden sm:inline">Sign In</span>
               </Link>
               <Link 
                 to="/signup" 
-                className="flex items-center gap-2 px-5 py-2 text-sm font-medium text-black bg-white hover:bg-slate-200 rounded-lg transition-all shadow-[0_0_25px_-5px_rgba(197,168,128,0.5)]"
+                className="flex items-center gap-1 sm:gap-2 px-3 sm:px-5 py-2 text-sm font-medium text-black bg-white hover:bg-slate-200 rounded-lg transition-all shadow-[0_0_25px_-5px_rgba(197,168,128,0.5)]"
               >
                 <UserPlus className="w-4 h-4" />
-                Get Started
+                <span className="hidden sm:inline">Get Started</span>
               </Link>
             </nav>
           )}

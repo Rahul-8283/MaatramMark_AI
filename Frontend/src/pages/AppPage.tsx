@@ -120,7 +120,7 @@ export function AppHome() {
 					)}
 
 					{daily ? (
-						<div className="flex gap-4">
+						<div className="flex flex-col sm:flex-row gap-4">
 							<button
 								onClick={() => setShowContent(true)}
 								className="flex-[2] px-8 py-4 bg-gradient-to-r from-white to-slate-200 hover:from-white hover:to-white text-black rounded-xl font-bold text-lg transition-all shadow-[0_0_30px_-5px_rgba(197,168,128,0.4)] flex items-center justify-center gap-3 group"
@@ -255,7 +255,7 @@ function DailyContentView({ daily, onBack }: { daily: DailyContent, onBack: () =
 		<div className="container mx-auto px-6 py-12">
 			<div className="max-w-4xl mx-auto">
 				{/* Header */}
-				<div className="flex items-center justify-between mb-8">
+				<div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
 					<div>
 						<h1 className="text-2xl md:text-3xl font-semibold text-white mb-2">Today's Content</h1>
 						<p className="text-slate-400">AI-generated strategy for maximum impact</p>

@@ -8,7 +8,7 @@ import useStore from '../store/useStore.ts'
 
 export default function Onboarding() {
   const navigate = useNavigate()
-  const userId = useStore((s) => s.userId)
+  const userId = useStore((s) => s.userId) || localStorage.getItem('userId')
   const setBusiness = useStore((s) => s.setBusiness)
   const [businessName, setBusinessName] = useState('')
   const [businessType, setBusinessType] = useState('')
@@ -21,6 +21,10 @@ export default function Onboarding() {
     e.preventDefault()
     if (!businessName || !businessType || !location) {
       setError('All fields are required')
+      return
+    }
+    if (!userId) {
+      setError('Session lost. Please go back and sign up again.')
       return
     }
 

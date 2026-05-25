@@ -1,11 +1,10 @@
 import { useState, useRef } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
-import useStore from '../store/useStore.ts'
 import { ArrowLeft, Mail, Lock, Loader2 } from 'lucide-react'
+import supabase from '../lib/supabaseClient.ts'
 
 export default function Login() {
   const navigate = useNavigate()
-  const setUser = useStore((s) => s.setUser)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
@@ -24,12 +23,18 @@ export default function Login() {
     setError('')
 
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 800))
-      const userId = `user_${Date.now()}`
-      setUser(userId)
-      localStorage.setItem('userId', userId)
-      navigate('/onboarding')
+      const { data, error: authError } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      })
+
+      if (authError) {
+        throw authError
+      }
+
+      if (data.user) {
+        navigate('/app') // Assuming successful login goes straight to app
+      }
     } catch (err: any) {
       setError(err?.message || 'Login failed')
     } finally {

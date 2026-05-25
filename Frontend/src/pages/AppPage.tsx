@@ -3,7 +3,7 @@ import { Outlet, useNavigate, Link } from 'react-router-dom'
 import useStore from '../store/useStore.ts'
 import api from '../lib/api.ts'
 import supabase from '../lib/supabaseClient.ts'
-import { ArrowLeft, FileText, BarChart3, Lightbulb, Target, Sparkles, Save, LogOut, Zap, Flame, Pin, ArrowRight, RefreshCw, Check } from 'lucide-react'
+import { ArrowLeft, FileText, BarChart3, Lightbulb, Target, Sparkles, Save, LogOut, Zap, Flame, Pin, ArrowRight, RefreshCw } from 'lucide-react'
 
 export default function AppPage() {
 	return (

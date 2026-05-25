@@ -66,8 +66,9 @@ export default function ImageGeneration() {
 		try {
 			const response = await api.post('/generate-image-concept', {
 				user_id: userId || storedUserId,
+				type: postType
 			})
-			setConcepts(response.data.concepts || [])
+			setConcepts(response.data.concept ? [response.data.concept] : [])
 			setStep(1)
 		} catch (err: any) {
 			setError(err?.response?.data?.detail || 'Failed to generate concepts')
@@ -83,7 +84,8 @@ export default function ImageGeneration() {
 		try {
 			const response = await api.post('/generate-image', {
 				user_id: userId || storedUserId,
-				concept: selectedConcept,
+				prompt: selectedConcept,
+				type: postType
 			})
 			setGeneratedImage(response.data.image_data || '')
 			setImageUrl(response.data.image_url || '')
@@ -181,6 +183,38 @@ export default function ImageGeneration() {
 							<p className="text-slate-400 max-w-2xl mx-auto">
 								Let AI generate stunning visuals tailored to your business
 							</p>
+						</div>
+
+						<div className="grid md:grid-cols-2 gap-6 mb-8">
+							<button
+								onClick={() => setPostType('poster')}
+								className={`p-6 rounded-md border-2 transition-all ${
+									postType === 'poster'
+										? 'border-[#c5a880] bg-[#c5a880]/5 shadow-lg shadow-[#c5a880]/10'
+										: 'border-slate-800 bg-[#121212]/40 backdrop-blur-md hover:border-slate-700'
+								}`}
+							>
+								<div className="w-12 h-12 rounded-md bg-white/5 border border-white/10 flex items-center justify-center text-white mb-4 mx-auto">
+									<Smartphone className="w-6 h-6" />
+								</div>
+								<h3 className="text-lg font-semibold text-white mb-1">Social Media Poster</h3>
+								<p className="text-slate-400 text-sm">Share on Instagram, Facebook, etc.</p>
+							</button>
+
+							<button
+								onClick={() => setPostType('logo')}
+								className={`p-6 rounded-md border-2 transition-all ${
+									postType === 'logo'
+										? 'border-[#c5a880] bg-[#c5a880]/5 shadow-lg shadow-[#c5a880]/10'
+										: 'border-slate-800 bg-[#121212]/40 backdrop-blur-md hover:border-slate-700'
+								}`}
+							>
+								<div className="w-12 h-12 rounded-md bg-white/5 border border-white/10 flex items-center justify-center text-white mb-4 mx-auto">
+									<Award className="w-6 h-6" />
+								</div>
+								<h3 className="text-lg font-semibold text-white mb-1">Business Logo</h3>
+								<p className="text-slate-400 text-sm">Use for branding & promotions</p>
+							</button>
 						</div>
 
 						<button
@@ -333,39 +367,6 @@ export default function ImageGeneration() {
 									className="w-full h-96 object-cover rounded-md border border-slate-700 shadow-lg"
 								/>
 							)}
-						</div>
-
-						{/* Post Type Selection */}
-						<div className="grid md:grid-cols-2 gap-6 mb-8">
-							<button
-								onClick={() => setPostType('poster')}
-								className={`p-6 rounded-md border-2 transition-all ${
-									postType === 'poster'
-										? 'border-[#c5a880] bg-[#c5a880]/5 shadow-lg shadow-[#c5a880]/10'
-										: 'border-slate-800 bg-[#121212]/40 backdrop-blur-md hover:border-slate-700'
-								}`}
-							>
-								<div className="w-12 h-12 rounded-md bg-white/5 border border-white/10 flex items-center justify-center text-white mb-4 mx-auto">
-									<Smartphone className="w-6 h-6" />
-								</div>
-								<h3 className="text-lg font-semibold text-white mb-1">Social Media Poster</h3>
-								<p className="text-slate-400 text-sm">Share on Instagram, Facebook, etc.</p>
-							</button>
-
-							<button
-								onClick={() => setPostType('logo')}
-								className={`p-6 rounded-md border-2 transition-all ${
-									postType === 'logo'
-										? 'border-[#c5a880] bg-[#c5a880]/5 shadow-lg shadow-[#c5a880]/10'
-										: 'border-slate-800 bg-[#121212]/40 backdrop-blur-md hover:border-slate-700'
-								}`}
-							>
-								<div className="w-12 h-12 rounded-md bg-white/5 border border-white/10 flex items-center justify-center text-white mb-4 mx-auto">
-									<Award className="w-6 h-6" />
-								</div>
-								<h3 className="text-lg font-semibold text-white mb-1">Business Logo</h3>
-								<p className="text-slate-400 text-sm">Use for branding & promotions</p>
-							</button>
 						</div>
 
 						<button

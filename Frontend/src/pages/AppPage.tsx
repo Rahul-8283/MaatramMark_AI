@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Outlet, useNavigate, Link } from 'react-router-dom'
 import useStore from '../store/useStore.ts'
 import api from '../lib/api.ts'
+import supabase from '../lib/supabaseClient.ts'
 import { ArrowLeft, FileText, BarChart3, Lightbulb, Target, Sparkles, Save, LogOut, Zap, Flame, Pin, ArrowRight } from 'lucide-react'
 
 export default function AppPage() {
@@ -19,6 +20,7 @@ export default function AppPage() {
 
 export function AppHome() {
 	const business = useStore((s) => s.business)
+	const setBusiness = useStore((s) => s.setBusiness)
 	const daily = useStore((s) => s.daily)
 	const setDaily = useStore((s) => s.setDaily)
 	const userId = useStore((s) => s.userId)
@@ -28,6 +30,26 @@ export function AppHome() {
 	const [loading, setLoading] = useState(false)
 	const [error, setError] = useState('')
 	const [showContent, setShowContent] = useState(false)
+
+	useEffect(() => {
+		const checkBusiness = async () => {
+			const activeId = userId || storedUserId
+			if (activeId && !business) {
+				const { data } = await supabase
+					.from('business_info')
+					.select('*')
+					.eq('user_id', activeId)
+				
+				if (!data || data.length === 0) {
+					// User doesn't have a business profile, redirect to onboarding
+					navigate('/onboarding')
+				} else {
+					setBusiness(data[0])
+				}
+			}
+		}
+		checkBusiness()
+	}, [userId, storedUserId, business, navigate, setBusiness])
 
 	const handleUpdateDaily = async () => {
 		setLoading(true)

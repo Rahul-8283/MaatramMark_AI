@@ -3,7 +3,7 @@ import { Outlet, useNavigate, Link } from 'react-router-dom'
 import useStore from '../store/useStore.ts'
 import api from '../lib/api.ts'
 import supabase from '../lib/supabaseClient.ts'
-import { ArrowLeft, FileText, BarChart3, Lightbulb, Target, Sparkles, Save, LogOut, Zap, Flame, Pin, ArrowRight } from 'lucide-react'
+import { ArrowLeft, FileText, BarChart3, Lightbulb, Target, Sparkles, Save, LogOut, Zap, Flame, Pin, ArrowRight, RefreshCw, Check } from 'lucide-react'
 
 export default function AppPage() {
 	return (
@@ -32,24 +32,41 @@ export function AppHome() {
 	const [showContent, setShowContent] = useState(false)
 
 	useEffect(() => {
-		const checkBusiness = async () => {
+		const loadInitialData = async () => {
 			const activeId = userId || storedUserId
-			if (activeId && !business) {
+			if (!activeId) return
+
+			// 1. Fetch Business Profile
+			if (!business) {
 				const { data } = await supabase
 					.from('business_info')
 					.select('*')
 					.eq('user_id', activeId)
 				
 				if (!data || data.length === 0) {
-					// User doesn't have a business profile, redirect to onboarding
 					navigate('/onboarding')
+					return
 				} else {
 					setBusiness(data[0])
 				}
 			}
+
+			// 2. Fetch Latest Content (so they don't have to regenerate on refresh)
+			if (!daily) {
+				const { data: dailyData } = await supabase
+					.from('daily_content')
+					.select('*')
+					.eq('user_id', activeId)
+					.order('created_at', { ascending: false })
+					.limit(1)
+				
+				if (dailyData && dailyData.length > 0) {
+					setDaily(dailyData[0])
+				}
+			}
 		}
-		checkBusiness()
-	}, [userId, storedUserId, business, navigate, setBusiness])
+		loadInitialData()
+	}, [userId, storedUserId, business, daily, navigate, setBusiness, setDaily])
 
 	const handleUpdateDaily = async () => {
 		setLoading(true)
@@ -102,23 +119,52 @@ export function AppHome() {
 						</div>
 					)}
 
-					<button
-						onClick={handleUpdateDaily}
-						disabled={loading}
-						className="w-full px-8 py-4 bg-white hover:bg-slate-200 text-black rounded-lg font-bold text-lg transition-all shadow-[0_0_25px_-5px_rgba(197,168,128,0.5)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-					>
-						{loading ? (
-							<div className="flex items-center justify-center gap-2">
-								<div className="animate-spin w-5 h-5 border-2 border-black border-t-transparent rounded-full" />
-								Generating...
-							</div>
-						) : (
-							<span className="flex items-center gap-2 justify-center">
-								<Zap className="w-5 h-5 text-amber-500 fill-amber-500 animate-pulse" />
-								Update for Today
-							</span>
-						)}
-					</button>
+					{daily ? (
+						<div className="flex gap-4">
+							<button
+								onClick={() => setShowContent(true)}
+								className="flex-[2] px-8 py-4 bg-gradient-to-r from-white to-slate-200 hover:from-white hover:to-white text-black rounded-xl font-bold text-lg transition-all shadow-[0_0_30px_-5px_rgba(197,168,128,0.4)] flex items-center justify-center gap-3 group"
+							>
+								<Sparkles className="w-5 h-5 text-amber-600 group-hover:scale-110 transition-transform" />
+								View Today's Strategy
+							</button>
+							<button
+								onClick={handleUpdateDaily}
+								disabled={loading}
+								className="flex-1 px-8 py-4 bg-[#1a1a1a]/80 hover:bg-[#222222] text-slate-300 hover:text-white border border-slate-800 hover:border-[#c5a880]/50 rounded-xl font-semibold text-lg transition-all disabled:opacity-50 flex items-center justify-center gap-2 group"
+							>
+								{loading ? (
+									<div className="flex items-center justify-center gap-2">
+										<div className="animate-spin w-4 h-4 border-2 border-slate-400 border-t-transparent rounded-full" />
+										Wait...
+									</div>
+								) : (
+									<span className="flex items-center gap-2">
+										<RefreshCw className="w-4 h-4 text-slate-500 group-hover:text-[#c5a880] group-hover:rotate-180 transition-all duration-500" />
+										Regenerate
+									</span>
+								)}
+							</button>
+						</div>
+					) : (
+						<button
+							onClick={handleUpdateDaily}
+							disabled={loading}
+							className="w-full px-8 py-4 bg-white hover:bg-slate-200 text-black rounded-lg font-bold text-lg transition-all shadow-[0_0_25px_-5px_rgba(197,168,128,0.5)] disabled:opacity-50 flex items-center justify-center gap-2"
+						>
+							{loading ? (
+								<div className="flex items-center justify-center gap-2">
+									<div className="animate-spin w-5 h-5 border-2 border-black border-t-transparent rounded-full" />
+									Generating...
+								</div>
+							) : (
+								<span className="flex items-center gap-2 justify-center">
+									<Zap className="w-5 h-5 text-amber-500 fill-amber-500 animate-pulse" />
+									Update for Today
+								</span>
+							)}
+						</button>
+					)}
 				</div>
 
 				{/* Quick Actions Grid */}
@@ -197,6 +243,13 @@ interface DailyContent {
 
 function DailyContentView({ daily, onBack }: { daily: DailyContent, onBack: () => void }) {
 	const navigate = useNavigate()
+	const [copiedCaption, setCopiedCaption] = useState<number | null>(null)
+
+	const handleCopyCaption = (text: string, index: number) => {
+		navigator.clipboard.writeText(text)
+		setCopiedCaption(index)
+		setTimeout(() => setCopiedCaption(null), 2000)
+	}
 
 	return (
 		<div className="container mx-auto px-6 py-12">
@@ -258,10 +311,14 @@ function DailyContentView({ daily, onBack }: { daily: DailyContent, onBack: () =
 									<div className="flex items-start justify-between">
 										<p className="text-slate-200 group-hover:text-white transition-colors flex-1">{caption}</p>
 										<button
-											onClick={() => navigator.clipboard.writeText(caption)}
-											className="ml-4 px-3 py-1 bg-amber-950/20 hover:bg-amber-900/30 text-[#c5a880] rounded text-xs font-medium transition-colors whitespace-nowrap"
+											onClick={() => handleCopyCaption(caption, idx)}
+											className={`ml-4 px-3 py-1 rounded text-xs font-medium transition-all whitespace-nowrap ${
+												copiedCaption === idx 
+												? 'bg-[#c5a880]/10 text-[#ebdcb9] border border-[#c5a880]/40' 
+												: 'bg-amber-950/20 hover:bg-amber-900/30 text-[#c5a880] border border-transparent hover:border-[#c5a880]/30'
+											}`}
 										>
-											Copy
+											{copiedCaption === idx ? 'Copied!' : 'Copy'}
 										</button>
 									</div>
 								</div>

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import useStore from '../store/useStore.ts'
 import api from '../lib/api.ts'
-import { HelpCircle, Target, Smartphone, Award, Star, Palette, Check, Send, Sparkles } from 'lucide-react'
+import { HelpCircle, Target, Smartphone, Award, Star, Palette, Check, Send, Sparkles, ArrowLeft } from 'lucide-react'
 
 // Step Indicator
 function StepIndicator({ steps, currentStep }: { steps: string[], currentStep: number }) {
@@ -167,6 +167,15 @@ export default function ImageGeneration() {
 	return (
 		<div className="container mx-auto px-4 md:px-6 py-8 md:py-12">
 			<div className="max-w-4xl mx-auto">
+				{/* Navigation Header */}
+				<button 
+					onClick={() => navigate('/app')}
+					className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors mb-8 group"
+				>
+					<ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+					Back to Dashboard
+				</button>
+
 				<StepIndicator steps={STEPS} currentStep={step} />
 
 				{error && (

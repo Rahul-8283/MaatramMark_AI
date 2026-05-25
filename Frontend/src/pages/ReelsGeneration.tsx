@@ -95,21 +95,25 @@ function CopyableBlock({ title, items, icon: Icon }: { title: string; items: str
 				<h3 className="text-xl font-bold text-white">{title}</h3>
 			</div>
 			<div className="space-y-3">
-				{items.map((item, idx) => (
-					<div key={idx} className="flex flex-col sm:flex-row gap-3 items-start sm:items-center justify-between bg-slate-900/50 p-4 rounded-lg border border-slate-800/50">
-						<p className="text-slate-300 text-sm">{item}</p>
-						<button
-							onClick={() => handleCopy(item, idx)}
-							className="shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-[#1a1a1a] hover:bg-[#222222] border border-slate-700 hover:border-[#c5a880]/50 text-slate-300 transition-all text-xs font-semibold"
-						>
-							{copiedIndex === idx ? (
-								<><Check className="w-3.5 h-3.5 text-emerald-500" /> Copied</>
-							) : (
-								<><Copy className="w-3.5 h-3.5" /> Copy</>
-							)}
-						</button>
-					</div>
-				))}
+				{!items || items.length === 0 ? (
+					<p className="text-slate-500 text-sm italic">No items generated.</p>
+				) : (
+					items.map((item, idx) => (
+						<div key={idx} className="flex flex-col sm:flex-row gap-3 items-start sm:items-center justify-between bg-slate-900/50 p-4 rounded-lg border border-slate-800/50">
+							<p className="text-slate-300 text-sm">{item}</p>
+							<button
+								onClick={() => handleCopy(item, idx)}
+								className="shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-[#1a1a1a] hover:bg-[#222222] border border-slate-700 hover:border-[#c5a880]/50 text-slate-300 transition-all text-xs font-semibold"
+							>
+								{copiedIndex === idx ? (
+									<><Check className="w-3.5 h-3.5 text-emerald-500" /> Copied</>
+								) : (
+									<><Copy className="w-3.5 h-3.5" /> Copy</>
+								)}
+							</button>
+						</div>
+					))
+				)}
 			</div>
 		</div>
 	)

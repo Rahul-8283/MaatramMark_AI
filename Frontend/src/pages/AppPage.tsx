@@ -3,7 +3,7 @@ import { Outlet, useNavigate, Link } from 'react-router-dom'
 import useStore from '../store/useStore.ts'
 import api from '../lib/api.ts'
 import supabase from '../lib/supabaseClient.ts'
-import { ArrowLeft, FileText, BarChart3, Lightbulb, Target, Sparkles, Save, LogOut, Zap, Flame, Pin, ArrowRight, RefreshCw, Video } from 'lucide-react'
+import { ArrowLeft, FileText, BarChart3, Lightbulb, Target, Sparkles, Save, LogOut, Zap, Flame, Pin, RefreshCw, Video, Image } from 'lucide-react'
 
 export default function AppPage() {
 	return (
@@ -215,13 +215,13 @@ export function AppHome() {
 								onClick={() => navigate('/app/generate-images')}
 								className="flex-1 px-4 py-3 bg-white hover:bg-slate-200 text-black rounded-lg text-sm font-semibold transition-all shadow-[0_0_20px_-5px_rgba(197,168,128,0.4)] flex items-center justify-center gap-2"
 							>
-								🎨 Visuals
+								<Image className="w-4 h-4" /> Visuals
 							</button>
 							<button
 								onClick={() => navigate('/app/generate-reels')}
-								className="flex-1 px-4 py-3 bg-[#c5a880] hover:bg-[#ebdcb9] text-black rounded-lg text-sm font-semibold transition-all shadow-[0_0_20px_-5px_rgba(197,168,128,0.4)] flex items-center justify-center gap-2"
+								className="flex-1 px-4 py-3 bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 rounded-lg text-sm font-semibold transition-all flex items-center justify-center gap-2"
 							>
-								🎬 Reels
+								<Video className="w-4 h-4 text-[#c5a880]" /> Reels
 							</button>
 						</div>
 					</div>
@@ -358,13 +358,21 @@ function DailyContentView({ daily, onBack }: { daily: DailyContent, onBack: () =
 
 				{/* CTA Section */}
 				<div className="bg-gradient-to-r from-amber-950/5 to-amber-900/5 backdrop-blur-md rounded-lg p-8 border border-[#c5a880]/20 text-center shadow-lg shadow-[#c5a880]/3">
-					<h3 className="text-xl font-bold text-white mb-4">Ready to create visuals?</h3>
-					<button
-						onClick={() => navigate('/app/generate-images')}
-						className="px-8 py-3 bg-white hover:bg-slate-200 text-black rounded-lg font-bold transition-all shadow-[0_0_25px_-5px_rgba(197,168,128,0.5)] flex items-center justify-center gap-2 mx-auto"
-					>
-						Generate Images <ArrowRight className="w-4 h-4" />
-					</button>
+					<h3 className="text-xl font-bold text-white mb-4">Ready to create content?</h3>
+					<div className="flex flex-col sm:flex-row justify-center gap-4">
+						<button
+							onClick={() => navigate('/app/generate-images')}
+							className="px-8 py-3 bg-white hover:bg-slate-200 text-black rounded-lg font-bold transition-all shadow-[0_0_25px_-5px_rgba(197,168,128,0.5)] flex items-center justify-center gap-2"
+						>
+							<Image className="w-5 h-5" /> Generate Images
+						</button>
+						<button
+							onClick={() => navigate('/app/generate-reels')}
+							className="px-8 py-3 bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 rounded-lg font-bold transition-all flex items-center justify-center gap-2"
+						>
+							<Video className="w-5 h-5 text-[#c5a880]" /> Generate Reels
+						</button>
+					</div>
 				</div>
 			</div>
 		</div>

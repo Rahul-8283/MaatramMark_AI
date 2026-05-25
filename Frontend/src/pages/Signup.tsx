@@ -10,6 +10,7 @@ export default function Signup() {
   const [confirmPassword, setConfirmPassword] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [isSubmitted, setIsSubmitted] = useState(false)
 
   const passwordRef = useRef<HTMLInputElement>(null)
   const confirmPasswordRef = useRef<HTMLInputElement>(null)
@@ -38,8 +39,11 @@ export default function Signup() {
         throw authError
       }
 
-      if (data.user) {
-        // Navigating to onboarding, the App.tsx listener handles saving the session
+      if (data.user && !data.session) {
+        // Email confirmation is required
+        setIsSubmitted(true)
+      } else if (data.user) {
+        // Navigating to onboarding if no email confirmation required
         navigate('/onboarding')
       }
     } catch (err: any) {
@@ -89,11 +93,29 @@ export default function Signup() {
 
           {/* Card */}
           <div className="bg-slate-900/40 backdrop-blur-xl border border-slate-800/60 rounded-xl p-8 shadow-2xl">
-            {error && (
-              <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 text-red-400 rounded-xl text-sm text-center">
-                {error}
+            {isSubmitted ? (
+              <div className="text-center py-8">
+                <div className="w-16 h-16 bg-emerald-500/10 border border-emerald-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Mail className="w-8 h-8 text-emerald-400" />
+                </div>
+                <h2 className="text-2xl font-bold text-white mb-4">Check your email</h2>
+                <p className="text-slate-400 mb-8 max-w-sm mx-auto">
+                  We've sent a verification link to <span className="text-white font-medium">{email}</span>. Please click the link to activate your account.
+                </p>
+                <Link 
+                  to="/login"
+                  className="inline-flex w-full py-3.5 bg-[#c5a880] hover:bg-[#ebdcb9] text-black rounded-lg font-bold shadow-[0_0_25px_-5px_rgba(197,168,128,0.5)] transition-all items-center justify-center"
+                >
+                  Return to Login
+                </Link>
               </div>
-            )}
+            ) : (
+              <>
+                {error && (
+                  <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 text-red-400 rounded-xl text-sm text-center">
+                    {error}
+                  </div>
+                )}
 
             <form onSubmit={handleSignup} className="space-y-4">
               <div className="space-y-1">
@@ -195,6 +217,8 @@ export default function Signup() {
                 </Link>
               </p>
             </div>
+            </>
+            )}
           </div>
         </div>
       </div>

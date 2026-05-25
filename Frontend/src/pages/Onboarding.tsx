@@ -76,7 +76,7 @@ export default function Onboarding() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0d0d0d] text-slate-200 flex items-center justify-center relative overflow-hidden selection:bg-amber-500/20">
+    <div className="h-screen bg-[#0d0d0d] text-slate-200 flex items-center justify-center relative overflow-hidden selection:bg-amber-500/20">
       {/* Background Glows */}
       <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-[#c5a880]/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-[#c5a880]/5 rounded-full blur-[120px] pointer-events-none" />

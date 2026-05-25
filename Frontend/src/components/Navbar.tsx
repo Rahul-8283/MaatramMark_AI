@@ -37,7 +37,7 @@ export default function Navbar() {
           </Link>
           {business?.business_name && (
             <div className="hidden md:flex items-center gap-2 pl-4 border-l border-slate-700">
-              <span className="text-slate-400 text-sm bg-slate-800/50 px-3 py-1 rounded-full border border-slate-700/50">
+              <span className="text-slate-400 text-sm bg-slate-800/50 px-3 py-1 rounded-md border border-slate-700/50">
                 {business.business_name}
               </span>
             </div>

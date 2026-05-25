@@ -9,7 +9,7 @@ const api = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
-  timeout: 15000,
+  timeout: 120000, // 2 minutes, since AI agents can take a long time
 })
 
 // Add a request interceptor to attach the Supabase JWT token

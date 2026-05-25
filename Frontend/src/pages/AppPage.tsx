@@ -3,7 +3,7 @@ import { Outlet, useNavigate, Link } from 'react-router-dom'
 import useStore from '../store/useStore.ts'
 import api from '../lib/api.ts'
 import supabase from '../lib/supabaseClient.ts'
-import { ArrowLeft, FileText, BarChart3, Lightbulb, Target, Sparkles, Save, LogOut, Zap, Flame, Pin, ArrowRight, RefreshCw } from 'lucide-react'
+import { ArrowLeft, FileText, BarChart3, Lightbulb, Target, Sparkles, Save, LogOut, Zap, Flame, Pin, ArrowRight, RefreshCw, Video } from 'lucide-react'
 
 export default function AppPage() {
 	return (
@@ -204,18 +204,26 @@ export function AppHome() {
 							<Sparkles className="w-5 h-5 text-amber-500" />
 							Next Steps
 						</h3>
-						<ul className="space-y-2 text-slate-300 text-sm mb-4">
+						<ul className="space-y-2 text-slate-300 text-sm mb-6">
 							<li>✓ Generate today's content ideas</li>
 							<li>✓ Review & refine captions</li>
-							<li>✓ Create stunning visuals</li>
+							<li>✓ Create stunning visuals or videos</li>
 							<li>✓ Post to social media</li>
 						</ul>
-						<button
-							onClick={() => navigate('/app/generate-images')}
-							className="w-full px-4 py-2 bg-white hover:bg-slate-200 text-black rounded-lg text-sm font-semibold transition-all shadow-[0_0_20px_-5px_rgba(197,168,128,0.4)]"
-						>
-							🎨 Generate Visuals
-						</button>
+						<div className="flex flex-col sm:flex-row gap-3">
+							<button
+								onClick={() => navigate('/app/generate-images')}
+								className="flex-1 px-4 py-3 bg-white hover:bg-slate-200 text-black rounded-lg text-sm font-semibold transition-all shadow-[0_0_20px_-5px_rgba(197,168,128,0.4)] flex items-center justify-center gap-2"
+							>
+								🎨 Visuals
+							</button>
+							<button
+								onClick={() => navigate('/app/generate-reels')}
+								className="flex-1 px-4 py-3 bg-[#c5a880] hover:bg-[#ebdcb9] text-black rounded-lg text-sm font-semibold transition-all shadow-[0_0_20px_-5px_rgba(197,168,128,0.4)] flex items-center justify-center gap-2"
+							>
+								🎬 Reels
+							</button>
+						</div>
 					</div>
 
 					<div className="bg-[#121212]/30 backdrop-blur-md rounded-lg p-6 border border-slate-800/40">

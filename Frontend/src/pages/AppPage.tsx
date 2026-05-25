@@ -349,15 +349,12 @@ export function AppSettings() {
 
 						<div>
 							<label className="block text-sm font-medium text-slate-300 mb-2">Business Type</label>
-							<select className="w-full px-4 py-3 bg-slate-950/50 border border-slate-800 rounded-lg text-white focus:outline-none focus:border-[#c5a880] focus:ring-1 focus:ring-[#c5a880]/30 transition-all">
-								<option>Select type</option>
-								<option selected={business?.business_type === 'Retail'}>Retail</option>
-								<option selected={business?.business_type === 'Food'}>Food & Beverage</option>
-								<option selected={business?.business_type === 'Services'}>Services</option>
-								<option selected={business?.business_type === 'Technology'}>Technology</option>
-								<option selected={business?.business_type === 'Health'}>Health & Wellness</option>
-								<option selected={business?.business_type === 'Entertainment'}>Entertainment</option>
-							</select>
+							<input
+								type="text"
+								defaultValue={business?.business_type || ''}
+								className="w-full px-4 py-3 bg-slate-950/50 border border-slate-800 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-[#c5a880] focus:ring-1 focus:ring-[#c5a880]/30 transition-all"
+								placeholder="e.g., Bakery, Technology, Retail"
+							/>
 						</div>
 
 						<div>

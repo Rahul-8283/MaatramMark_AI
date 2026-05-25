@@ -27,7 +27,7 @@ export default function Footer() {
           </div>
         </div>
         
-        <div>
+        <div className="hidden md:block">
           <h3 className="text-lg font-semibold text-white mb-4">Product</h3>
           <ul className="space-y-3 text-slate-400">
             <li><a href="#features" className="hover:text-[#ebdcb9] transition-colors">Features</a></li>
@@ -37,7 +37,7 @@ export default function Footer() {
           </ul>
         </div>
 
-        <div>
+        <div className="hidden md:block">
           <h3 className="text-lg font-semibold text-white mb-4">Company</h3>
           <ul className="space-y-3 text-slate-400">
             <li><a href="#" className="hover:text-[#ebdcb9] transition-colors">About Us</a></li>

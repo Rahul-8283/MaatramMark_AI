@@ -8,6 +8,7 @@ import Signup from './pages/Signup.tsx';
 import Onboarding from './pages/Onboarding.tsx';
 import AppPage, { AppHome, AppSettings } from './pages/AppPage.tsx';
 import ImageGeneration from './pages/ImageGeneration.tsx';
+import ReelsGeneration from './pages/ReelsGeneration.tsx';
 import ProtectedRoute from './components/ProtectedRoute.tsx';
 import ErrorBoundary from './components/ErrorBoundary.tsx';
 import Navbar from './components/Navbar.tsx';
@@ -75,6 +76,7 @@ export default function App() {
 						<Route index element={<AppHome />} />
 						<Route path="settings" element={<AppSettings />} />
 					<Route path="generate-images" element={<ImageGeneration />} />
+					<Route path="generate-reels" element={<ReelsGeneration />} />
 				</Route>
 
 				{/* Fallback */}

@@ -2,25 +2,25 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import useStore from '../store/useStore.ts'
 import api from '../lib/api.ts'
-import { HelpCircle, Target, Smartphone, Award, Star, Palette, Check, Send, Sparkles } from 'lucide-react'
+import { HelpCircle, Target, Smartphone, Award, Star, Palette, Check, Send, Sparkles, ArrowLeft } from 'lucide-react'
 
 // Step Indicator
 function StepIndicator({ steps, currentStep }: { steps: string[], currentStep: number }) {
 	return (
-		<div className="flex items-center justify-center gap-2 mb-12">
+		<div className="flex items-center justify-center gap-1 sm:gap-2 mb-8 md:mb-12 overflow-x-auto pb-4 md:pb-0 scrollbar-hide">
 			{steps.map((_step, idx) => (
-				<div key={idx} className="flex items-center">
-					<div className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold text-sm transition-all ${
+				<div key={idx} className="flex items-center shrink-0">
+					<div className={`w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center font-semibold text-xs md:text-sm transition-all ${
 						idx < currentStep 
 							? 'bg-[#c5a880] text-black shadow-lg shadow-[#c5a880]/20' 
 							: idx === currentStep 
-							? 'bg-[#c5a880] text-black ring-4 ring-[#c5a880]/20 shadow-lg shadow-[#c5a880]/30' 
+							? 'bg-[#c5a880] text-black ring-2 md:ring-4 ring-[#c5a880]/20 shadow-lg shadow-[#c5a880]/30' 
 							: 'bg-slate-700 text-slate-400'
 					}`}>
 						{idx + 1}
 					</div>
 					{idx < steps.length - 1 && (
-						<div className={`w-12 h-1 mx-2 rounded-full transition-colors ${
+						<div className={`w-4 sm:w-8 md:w-12 h-1 mx-1 sm:mx-2 rounded-full transition-colors ${
 							idx < currentStep ? 'bg-[#c5a880]' : 'bg-slate-700'
 						}`} />
 					)}
@@ -165,8 +165,17 @@ export default function ImageGeneration() {
 	}
 
 	return (
-		<div className="container mx-auto px-6 py-12">
+		<div className="container mx-auto px-4 md:px-6 py-8 md:py-12">
 			<div className="max-w-4xl mx-auto">
+				{/* Navigation Header */}
+				<button 
+					onClick={() => navigate('/app')}
+					className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors mb-8 group"
+				>
+					<ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+					Back to Dashboard
+				</button>
+
 				<StepIndicator steps={STEPS} currentStep={step} />
 
 				{error && (
@@ -325,7 +334,7 @@ export default function ImageGeneration() {
 									className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-md text-white placeholder-slate-500 focus:border-[#c5a880] focus:outline-none focus:ring-2 focus:ring-[#c5a880]/20 transition-all resize-none h-20"
 								/>
 
-								<div className="flex gap-4">
+								<div className="flex flex-col sm:flex-row gap-4">
 									<button
 										onClick={handleRefineImage}
 										disabled={loading || !refinementPrompt.trim()}

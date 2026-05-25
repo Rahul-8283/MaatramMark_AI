@@ -3,7 +3,7 @@ import { Outlet, useNavigate, Link } from 'react-router-dom'
 import useStore from '../store/useStore.ts'
 import api from '../lib/api.ts'
 import supabase from '../lib/supabaseClient.ts'
-import { ArrowLeft, FileText, BarChart3, Lightbulb, Target, Sparkles, Save, LogOut, Zap, Flame, Pin, ArrowRight, RefreshCw } from 'lucide-react'
+import { ArrowLeft, FileText, BarChart3, Lightbulb, Target, Sparkles, Save, LogOut, Zap, Flame, Pin, RefreshCw, Video, Image } from 'lucide-react'
 
 export default function AppPage() {
 	return (
@@ -120,7 +120,7 @@ export function AppHome() {
 					)}
 
 					{daily ? (
-						<div className="flex gap-4">
+						<div className="flex flex-col sm:flex-row gap-4">
 							<button
 								onClick={() => setShowContent(true)}
 								className="flex-[2] px-8 py-4 bg-gradient-to-r from-white to-slate-200 hover:from-white hover:to-white text-black rounded-xl font-bold text-lg transition-all shadow-[0_0_30px_-5px_rgba(197,168,128,0.4)] flex items-center justify-center gap-3 group"
@@ -204,18 +204,26 @@ export function AppHome() {
 							<Sparkles className="w-5 h-5 text-amber-500" />
 							Next Steps
 						</h3>
-						<ul className="space-y-2 text-slate-300 text-sm mb-4">
+						<ul className="space-y-2 text-slate-300 text-sm mb-6">
 							<li>✓ Generate today's content ideas</li>
 							<li>✓ Review & refine captions</li>
-							<li>✓ Create stunning visuals</li>
+							<li>✓ Create stunning visuals or videos</li>
 							<li>✓ Post to social media</li>
 						</ul>
-						<button
-							onClick={() => navigate('/app/generate-images')}
-							className="w-full px-4 py-2 bg-white hover:bg-slate-200 text-black rounded-lg text-sm font-semibold transition-all shadow-[0_0_20px_-5px_rgba(197,168,128,0.4)]"
-						>
-							🎨 Generate Visuals
-						</button>
+						<div className="flex flex-col sm:flex-row gap-3">
+							<button
+								onClick={() => navigate('/app/generate-images')}
+								className="flex-1 px-4 py-3 bg-white hover:bg-slate-200 text-black rounded-lg text-sm font-semibold transition-all shadow-[0_0_20px_-5px_rgba(197,168,128,0.4)] flex items-center justify-center gap-2"
+							>
+								<Image className="w-4 h-4" /> Visuals
+							</button>
+							<button
+								onClick={() => navigate('/app/generate-reels')}
+								className="flex-1 px-4 py-3 bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 rounded-lg text-sm font-semibold transition-all flex items-center justify-center gap-2"
+							>
+								<Video className="w-4 h-4 text-[#c5a880]" /> Reels
+							</button>
+						</div>
 					</div>
 
 					<div className="bg-[#121212]/30 backdrop-blur-md rounded-lg p-6 border border-slate-800/40">
@@ -255,7 +263,7 @@ function DailyContentView({ daily, onBack }: { daily: DailyContent, onBack: () =
 		<div className="container mx-auto px-6 py-12">
 			<div className="max-w-4xl mx-auto">
 				{/* Header */}
-				<div className="flex items-center justify-between mb-8">
+				<div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
 					<div>
 						<h1 className="text-2xl md:text-3xl font-semibold text-white mb-2">Today's Content</h1>
 						<p className="text-slate-400">AI-generated strategy for maximum impact</p>
@@ -350,13 +358,21 @@ function DailyContentView({ daily, onBack }: { daily: DailyContent, onBack: () =
 
 				{/* CTA Section */}
 				<div className="bg-gradient-to-r from-amber-950/5 to-amber-900/5 backdrop-blur-md rounded-lg p-8 border border-[#c5a880]/20 text-center shadow-lg shadow-[#c5a880]/3">
-					<h3 className="text-xl font-bold text-white mb-4">Ready to create visuals?</h3>
-					<button
-						onClick={() => navigate('/app/generate-images')}
-						className="px-8 py-3 bg-white hover:bg-slate-200 text-black rounded-lg font-bold transition-all shadow-[0_0_25px_-5px_rgba(197,168,128,0.5)] flex items-center justify-center gap-2 mx-auto"
-					>
-						Generate Images <ArrowRight className="w-4 h-4" />
-					</button>
+					<h3 className="text-xl font-bold text-white mb-4">Ready to create content?</h3>
+					<div className="flex flex-col sm:flex-row justify-center gap-4">
+						<button
+							onClick={() => navigate('/app/generate-images')}
+							className="px-8 py-3 bg-white hover:bg-slate-200 text-black rounded-lg font-bold transition-all shadow-[0_0_25px_-5px_rgba(197,168,128,0.5)] flex items-center justify-center gap-2"
+						>
+							<Image className="w-5 h-5" /> Generate Images
+						</button>
+						<button
+							onClick={() => navigate('/app/generate-reels')}
+							className="px-8 py-3 bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 rounded-lg font-bold transition-all flex items-center justify-center gap-2"
+						>
+							<Video className="w-5 h-5 text-[#c5a880]" /> Generate Reels
+						</button>
+					</div>
 				</div>
 			</div>
 		</div>

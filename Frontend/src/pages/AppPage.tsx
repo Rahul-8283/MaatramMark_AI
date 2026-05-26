@@ -165,14 +165,17 @@ export function AppHome() {
 
 				{/* Quick Actions Grid */}
 				<div className="grid md:grid-cols-3 gap-6">
-					<div className="bg-[#121212]/40 backdrop-blur-md rounded-lg p-6 border border-slate-800/60 hover:border-[#c5a880]/40 hover:bg-[#161616]/60 transition-all hover:shadow-[0_10px_30px_-15px_rgba(0,0,0,0.7)]">
-						<div className="w-10 h-10 rounded-md bg-amber-950/20 border border-amber-900/30 flex items-center justify-center text-[#c5a880] mb-3">
+					<button 
+						onClick={() => navigate('/app/todays-content')}
+						className="text-left bg-[#121212]/40 backdrop-blur-md rounded-lg p-6 border border-[#c5a880]/30 hover:border-[#c5a880] hover:bg-[#161616]/80 transition-all hover:shadow-[0_10px_30px_-15px_rgba(197,168,128,0.5)] group block w-full"
+					>
+						<div className="w-10 h-10 rounded-md bg-amber-950/30 border border-amber-900/50 flex items-center justify-center text-[#c5a880] mb-3 group-hover:scale-110 transition-transform">
 							<Lightbulb className="w-5 h-5" />
 						</div>
-						<h3 className="text-lg font-semibold text-white mb-1">Ideas Ready</h3>
+						<h3 className="text-lg font-semibold text-white mb-1 group-hover:text-[#c5a880] transition-colors">Ideas Ready</h3>
 						<p className="text-3xl font-bold text-[#c5a880]">{daily?.ideas?.length || 0}</p>
 						<p className="text-sm text-slate-400 mt-2">Unique concepts</p>
-					</div>
+					</button>
 
 					<button 
 						onClick={() => navigate('/app/assets')}
@@ -199,7 +202,7 @@ export function AppHome() {
 								<Video className="w-5 h-5" />
 							</div>
 							<div className="px-3 py-1 bg-[#c5a880]/20 text-[#c5a880] text-xs font-bold rounded-md border border-[#c5a880]/30">
-								History
+								Scripts
 							</div>
 						</div>
 						<h3 className="text-lg font-semibold text-white mb-1 group-hover:text-[#c5a880] transition-colors">Reels Scripts</h3>
@@ -216,7 +219,7 @@ export function AppHome() {
 				<div className="mt-12 grid md:grid-cols-2 gap-6">
 					
 					{/* Image Generation Box */}
-					<div className="bg-[#121212]/30 backdrop-blur-md rounded-xl p-8 border border-slate-800/40 hover:border-[#c5a880]/40 transition-all flex flex-col h-full group hover:shadow-[0_10px_30px_-15px_rgba(197,168,128,0.2)]">
+					<div className="bg-[#121212]/30 backdrop-blur-md rounded-xl p-8 border border-[#c5a880]/30 hover:border-[#c5a880] transition-all flex flex-col h-full group hover:shadow-[0_10px_30px_-15px_rgba(197,168,128,0.5)]">
 						<div className="w-12 h-12 rounded-full bg-amber-950/30 border border-amber-900/50 flex items-center justify-center text-[#c5a880] mb-5 group-hover:scale-110 transition-transform shadow-inner">
 							<Image className="w-6 h-6" />
 						</div>
@@ -233,7 +236,7 @@ export function AppHome() {
 					</div>
 
 					{/* Reels Generation Box */}
-					<div className="bg-[#121212]/30 backdrop-blur-md rounded-xl p-8 border border-slate-800/40 hover:border-[#c5a880]/40 transition-all flex flex-col h-full group hover:shadow-[0_10px_30px_-15px_rgba(197,168,128,0.2)]">
+					<div className="bg-[#121212]/30 backdrop-blur-md rounded-xl p-8 border border-[#c5a880]/30 hover:border-[#c5a880] transition-all flex flex-col h-full group hover:shadow-[0_10px_30px_-15px_rgba(197,168,128,0.5)]">
 						<div className="w-12 h-12 rounded-full bg-amber-950/30 border border-amber-900/50 flex items-center justify-center text-[#c5a880] mb-5 group-hover:scale-110 transition-transform shadow-inner">
 							<Video className="w-6 h-6" />
 						</div>

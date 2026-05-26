@@ -102,7 +102,7 @@ export default function AgentResults() {
 	const hasResearch = !!data.research
 
 	return (
-		<div className="bg-[#121212]/40 backdrop-blur-xl border border-slate-800/60 rounded-xl overflow-hidden hover:border-[#c5a880]/30 transition-all duration-300 shadow-2xl">
+		<div className="bg-[#121212]/40 backdrop-blur-xl border border-[#c5a880]/30 rounded-xl overflow-hidden hover:border-[#c5a880] transition-all duration-300 shadow-2xl hover:shadow-[0_10px_40px_-15px_rgba(197,168,128,0.35)]">
 			{/* Header */}
 			<div className="bg-amber-950/10 px-6 py-5 border-b border-slate-800/80 flex items-center justify-between">
 				<div className="flex items-center gap-3">
@@ -183,7 +183,7 @@ export default function AgentResults() {
 							</div>
 						</div>
 
-						<div className="bg-slate-900/30 border border-slate-800/40 rounded-xl p-6">
+						<div className="bg-slate-900/30 border border-[#c5a880]/30 hover:border-[#c5a880] rounded-xl p-6 transition-all hover:shadow-[0_10px_30px_-15px_rgba(197,168,128,0.3)]">
 							<h3 className="font-bold text-white mb-2 flex items-center gap-2">
 								<Sparkles className="w-4 h-4 text-[#c5a880]" />
 								Content Style Blueprint

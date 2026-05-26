@@ -81,7 +81,7 @@ export default function Navbar() {
                 className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-[#c5a880] hover:text-[#ebdcb9] hover:bg-[#c5a880]/10 rounded-lg transition-all"
               >
                 <Briefcase className="w-4 h-4" />
-                <span>Workspace Assets</span>
+                <span>Assets</span>
               </Link>
               <Link 
                 to="/app/settings" 

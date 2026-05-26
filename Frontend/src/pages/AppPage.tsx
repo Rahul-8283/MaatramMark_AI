@@ -3,7 +3,7 @@ import { Outlet, useNavigate, Link } from 'react-router-dom'
 import useStore from '../store/useStore.ts'
 import api from '../lib/api.ts'
 import supabase from '../lib/supabaseClient.ts'
-import { ArrowLeft, FileText, BarChart3, Lightbulb, Sparkles, Save, LogOut, Zap, Flame, RefreshCw, Video, Image, Briefcase } from 'lucide-react'
+import { ArrowLeft, FileText, BarChart3, Lightbulb, Sparkles, Save, LogOut, Zap, RefreshCw, Video, Image, Briefcase } from 'lucide-react'
 import AgentResults from '../components/AgentResults.tsx'
 
 export default function AppPage() {
@@ -205,43 +205,41 @@ export function AppHome() {
 					<AgentResults />
 				</div>
 
-				{/* Features Section */}
+				{/* Action Hub */}
 				<div className="mt-12 grid md:grid-cols-2 gap-6">
-					<div className="bg-[#121212]/30 backdrop-blur-md rounded-lg p-6 border border-slate-800/40">
-						<h3 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
-							<Sparkles className="w-5 h-5 text-amber-500" />
-							Next Steps
-						</h3>
-						<ul className="space-y-2 text-slate-300 text-sm mb-6">
-							<li>✓ Generate today's content ideas</li>
-							<li>✓ Review & refine captions</li>
-							<li>✓ Create stunning visuals or videos</li>
-							<li>✓ Post to social media</li>
-						</ul>
-						<div className="flex flex-col sm:flex-row gap-3">
-							<button
-								onClick={() => navigate('/app/generate-images')}
-								className="flex-1 px-4 py-3 bg-white hover:bg-slate-200 text-black rounded-lg text-sm font-semibold transition-all shadow-[0_0_20px_-5px_rgba(197,168,128,0.4)] flex items-center justify-center gap-2"
-							>
-								<Image className="w-4 h-4" /> Visuals
-							</button>
-							<button
-								onClick={() => navigate('/app/generate-reels')}
-								className="flex-1 px-4 py-3 bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 rounded-lg text-sm font-semibold transition-all flex items-center justify-center gap-2"
-							>
-								<Video className="w-4 h-4 text-[#c5a880]" /> Reels
-							</button>
+					
+					{/* Image Generation Box */}
+					<div className="bg-[#121212]/30 backdrop-blur-md rounded-xl p-8 border border-slate-800/40 hover:border-[#c5a880]/40 transition-all flex flex-col h-full group hover:shadow-[0_10px_30px_-15px_rgba(197,168,128,0.2)]">
+						<div className="w-12 h-12 rounded-full bg-amber-950/30 border border-amber-900/50 flex items-center justify-center text-[#c5a880] mb-5 group-hover:scale-110 transition-transform shadow-inner">
+							<Image className="w-6 h-6" />
 						</div>
+						<h3 className="text-xl font-bold text-white mb-3 group-hover:text-[#c5a880] transition-colors">Image Generation</h3>
+						<p className="text-slate-400 text-sm leading-relaxed mb-8 flex-grow">
+							Create stunning, brand-aligned visual assets instantly. From promotional posters to elegant logos, let our AI handle your daily design needs seamlessly.
+						</p>
+						<button
+							onClick={() => navigate('/app/generate-images')}
+							className="w-full px-6 py-4 bg-[#c5a880] hover:bg-[#ebdcb9] text-black rounded-xl text-sm font-bold transition-all shadow-[0_0_20px_-5px_rgba(197,168,128,0.4)] flex items-center justify-center gap-2"
+						>
+							<Sparkles className="w-4 h-4" /> Create Visuals
+						</button>
 					</div>
 
-					<div className="bg-[#121212]/30 backdrop-blur-md rounded-lg p-6 border border-slate-800/40">
-						<h3 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
-							<Flame className="w-5 h-5 text-orange-500" />
-							Pro Tip
-						</h3>
-						<p className="text-slate-300 text-sm">
-							Generate content daily to maintain consistency and boost your engagement. Our AI learns from your business to create better content over time.
+					{/* Reels Generation Box */}
+					<div className="bg-[#121212]/30 backdrop-blur-md rounded-xl p-8 border border-slate-800/40 hover:border-blue-500/30 transition-all flex flex-col h-full group hover:shadow-[0_10px_30px_-15px_rgba(59,130,246,0.15)]">
+						<div className="w-12 h-12 rounded-full bg-blue-950/30 border border-blue-900/50 flex items-center justify-center text-blue-400 mb-5 group-hover:scale-110 transition-transform shadow-inner">
+							<Video className="w-6 h-6" />
+						</div>
+						<h3 className="text-xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors">Reels Generation</h3>
+						<p className="text-slate-400 text-sm leading-relaxed mb-8 flex-grow">
+							Produce captivating short-form videos tailored to your audience. Keep your social feeds consistently active with highly engaging AI-generated reels.
 						</p>
+						<button
+							onClick={() => navigate('/app/generate-reels')}
+							className="w-full px-6 py-4 bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 hover:border-slate-600 rounded-xl text-sm font-bold transition-all flex items-center justify-center gap-2"
+						>
+							<Video className="w-4 h-4 text-[#c5a880]" /> Create Reels
+						</button>
 					</div>
 				</div>
 			</div>

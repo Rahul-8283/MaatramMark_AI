@@ -55,8 +55,9 @@ export default function ImageHistoryDetail() {
     if (!feedback.trim()) return;
     setIsRegenerating(true);
     try {
-      const endpoint = currentGenerationId ? '/refine-image' : '/generate-image';
-      const payload = currentGenerationId 
+      const isRealGenerationId = currentGenerationId && !currentGenerationId.startsWith('history-');
+      const endpoint = isRealGenerationId ? '/refine-image' : '/generate-image';
+      const payload = isRealGenerationId 
         ? { generation_id: currentGenerationId, refinement: feedback }
         : { user_id: userId, prompt: `Original: ${currentPrompt}. Refinement: ${feedback}`, type: 'poster' };
       
@@ -117,7 +118,7 @@ export default function ImageHistoryDetail() {
   }
 
   return (
-    <div className="container mx-auto px-4 md:px-6 py-8 md:py-12 max-w-7xl">
+    <div className="container mx-auto px-4 md:px-6 py-8 md:py-12 max-w-6xl">
       <div className="mb-8">
         <button 
           onClick={() => navigate('/app/assets/history')}
@@ -128,18 +129,18 @@ export default function ImageHistoryDetail() {
         </button>
       </div>
 
-      <div className="bg-[#121212]/40 backdrop-blur-xl rounded-2xl border border-slate-800/60 shadow-2xl overflow-hidden flex flex-col lg:flex-row min-h-[70vh]">
+      <div className="bg-[#121212]/40 backdrop-blur-xl rounded-2xl border border-slate-800/60 shadow-2xl overflow-hidden flex flex-col lg:flex-row">
         
         {/* Left Column: Image */}
-        <div className="w-full lg:w-3/5 bg-[#0a0a0a] flex items-center justify-center relative p-6 md:p-10 border-b lg:border-b-0 lg:border-r border-slate-800">
-          <div className="relative w-full h-full flex items-center justify-center">
+        <div className="w-full lg:w-1/2 p-6 md:p-10 flex items-center justify-center relative border-b lg:border-b-0 lg:border-r border-slate-800/60">
+          <div className="relative w-full max-w-md mx-auto aspect-square flex items-center justify-center">
             <img 
               src={currentImage} 
               alt="Detailed Concept" 
-              className="max-w-full max-h-[70vh] lg:max-h-[85vh] object-contain rounded-lg shadow-2xl"
+              className="w-full h-full object-cover rounded-xl shadow-[0_0_40px_rgba(0,0,0,0.5)] border border-slate-700/50"
             />
             {isRegenerating && (
-              <div className="absolute inset-0 bg-black/70 backdrop-blur-md rounded-lg flex flex-col items-center justify-center z-10">
+              <div className="absolute inset-0 bg-black/70 backdrop-blur-md rounded-xl flex flex-col items-center justify-center z-10 border border-[#c5a880]/30">
                 <div className="animate-spin w-16 h-16 border-4 border-[#c5a880] border-t-transparent rounded-full mb-6 shadow-[0_0_20px_rgba(197,168,128,0.5)]" />
                 <p className="text-[#c5a880] font-bold tracking-[0.2em] text-lg animate-pulse">REGENERATING</p>
               </div>
@@ -148,7 +149,7 @@ export default function ImageHistoryDetail() {
         </div>
 
         {/* Right Column: Controls */}
-        <div className="w-full lg:w-2/5 p-6 md:p-8 flex flex-col bg-gradient-to-b from-[#161616] to-[#111]">
+        <div className="w-full lg:w-1/2 p-6 md:p-10 flex flex-col bg-gradient-to-b from-[#161616] to-[#111]">
           <h1 className="text-2xl md:text-3xl font-bold text-white mb-8">Enhance Image</h1>
           
           <div className="mb-8">
@@ -169,7 +170,7 @@ export default function ImageHistoryDetail() {
             <button 
               onClick={handleRegenerate}
               disabled={isRegenerating || !feedback.trim()}
-              className="w-full mt-4 px-6 py-4 bg-gradient-to-r from-[#c5a880] to-[#ebdcb9] hover:from-[#ebdcb9] hover:to-[#fff] text-black font-bold rounded-xl transition-all shadow-[0_0_20px_-5px_rgba(197,168,128,0.4)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 text-lg"
+              className="w-full mt-4 px-6 py-4 bg-[#c5a880] hover:bg-[#ebdcb9] disabled:bg-[#c5a880]/30 text-black disabled:text-slate-500 font-bold rounded-xl transition-all shadow-[0_0_20px_-5px_rgba(197,168,128,0.4)] flex items-center justify-center gap-2 text-lg"
             >
               <Sparkles className="w-5 h-5" />
               {isRegenerating ? 'Generating...' : 'Regenerate Image'}
@@ -178,20 +179,20 @@ export default function ImageHistoryDetail() {
 
           <div className="pt-8 border-t border-slate-800 mt-auto">
             <p className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-4 text-center">Love it? Make it Final!</p>
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-3">
               <button 
                 onClick={() => handleConfirm('poster')}
                 disabled={isRegenerating || isConfirming}
-                className="flex-1 px-4 py-4 bg-slate-800 hover:bg-emerald-600/20 text-white hover:text-emerald-400 border border-slate-700 hover:border-emerald-500/50 rounded-xl font-medium transition-all flex items-center justify-center gap-2"
+                className="flex-1 px-4 py-3 bg-slate-800/80 hover:bg-emerald-600/20 text-slate-200 hover:text-emerald-400 border border-slate-700/80 hover:border-emerald-500/50 rounded-lg text-sm font-semibold transition-all flex items-center justify-center gap-2 whitespace-nowrap"
               >
-                <Check className="w-5 h-5" /> Save as Poster
+                <Check className="w-4 h-4" /> Save as Poster
               </button>
               <button 
                 onClick={() => handleConfirm('logo')}
                 disabled={isRegenerating || isConfirming}
-                className="flex-1 px-4 py-4 bg-slate-800 hover:bg-blue-600/20 text-white hover:text-blue-400 border border-slate-700 hover:border-blue-500/50 rounded-xl font-medium transition-all flex items-center justify-center gap-2"
+                className="flex-1 px-4 py-3 bg-slate-800/80 hover:bg-blue-600/20 text-slate-200 hover:text-blue-400 border border-slate-700/80 hover:border-blue-500/50 rounded-lg text-sm font-semibold transition-all flex items-center justify-center gap-2 whitespace-nowrap"
               >
-                <Check className="w-5 h-5" /> Save as Logo
+                <Check className="w-4 h-4" /> Save as Logo
               </button>
             </div>
           </div>

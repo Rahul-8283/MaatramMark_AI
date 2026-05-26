@@ -120,6 +120,28 @@ export default function BrandAssets() {
           </div>
         </div>
 
+        {/* History Banner */}
+        <div className="mb-8 bg-gradient-to-r from-[#1a1a1a] to-[#111111] rounded-xl p-6 md:p-8 border border-[#c5a880]/20 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-2xl relative overflow-hidden group hover:border-[#c5a880]/40 transition-colors">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-[#c5a880]/5 rounded-full blur-[80px] pointer-events-none group-hover:bg-[#c5a880]/10 transition-colors" />
+          <div className="relative z-10 flex items-center gap-4">
+            <div className="w-12 h-12 rounded-full bg-amber-950/30 border border-amber-900/50 flex items-center justify-center text-[#c5a880]">
+              <Clock className="w-6 h-6" />
+            </div>
+            <div>
+              <h2 className="text-xl font-bold text-white mb-1">Image Generation History</h2>
+              <p className="text-slate-400 text-sm">
+                Explore all your past image concepts, including unconfirmed designs.
+              </p>
+            </div>
+          </div>
+          <Link 
+            to="/app/assets/history"
+            className="relative z-10 w-full sm:w-auto px-6 py-3 bg-slate-800 hover:bg-slate-700 text-white font-medium rounded-lg border border-slate-700 hover:border-[#c5a880]/50 transition-all flex items-center justify-center gap-2 whitespace-nowrap"
+          >
+            Explore History
+          </Link>
+        </div>
+
         {/* Content */}
         <div className="bg-[#121212]/40 backdrop-blur-xl rounded-lg p-8 border border-slate-800/60 shadow-2xl">
           
@@ -127,23 +149,14 @@ export default function BrandAssets() {
             <h2 className="text-xl font-semibold text-white flex items-center gap-2">
               <Briefcase className="w-5 h-5 text-amber-500" /> Your Collection
             </h2>
-            <div className="flex items-center gap-4">
-              <Link 
-                to="/app/assets/history"
-                className="text-sm px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white rounded-lg flex items-center gap-2 transition-colors border border-slate-700"
-              >
-                <Clock className="w-4 h-4" />
-                History
-              </Link>
-              <button 
-                onClick={fetchAssets}
-                disabled={loading}
-                className="text-sm text-slate-400 hover:text-[#c5a880] flex items-center gap-2 transition-colors"
-              >
-                <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
-                Refresh
-              </button>
-            </div>
+            <button 
+              onClick={fetchAssets}
+              disabled={loading}
+              className="text-sm text-slate-400 hover:text-[#c5a880] flex items-center gap-2 transition-colors"
+            >
+              <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
+              Refresh
+            </button>
           </div>
 
           {error && (

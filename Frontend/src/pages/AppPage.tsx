@@ -4,6 +4,7 @@ import useStore from '../store/useStore.ts'
 import api from '../lib/api.ts'
 import supabase from '../lib/supabaseClient.ts'
 import { ArrowLeft, FileText, BarChart3, Lightbulb, Target, Sparkles, Save, LogOut, Zap, Flame, Pin, RefreshCw, Video, Image } from 'lucide-react'
+import AgentResults from '../components/AgentResults.tsx'
 
 export default function AppPage() {
 	return (
@@ -195,6 +196,11 @@ export function AppHome() {
 						<p className="text-3xl font-bold text-[#c5a880]">0</p>
 						<p className="text-sm text-slate-400 mt-2">Images generated</p>
 					</div>
+				</div>
+
+				{/* Agent Results Brand Blueprint */}
+				<div className="mt-12">
+					<AgentResults />
 				</div>
 
 				{/* Features Section */}

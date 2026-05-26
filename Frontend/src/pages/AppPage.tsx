@@ -292,8 +292,14 @@ export function AppHome() {
 
 			{/* Guide Modal Popup */}
 			{showGuideModal && (
-				<div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md transition-all">
-					<div className="bg-[#121212] border border-[#c5a880]/30 rounded-2xl max-w-2xl w-full p-8 shadow-2xl relative overflow-hidden animate-fadeIn">
+				<div 
+					onClick={() => setShowGuideModal(false)}
+					className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md transition-all"
+				>
+					<div 
+						onClick={(e) => e.stopPropagation()}
+						className="bg-[#121212] border border-[#c5a880]/30 rounded-2xl max-w-2xl w-full p-8 shadow-2xl relative overflow-hidden animate-fadeIn"
+					>
 						<div className="absolute top-[-10%] right-[-10%] w-48 h-48 bg-[#c5a880]/5 rounded-full blur-[80px] pointer-events-none" />
 						
 						{/* Close Button */}
@@ -393,7 +399,7 @@ export function AppHome() {
 									<span className="text-xs text-slate-500 font-semibold uppercase tracking-wider">Page 2 of 2</span>
 									<button
 										onClick={() => setGuidePage(1)}
-										className="px-4 py-2 bg-slate-800/50 hover:bg-slate-850 text-slate-300 border border-slate-700/30 rounded-lg text-xs font-bold transition-colors flex items-center gap-1.5 cursor-pointer"
+										className="px-4 py-2 bg-[#c5a880]/15 hover:bg-[#c5a880]/25 text-[#c5a880] border border-[#c5a880]/30 rounded-lg text-xs font-bold transition-colors flex items-center gap-1.5 cursor-pointer"
 									>
 										← Previous Page
 									</button>

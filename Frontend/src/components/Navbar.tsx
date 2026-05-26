@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router-dom'
 import useStore from '../store/useStore.ts'
 import { supabase } from '../lib/supabaseClient.ts'
-import { LogOut, LayoutDashboard, Settings, UserPlus, LogIn } from 'lucide-react'
+import { LogOut, LayoutDashboard, Settings, UserPlus, LogIn, Briefcase } from 'lucide-react'
 
 export default function Navbar() {
   const business = useStore((s) => s.business)
@@ -54,6 +54,13 @@ export default function Navbar() {
               >
                 <LayoutDashboard className="w-4 h-4" />
                 <span className="hidden sm:inline">Workspace</span>
+              </Link>
+              <Link 
+                to="/app/assets" 
+                className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-amber-500 hover:text-amber-400 hover:bg-amber-950/30 rounded-lg transition-all"
+              >
+                <Briefcase className="w-4 h-4" />
+                <span className="hidden sm:inline">Assets</span>
               </Link>
               <Link 
                 to="/app/settings" 

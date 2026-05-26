@@ -3,7 +3,7 @@ import { Outlet, useNavigate, Link } from 'react-router-dom'
 import useStore from '../store/useStore.ts'
 import api from '../lib/api.ts'
 import supabase from '../lib/supabaseClient.ts'
-import { ArrowLeft, FileText, BarChart3, Lightbulb, Target, Sparkles, Save, LogOut, Zap, Flame, RefreshCw, Video, Image, Briefcase } from 'lucide-react'
+import { ArrowLeft, FileText, BarChart3, Lightbulb, Sparkles, Save, LogOut, Zap, Flame, RefreshCw, Video, Image, Briefcase } from 'lucide-react'
 import AgentResults from '../components/AgentResults.tsx'
 
 export default function AppPage() {
@@ -183,14 +183,21 @@ export function AppHome() {
 						<p className="text-sm text-slate-400 mt-2">Unique concepts</p>
 					</div>
 
-					<div className="bg-[#121212]/40 backdrop-blur-md rounded-lg p-6 border border-slate-800/60 hover:border-[#c5a880]/40 hover:bg-[#161616]/60 transition-all hover:shadow-[0_10px_30px_-15px_rgba(0,0,0,0.7)]">
-						<div className="w-10 h-10 rounded-md bg-amber-950/20 border border-amber-900/30 flex items-center justify-center text-[#c5a880] mb-3">
-							<Target className="w-5 h-5" />
+					<button 
+						onClick={() => navigate('/app/assets')}
+						className="text-left bg-[#121212]/40 backdrop-blur-md rounded-lg p-6 border border-[#c5a880]/30 hover:border-[#c5a880] hover:bg-[#161616]/80 transition-all hover:shadow-[0_10px_30px_-15px_rgba(197,168,128,0.5)] group block w-full"
+					>
+						<div className="flex items-center justify-between mb-3">
+							<div className="w-10 h-10 rounded-md bg-amber-950/30 border border-amber-900/50 flex items-center justify-center text-[#c5a880] group-hover:scale-110 transition-transform">
+								<Briefcase className="w-5 h-5" />
+							</div>
+							<div className="px-3 py-1 bg-[#c5a880]/20 text-[#c5a880] text-xs font-bold rounded-md border border-[#c5a880]/30">
+								Gallery
+							</div>
 						</div>
-						<h3 className="text-lg font-semibold text-white mb-1">Ready to Post</h3>
-						<p className="text-3xl font-bold text-[#c5a880]">0</p>
-						<p className="text-sm text-slate-400 mt-2">Images generated</p>
-					</div>
+						<h3 className="text-lg font-semibold text-white mb-1 group-hover:text-[#c5a880] transition-colors">Brand Assets</h3>
+						<p className="text-sm text-slate-400 mt-2">View & download your generated logos and posters.</p>
+					</button>
 				</div>
 
 				{/* Agent Results Brand Blueprint */}
@@ -223,12 +230,6 @@ export function AppHome() {
 								className="flex-1 px-4 py-3 bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 rounded-lg text-sm font-semibold transition-all flex items-center justify-center gap-2"
 							>
 								<Video className="w-4 h-4 text-[#c5a880]" /> Reels
-							</button>
-							<button
-								onClick={() => navigate('/app/assets')}
-								className="flex-1 px-4 py-3 bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 rounded-lg text-sm font-semibold transition-all flex items-center justify-center gap-2"
-							>
-								<Briefcase className="w-4 h-4 text-amber-500" /> Assets
 							</button>
 						</div>
 					</div>

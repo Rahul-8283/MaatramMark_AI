@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ArrowLeft, Clock, RefreshCw, AlertCircle, Image as ImageIcon } from 'lucide-react';
+import { ArrowLeft, Clock, RefreshCw, AlertCircle, Image as ImageIcon, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import api from '../lib/api.ts';
 import useStore from '../store/useStore.ts';
@@ -11,8 +11,11 @@ interface HistoryItem {
   created_at: string;
 }
 
+import { useNavigate } from 'react-router-dom';
+
 export default function ImageHistory() {
   const userId = useStore((s) => s.userId) || localStorage.getItem('userId');
+  const navigate = useNavigate();
   const [items, setItems] = useState<HistoryItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -114,7 +117,11 @@ export default function ImageHistory() {
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {items.map((asset) => (
-                <div key={asset.id} className="group relative bg-[#1a1a1a] rounded-xl overflow-hidden border border-slate-800 hover:border-[#c5a880]/50 transition-all hover:shadow-[0_10px_30px_-10px_rgba(197,168,128,0.2)]">
+                <button 
+                  key={asset.id} 
+                  onClick={() => navigate(`/app/assets/history/${asset.id}`, { state: { asset } })}
+                  className="group relative bg-[#1a1a1a] rounded-xl overflow-hidden border border-slate-800 hover:border-[#c5a880]/50 transition-all hover:shadow-[0_10px_30px_-10px_rgba(197,168,128,0.2)] text-left focus:outline-none focus:ring-2 focus:ring-[#c5a880]/50 block w-full cursor-pointer"
+                >
                   <div className="aspect-square w-full relative overflow-hidden bg-slate-900">
                     <img 
                       src={asset.image_url} 
@@ -122,6 +129,12 @@ export default function ImageHistory() {
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                       loading="lazy"
                     />
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
+                      <div className="bg-black/70 backdrop-blur-sm text-white px-4 py-2 rounded-lg font-medium border border-white/10 shadow-xl flex items-center gap-2">
+                        <Sparkles className="w-4 h-4 text-[#c5a880]" />
+                        Enhance & View
+                      </div>
+                    </div>
                   </div>
                   <div className="p-4">
                     <p className="text-xs text-slate-400 mb-2 line-clamp-3" title={asset.prompt}>
@@ -131,7 +144,7 @@ export default function ImageHistory() {
                       {new Date(asset.created_at).toLocaleDateString()}
                     </p>
                   </div>
-                </div>
+                </button>
               ))}
             </div>
           )}

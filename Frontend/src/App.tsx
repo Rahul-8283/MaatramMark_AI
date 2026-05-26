@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import supabase from './lib/supabaseClient.ts';
 import useStore from './store/useStore.ts';
 import Home from './pages/Home.tsx';
@@ -9,6 +9,12 @@ import Onboarding from './pages/Onboarding.tsx';
 import AppPage, { AppHome, AppSettings } from './pages/AppPage.tsx';
 import ImageGeneration from './pages/ImageGeneration.tsx';
 import ReelsGeneration from './pages/ReelsGeneration.tsx';
+import TodaysContent from './pages/TodaysContent.tsx';
+import BrandAssets from './pages/BrandAssets.tsx';
+import ImageHistory from './pages/ImageHistory.tsx';
+import ImageHistoryDetail from './pages/ImageHistoryDetail.tsx';
+import ReelsHistory from './pages/ReelsHistory.tsx';
+import NotFound from './pages/NotFound.tsx';
 import ProtectedRoute from './components/ProtectedRoute.tsx';
 import ErrorBoundary from './components/ErrorBoundary.tsx';
 import Navbar from './components/Navbar.tsx';
@@ -75,12 +81,18 @@ export default function App() {
 					>
 						<Route index element={<AppHome />} />
 						<Route path="settings" element={<AppSettings />} />
-					<Route path="generate-images" element={<ImageGeneration />} />
-					<Route path="generate-reels" element={<ReelsGeneration />} />
+						<Route path="generate-images" element={<ImageGeneration />} />
+						<Route path="generate-reels" element={<ReelsGeneration />} />
+						<Route path="todays-content" element={<TodaysContent />} />
+						<Route path="assets" element={<BrandAssets />} />
+						<Route path="assets/history" element={<ImageHistory />} />
+						<Route path="assets/history/:id" element={<ImageHistoryDetail />} />
+						<Route path="assets/reels" element={<ReelsHistory />} />
+						<Route path="reels-history" element={<ReelsHistory />} />
 				</Route>
 
 				{/* Fallback */}
-				<Route path="*" element={<Navigate to="/" replace />} />
+				<Route path="*" element={<NotFound />} />
 			</Routes>
 		</BrowserRouter>
 	</ErrorBoundary>

@@ -3,7 +3,8 @@ import { Outlet, useNavigate, Link } from 'react-router-dom'
 import useStore from '../store/useStore.ts'
 import api from '../lib/api.ts'
 import supabase from '../lib/supabaseClient.ts'
-import { ArrowLeft, FileText, BarChart3, Lightbulb, Target, Sparkles, Save, LogOut, Zap, Flame, Pin, RefreshCw, Video, Image } from 'lucide-react'
+import { ArrowLeft, FileText, Lightbulb, Sparkles, Save, LogOut, Zap, RefreshCw, Video, Image, Briefcase } from 'lucide-react'
+import AgentResults from '../components/AgentResults.tsx'
 
 export default function AppPage() {
 	return (
@@ -29,7 +30,6 @@ export function AppHome() {
 
 	const [loading, setLoading] = useState(false)
 	const [error, setError] = useState('')
-	const [showContent, setShowContent] = useState(false)
 
 	useEffect(() => {
 		const loadInitialData = async () => {
@@ -76,16 +76,12 @@ export function AppHome() {
 				user_id: userId || storedUserId,
 			})
 			setDaily(response.data)
-			setShowContent(true)
+			navigate('/app/todays-content')
 		} catch (err: any) {
 			setError(err?.response?.data?.detail || 'Failed to generate content')
 		} finally {
 			setLoading(false)
 		}
-	}
-
-	if (showContent && daily) {
-		return <DailyContentView daily={daily} onBack={() => setShowContent(false)} />
 	}
 
 	return (
@@ -122,7 +118,7 @@ export function AppHome() {
 					{daily ? (
 						<div className="flex flex-col sm:flex-row gap-4">
 							<button
-								onClick={() => setShowContent(true)}
+								onClick={() => navigate('/app/todays-content')}
 								className="flex-[2] px-8 py-4 bg-gradient-to-r from-white to-slate-200 hover:from-white hover:to-white text-black rounded-xl font-bold text-lg transition-all shadow-[0_0_30px_-5px_rgba(197,168,128,0.4)] flex items-center justify-center gap-3 group"
 							>
 								<Sparkles className="w-5 h-5 text-amber-600 group-hover:scale-110 transition-transform" />
@@ -171,15 +167,6 @@ export function AppHome() {
 				<div className="grid md:grid-cols-3 gap-6">
 					<div className="bg-[#121212]/40 backdrop-blur-md rounded-lg p-6 border border-slate-800/60 hover:border-[#c5a880]/40 hover:bg-[#161616]/60 transition-all hover:shadow-[0_10px_30px_-15px_rgba(0,0,0,0.7)]">
 						<div className="w-10 h-10 rounded-md bg-amber-950/20 border border-amber-900/30 flex items-center justify-center text-[#c5a880] mb-3">
-							<BarChart3 className="w-5 h-5" />
-						</div>
-						<h3 className="text-lg font-semibold text-white mb-1">Content Posts</h3>
-						<p className="text-3xl font-bold text-[#c5a880]">{daily?.ideas?.length || 0}</p>
-						<p className="text-sm text-slate-400 mt-2">This month</p>
-					</div>
-
-					<div className="bg-[#121212]/40 backdrop-blur-md rounded-lg p-6 border border-slate-800/60 hover:border-[#c5a880]/40 hover:bg-[#161616]/60 transition-all hover:shadow-[0_10px_30px_-15px_rgba(0,0,0,0.7)]">
-						<div className="w-10 h-10 rounded-md bg-amber-950/20 border border-amber-900/30 flex items-center justify-center text-[#c5a880] mb-3">
 							<Lightbulb className="w-5 h-5" />
 						</div>
 						<h3 className="text-lg font-semibold text-white mb-1">Ideas Ready</h3>
@@ -187,190 +174,78 @@ export function AppHome() {
 						<p className="text-sm text-slate-400 mt-2">Unique concepts</p>
 					</div>
 
-					<div className="bg-[#121212]/40 backdrop-blur-md rounded-lg p-6 border border-slate-800/60 hover:border-[#c5a880]/40 hover:bg-[#161616]/60 transition-all hover:shadow-[0_10px_30px_-15px_rgba(0,0,0,0.7)]">
-						<div className="w-10 h-10 rounded-md bg-amber-950/20 border border-amber-900/30 flex items-center justify-center text-[#c5a880] mb-3">
-							<Target className="w-5 h-5" />
-						</div>
-						<h3 className="text-lg font-semibold text-white mb-1">Ready to Post</h3>
-						<p className="text-3xl font-bold text-[#c5a880]">0</p>
-						<p className="text-sm text-slate-400 mt-2">Images generated</p>
-					</div>
-				</div>
-
-				{/* Features Section */}
-				<div className="mt-12 grid md:grid-cols-2 gap-6">
-					<div className="bg-[#121212]/30 backdrop-blur-md rounded-lg p-6 border border-slate-800/40">
-						<h3 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
-							<Sparkles className="w-5 h-5 text-amber-500" />
-							Next Steps
-						</h3>
-						<ul className="space-y-2 text-slate-300 text-sm mb-6">
-							<li>✓ Generate today's content ideas</li>
-							<li>✓ Review & refine captions</li>
-							<li>✓ Create stunning visuals or videos</li>
-							<li>✓ Post to social media</li>
-						</ul>
-						<div className="flex flex-col sm:flex-row gap-3">
-							<button
-								onClick={() => navigate('/app/generate-images')}
-								className="flex-1 px-4 py-3 bg-white hover:bg-slate-200 text-black rounded-lg text-sm font-semibold transition-all shadow-[0_0_20px_-5px_rgba(197,168,128,0.4)] flex items-center justify-center gap-2"
-							>
-								<Image className="w-4 h-4" /> Visuals
-							</button>
-							<button
-								onClick={() => navigate('/app/generate-reels')}
-								className="flex-1 px-4 py-3 bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 rounded-lg text-sm font-semibold transition-all flex items-center justify-center gap-2"
-							>
-								<Video className="w-4 h-4 text-[#c5a880]" /> Reels
-							</button>
-						</div>
-					</div>
-
-					<div className="bg-[#121212]/30 backdrop-blur-md rounded-lg p-6 border border-slate-800/40">
-						<h3 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
-							<Flame className="w-5 h-5 text-orange-500" />
-							Pro Tip
-						</h3>
-						<p className="text-slate-300 text-sm">
-							Generate content daily to maintain consistency and boost your engagement. Our AI learns from your business to create better content over time.
-						</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	)
-}
-
-interface DailyContent {
-	date?: string
-	context?: string
-	ideas?: string[]
-	captions?: string[]
-	hashtags?: string[]
-}
-
-function DailyContentView({ daily, onBack }: { daily: DailyContent, onBack: () => void }) {
-	const navigate = useNavigate()
-	const [copiedCaption, setCopiedCaption] = useState<number | null>(null)
-
-	const handleCopyCaption = (text: string, index: number) => {
-		navigator.clipboard.writeText(text)
-		setCopiedCaption(index)
-		setTimeout(() => setCopiedCaption(null), 2000)
-	}
-
-	return (
-		<div className="container mx-auto px-6 py-12">
-			<div className="max-w-4xl mx-auto">
-				{/* Header */}
-				<div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
-					<div>
-						<h1 className="text-2xl md:text-3xl font-semibold text-white mb-2">Today's Content</h1>
-						<p className="text-slate-400">AI-generated strategy for maximum impact</p>
-					</div>
-					<button
-						onClick={onBack}
-						className="px-6 py-2 bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 rounded-lg text-sm font-medium transition-colors flex items-center gap-2"
+					<button 
+						onClick={() => navigate('/app/assets')}
+						className="text-left bg-[#121212]/40 backdrop-blur-md rounded-lg p-6 border border-[#c5a880]/30 hover:border-[#c5a880] hover:bg-[#161616]/80 transition-all hover:shadow-[0_10px_30px_-15px_rgba(197,168,128,0.5)] group block w-full"
 					>
-						<ArrowLeft className="w-4 h-4" /> Back
+						<div className="flex items-center justify-between mb-3">
+							<div className="w-10 h-10 rounded-md bg-amber-950/30 border border-amber-900/50 flex items-center justify-center text-[#c5a880] group-hover:scale-110 transition-transform">
+								<Briefcase className="w-5 h-5" />
+							</div>
+							<div className="px-3 py-1 bg-[#c5a880]/20 text-[#c5a880] text-xs font-bold rounded-md border border-[#c5a880]/30">
+								Gallery
+							</div>
+						</div>
+						<h3 className="text-lg font-semibold text-white mb-1 group-hover:text-[#c5a880] transition-colors">Brand Assets</h3>
+						<p className="text-sm text-slate-400 mt-2">View & download your generated logos and posters.</p>
+					</button>
+
+					<button 
+						onClick={() => navigate('/app/reels-history')}
+						className="text-left bg-[#121212]/40 backdrop-blur-md rounded-lg p-6 border border-[#c5a880]/30 hover:border-[#c5a880] hover:bg-[#161616]/80 transition-all hover:shadow-[0_10px_30px_-15px_rgba(197,168,128,0.5)] group block w-full"
+					>
+						<div className="flex items-center justify-between mb-3">
+							<div className="w-10 h-10 rounded-md bg-amber-950/30 border border-amber-900/50 flex items-center justify-center text-[#c5a880] group-hover:scale-110 transition-transform">
+								<Video className="w-5 h-5" />
+							</div>
+							<div className="px-3 py-1 bg-[#c5a880]/20 text-[#c5a880] text-xs font-bold rounded-md border border-[#c5a880]/30">
+								History
+							</div>
+						</div>
+						<h3 className="text-lg font-semibold text-white mb-1 group-hover:text-[#c5a880] transition-colors">Reels Scripts</h3>
+						<p className="text-sm text-slate-400 mt-2">View your past generated reels & scripts.</p>
 					</button>
 				</div>
 
-				{/* Context Section */}
-				{daily.context && (
-					<div className="bg-[#121212]/50 backdrop-blur-md border border-[#c5a880]/30 rounded-lg p-6 mb-8">
-						<h2 className="text-xl font-semibold text-[#c5a880] mb-3 flex items-center gap-2">
-							<Pin className="w-5 h-5" /> Today's Context
-						</h2>
-						<p className="text-slate-200 leading-relaxed">{daily.context}</p>
-					</div>
-				)}
+				{/* Agent Results Brand Blueprint */}
+				<div className="mt-12">
+					<AgentResults />
+				</div>
 
-				{/* Ideas Section */}
-				{daily.ideas && daily.ideas.length > 0 && (
-					<div className="mb-8">
-						<h2 className="text-xl font-semibold text-white mb-4">💡 Content Ideas</h2>
-						<div className="grid md:grid-cols-2 gap-4">
-							{daily.ideas.map((idea, idx) => (
-								<div
-									key={idx}
-									className="bg-[#121212]/40 backdrop-blur-md border border-slate-800/60 hover:border-[#c5a880]/40 hover:bg-[#161616]/60 rounded-lg p-5 transition-all group cursor-pointer"
-								>
-									<div className="w-8 h-8 rounded-md bg-amber-950/20 border border-amber-900/30 flex items-center justify-center text-[#c5a880] mb-3">
-										<Sparkles className="w-4 h-4" />
-									</div>
-									<p className="text-slate-200 group-hover:text-white transition-colors">{idea}</p>
-								</div>
-							))}
+				{/* Action Hub */}
+				<div className="mt-12 grid md:grid-cols-2 gap-6">
+					
+					{/* Image Generation Box */}
+					<div className="bg-[#121212]/30 backdrop-blur-md rounded-xl p-8 border border-slate-800/40 hover:border-[#c5a880]/40 transition-all flex flex-col h-full group hover:shadow-[0_10px_30px_-15px_rgba(197,168,128,0.2)]">
+						<div className="w-12 h-12 rounded-full bg-amber-950/30 border border-amber-900/50 flex items-center justify-center text-[#c5a880] mb-5 group-hover:scale-110 transition-transform shadow-inner">
+							<Image className="w-6 h-6" />
 						</div>
-					</div>
-				)}
-
-				{/* Captions Section */}
-				{daily.captions && daily.captions.length > 0 && (
-					<div className="mb-8">
-						<h2 className="text-xl font-semibold text-white mb-4">📝 Ready-to-Use Captions</h2>
-						<div className="space-y-4">
-							{daily.captions.map((caption, idx) => (
-								<div
-									key={idx}
-									className="bg-[#121212]/40 backdrop-blur-md border border-slate-800/60 hover:border-[#c5a880]/40 hover:bg-[#161616]/60 rounded-lg p-5 transition-all group"
-								>
-									<div className="flex items-start justify-between">
-										<p className="text-slate-200 group-hover:text-white transition-colors flex-1">{caption}</p>
-										<button
-											onClick={() => handleCopyCaption(caption, idx)}
-											className={`ml-4 px-3 py-1 rounded text-xs font-medium transition-all whitespace-nowrap ${
-												copiedCaption === idx 
-												? 'bg-[#c5a880]/10 text-[#ebdcb9] border border-[#c5a880]/40' 
-												: 'bg-amber-950/20 hover:bg-amber-900/30 text-[#c5a880] border border-transparent hover:border-[#c5a880]/30'
-											}`}
-										>
-											{copiedCaption === idx ? 'Copied!' : 'Copy'}
-										</button>
-									</div>
-								</div>
-							))}
-						</div>
-					</div>
-				)}
-
-				{/* Hashtags Section */}
-				{daily.hashtags && daily.hashtags.length > 0 && (
-					<div className="mb-8">
-						<h2 className="text-xl font-semibold text-white mb-4">🏷️ Recommended Hashtags</h2>
-						<div className="bg-[#121212]/40 backdrop-blur-md border border-slate-800/60 rounded-lg p-6">
-							<div className="flex flex-wrap gap-3">
-								{daily.hashtags.map((tag, idx) => (
-									<button
-										key={idx}
-										onClick={() => navigator.clipboard.writeText(tag)}
-										className="px-4 py-2 bg-amber-950/20 hover:bg-amber-900/30 text-[#c5a880] rounded-md text-sm font-medium transition-colors border border-amber-900/30 hover:border-[#c5a880]/50"
-									>
-										{tag}
-									</button>
-								))}
-							</div>
-							<p className="text-sm text-slate-400 mt-4">Click any hashtag to copy</p>
-						</div>
-					</div>
-				)}
-
-				{/* CTA Section */}
-				<div className="bg-gradient-to-r from-amber-950/5 to-amber-900/5 backdrop-blur-md rounded-lg p-8 border border-[#c5a880]/20 text-center shadow-lg shadow-[#c5a880]/3">
-					<h3 className="text-xl font-bold text-white mb-4">Ready to create content?</h3>
-					<div className="flex flex-col sm:flex-row justify-center gap-4">
+						<h3 className="text-xl font-bold text-white mb-3 group-hover:text-[#c5a880] transition-colors">Image & Logo Generation</h3>
+						<p className="text-slate-400 text-sm leading-relaxed mb-8 flex-grow">
+							Create stunning, brand-aligned visual assets instantly. From promotional posters to elegant logos, let our AI handle your daily design needs seamlessly.
+						</p>
 						<button
 							onClick={() => navigate('/app/generate-images')}
-							className="px-8 py-3 bg-white hover:bg-slate-200 text-black rounded-lg font-bold transition-all shadow-[0_0_25px_-5px_rgba(197,168,128,0.5)] flex items-center justify-center gap-2"
+							className="w-full px-6 py-4 bg-[#c5a880] hover:bg-[#ebdcb9] text-black rounded-xl text-sm font-bold transition-all shadow-[0_0_20px_-5px_rgba(197,168,128,0.4)] flex items-center justify-center gap-2"
 						>
-							<Image className="w-5 h-5" /> Generate Images
+							<Sparkles className="w-4 h-4" /> Create Visuals & Logos
 						</button>
+					</div>
+
+					{/* Reels Generation Box */}
+					<div className="bg-[#121212]/30 backdrop-blur-md rounded-xl p-8 border border-slate-800/40 hover:border-[#c5a880]/40 transition-all flex flex-col h-full group hover:shadow-[0_10px_30px_-15px_rgba(197,168,128,0.2)]">
+						<div className="w-12 h-12 rounded-full bg-amber-950/30 border border-amber-900/50 flex items-center justify-center text-[#c5a880] mb-5 group-hover:scale-110 transition-transform shadow-inner">
+							<Video className="w-6 h-6" />
+						</div>
+						<h3 className="text-xl font-bold text-white mb-3 group-hover:text-[#c5a880] transition-colors">Reels Generation</h3>
+						<p className="text-slate-400 text-sm leading-relaxed mb-8 flex-grow">
+							Produce captivating short-form videos tailored to your audience. Keep your social feeds consistently active with highly engaging AI-generated reels.
+						</p>
 						<button
 							onClick={() => navigate('/app/generate-reels')}
-							className="px-8 py-3 bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 rounded-lg font-bold transition-all flex items-center justify-center gap-2"
+							className="w-full px-6 py-4 bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 hover:border-slate-600 rounded-xl text-sm font-bold transition-all flex items-center justify-center gap-2"
 						>
-							<Video className="w-5 h-5 text-[#c5a880]" /> Generate Reels
+							<Video className="w-4 h-4 text-[#c5a880]" /> Create Reels
 						</button>
 					</div>
 				</div>
@@ -378,6 +253,8 @@ function DailyContentView({ daily, onBack }: { daily: DailyContent, onBack: () =
 		</div>
 	)
 }
+
+
 
 export function AppSettings() {
 	const business = useStore((s) => s.business)

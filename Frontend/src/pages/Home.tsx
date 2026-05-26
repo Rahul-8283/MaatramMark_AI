@@ -127,8 +127,8 @@ export default function Home() {
               {[
                 { icon: <LineChart className="w-8 h-8 text-[#c5a880]" />, title: 'Trend Detection', desc: 'Auto-detects local events, festivals, and trending topics to keep your content highly relevant.' },
                 { icon: <BrainCircuit className="w-8 h-8 text-[#c5a880]" />, title: 'LLM Strategy Agents', desc: 'Autonomous agents research your niche and construct a cohesive brand strategy and voice.' },
-                { icon: <ImageIcon className="w-8 h-8 text-[#c5a880]" />, title: 'Visual Generation', desc: 'Instantly generate and refine stunning social media posters, promotional flyers, and business logos.' },
-                { icon: <RefreshCw className="w-8 h-8 text-[#c5a880]" />, title: 'Feedback Learning', desc: 'Stores content and analytics, continuously learning from your preferences to improve future outputs.' }
+                { icon: <ImageIcon className="w-8 h-8 text-[#c5a880]" />, title: 'Visuals & Reels', desc: 'Instantly generate posters, logos, and detailed short-form reels scripts complete with hooks and camera cues.' },
+                { icon: <RefreshCw className="w-8 h-8 text-[#c5a880]" />, title: 'AI Feedback Loop', desc: 'Submit post performance metrics (likes, shares, reach) to train the AI and optimize future outputs.' }
               ].map((feature, idx) => (
                 <motion.div 
                   key={idx}
@@ -163,7 +163,8 @@ export default function Home() {
               {[
                 { step: '01', title: 'Business Profiling', desc: 'Tell us about your business. We set up your unique brand context, location, and target audience.', icon: <Zap className="w-6 h-6" /> },
                 { step: '02', title: 'Contextual Analysis', desc: 'Our AI scans daily trends and local events, formulating content ideas specifically tailored to your profile.', icon: <BarChart className="w-6 h-6" /> },
-                { step: '03', title: 'Creative Generation', desc: 'Review AI-generated concepts, then watch as the system creates beautiful visual assets in seconds.', icon: <ImageIcon className="w-6 h-6" /> },
+                { step: '03', title: 'Creative Generation', desc: 'Review AI-generated concepts, then watch as the system creates beautiful posters, logos, and reels in seconds.', icon: <ImageIcon className="w-6 h-6" /> },
+                { step: '04', title: 'Analytics & Feedback Loop', desc: 'Log post metrics. The AI analyzes reach, likes, and shares to continuously adapt and improve your schedules and content style.', icon: <LineChart className="w-6 h-6" /> },
               ].map((item, idx) => (
                 <motion.div 
                   key={idx}

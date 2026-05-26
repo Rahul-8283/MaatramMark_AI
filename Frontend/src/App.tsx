@@ -13,6 +13,7 @@ import TodaysContent from './pages/TodaysContent.tsx';
 import BrandAssets from './pages/BrandAssets.tsx';
 import ImageHistory from './pages/ImageHistory.tsx';
 import ImageHistoryDetail from './pages/ImageHistoryDetail.tsx';
+import ReelsHistory from './pages/ReelsHistory.tsx';
 import NotFound from './pages/NotFound.tsx';
 import ProtectedRoute from './components/ProtectedRoute.tsx';
 import ErrorBoundary from './components/ErrorBoundary.tsx';
@@ -86,6 +87,7 @@ export default function App() {
 						<Route path="assets" element={<BrandAssets />} />
 						<Route path="assets/history" element={<ImageHistory />} />
 						<Route path="assets/history/:id" element={<ImageHistoryDetail />} />
+						<Route path="assets/reels" element={<ReelsHistory />} />
 				</Route>
 
 				{/* Fallback */}

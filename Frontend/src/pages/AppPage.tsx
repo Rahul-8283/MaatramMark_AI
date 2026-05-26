@@ -243,9 +243,9 @@ export function AppHome() {
 						</p>
 						<button
 							onClick={() => navigate('/app/generate-reels')}
-							className="w-full px-6 py-4 bg-slate-800 hover:bg-[#ebdcb9] hover:text-black text-white border border-slate-700 hover:border-[#c5a880] rounded-xl text-sm font-bold transition-all flex items-center justify-center gap-2"
+							className="w-full px-6 py-4 bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 hover:border-slate-600 rounded-xl text-sm font-bold transition-all flex items-center justify-center gap-2"
 						>
-							<Video className="w-4 h-4 text-[#c5a880] group-hover:text-black" /> Create Reels
+							<Video className="w-4 h-4 text-[#c5a880]" /> Create Reels
 						</button>
 					</div>
 				</div>

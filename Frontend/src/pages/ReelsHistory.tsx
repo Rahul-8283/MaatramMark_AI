@@ -107,18 +107,28 @@ export default function ReelsHistory() {
         ) : (
           <div className="space-y-12">
             {items.map((session, index) => {
-              // The backend might nest the ideas or keep them flat depending on DB schema
-              // If it's a raw string in DB, it might be parsed or in response_data
               const rawData = session.response_data || session;
-              let ideas = session.reel_ideas || rawData.reel_ideas || [];
-              if (typeof rawData === 'string') {
-                try {
+              let ideas = [];
+              try {
+                if (session.reel_ideas) {
+                  ideas = typeof session.reel_ideas === 'string' ? JSON.parse(session.reel_ideas) : session.reel_ideas;
+                } else if (rawData.reel_ideas) {
+                  ideas = typeof rawData.reel_ideas === 'string' ? JSON.parse(rawData.reel_ideas) : rawData.reel_ideas;
+                } else if (rawData.response_data?.reel_ideas) {
+                  ideas = typeof rawData.response_data.reel_ideas === 'string' ? JSON.parse(rawData.response_data.reel_ideas) : rawData.response_data.reel_ideas;
+                } else if (typeof rawData === 'string') {
                   const parsed = JSON.parse(rawData);
-                  ideas = parsed.reel_ideas || [];
-                } catch(e) {}
+                  ideas = parsed.reel_ideas || parsed.response_data?.reel_ideas || [];
+                }
+              } catch (e) {
+                console.error("Error parsing reel ideas:", e);
               }
 
-              if (!ideas.length) return null;
+              if (!Array.isArray(ideas)) {
+                ideas = [];
+              }
+
+              if (ideas.length === 0) return null;
 
               return (
                 <div key={session.id || index} className="relative">

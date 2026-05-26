@@ -3,7 +3,7 @@ import { Outlet, useNavigate, Link } from 'react-router-dom'
 import useStore from '../store/useStore.ts'
 import api from '../lib/api.ts'
 import supabase from '../lib/supabaseClient.ts'
-import { ArrowLeft, FileText, Lightbulb, Sparkles, Save, LogOut, Zap, RefreshCw, Video, Image, Briefcase } from 'lucide-react'
+import { ArrowLeft, FileText, Lightbulb, Sparkles, Save, LogOut, Zap, RefreshCw, Video, Image, Briefcase, LineChart, HelpCircle, X } from 'lucide-react'
 import AgentResults from '../components/AgentResults.tsx'
 
 export default function AppPage() {
@@ -30,6 +30,8 @@ export function AppHome() {
 
 	const [loading, setLoading] = useState(false)
 	const [error, setError] = useState('')
+	const [showGuideModal, setShowGuideModal] = useState(false)
+	const [guidePage, setGuidePage] = useState(1)
 
 	useEffect(() => {
 		const loadInitialData = async () => {
@@ -223,7 +225,7 @@ export function AppHome() {
 						<div className="w-12 h-12 rounded-full bg-amber-950/30 border border-amber-900/50 flex items-center justify-center text-[#c5a880] mb-5 group-hover:scale-110 transition-transform shadow-inner">
 							<Image className="w-6 h-6" />
 						</div>
-						<h3 className="text-xl font-bold text-white mb-3 group-hover:text-[#c5a880] transition-colors">Image & Logo Generation</h3>
+						<h3 className="text-xl font-bold text-white mb-3 group-hover:text-[#c5a880] transition-colors">Poster & Logo Generation</h3>
 						<p className="text-slate-400 text-sm leading-relaxed mb-8 flex-grow">
 							Create stunning, brand-aligned visual assets instantly. From promotional posters to elegant logos, let our AI handle your daily design needs seamlessly.
 						</p>
@@ -251,8 +253,162 @@ export function AppHome() {
 							<Video className="w-4 h-4 text-[#c5a880]" /> Create Reels
 						</button>
 					</div>
+
+					{/* AI Feedback Memory Box */}
+					<div className="bg-[#121212]/30 backdrop-blur-md rounded-xl p-8 border border-[#c5a880]/30 hover:border-[#c5a880] transition-all flex flex-col h-full group hover:shadow-[0_10px_30px_-15px_rgba(197,168,128,0.5)]">
+						<div className="w-12 h-12 rounded-full bg-amber-950/30 border border-amber-900/50 flex items-center justify-center text-[#c5a880] mb-5 group-hover:scale-110 transition-transform shadow-inner">
+							<LineChart className="w-6 h-6" />
+						</div>
+						<h3 className="text-xl font-bold text-white mb-3 group-hover:text-[#c5a880] transition-colors">AI Feedback Feed</h3>
+						<p className="text-slate-400 text-sm leading-relaxed mb-8 flex-grow">
+							Access the optimization records compiled by the AI model. Study ideal times, high-performing styles, and best hashtag trends derived from your post feedbacks.
+						</p>
+						<button
+							onClick={() => navigate('/app/view-feedback')}
+							className="w-full px-6 py-4 bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 hover:border-slate-600 rounded-xl text-sm font-bold transition-all flex items-center justify-center gap-2"
+						>
+							<LineChart className="w-4 h-4 text-[#c5a880]" /> View Feedbacks
+						</button>
+					</div>
+
+					{/* Pro Tips Box */}
+					<div className="bg-[#121212]/30 backdrop-blur-md rounded-xl p-8 border border-[#c5a880]/30 hover:border-[#c5a880] transition-all flex flex-col h-full group hover:shadow-[0_10px_30px_-15px_rgba(197,168,128,0.5)]">
+						<div className="w-12 h-12 rounded-full bg-amber-950/30 border border-amber-900/50 flex items-center justify-center text-[#c5a880] mb-5 group-hover:scale-110 transition-transform shadow-inner">
+							<HelpCircle className="w-6 h-6" />
+						</div>
+						<h3 className="text-xl font-bold text-white mb-3 group-hover:text-[#c5a880] transition-colors">Pro Tips & Guidelines</h3>
+						<p className="text-slate-400 text-sm leading-relaxed mb-8 flex-grow">
+							Learn how to use MaatramMARK effectively to scale your online brand. Discover poster curation tips, logotype templates, and AI training feedback practices.
+						</p>
+						<button
+							onClick={() => { setGuidePage(1); setShowGuideModal(true); }}
+							className="w-full px-6 py-4 bg-[#c5a880] hover:bg-[#ebdcb9] text-black rounded-xl text-sm font-bold transition-all shadow-[0_0_20px_-5px_rgba(197,168,128,0.4)] flex items-center justify-center gap-2"
+						>
+							<HelpCircle className="w-4 h-4" /> Show Guidelines
+						</button>
+					</div>
 				</div>
 			</div>
+
+			{/* Guide Modal Popup */}
+			{showGuideModal && (
+				<div 
+					onClick={() => setShowGuideModal(false)}
+					className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md transition-all"
+				>
+					<div 
+						onClick={(e) => e.stopPropagation()}
+						className="bg-[#121212] border border-[#c5a880]/30 rounded-2xl max-w-2xl w-full p-8 shadow-2xl relative overflow-hidden animate-fadeIn"
+					>
+						<div className="absolute top-[-10%] right-[-10%] w-48 h-48 bg-[#c5a880]/5 rounded-full blur-[80px] pointer-events-none" />
+						
+						{/* Close Button */}
+						<button 
+							onClick={() => setShowGuideModal(false)}
+							className="absolute top-5 right-5 text-slate-400 hover:text-white bg-slate-800/40 p-2 rounded-lg transition-colors border border-slate-700/30"
+						>
+							<X className="w-5 h-5" />
+						</button>
+
+						<div className="flex items-center gap-3 mb-6">
+							<div className="w-10 h-10 rounded-lg bg-amber-950/20 border border-amber-900/30 flex items-center justify-center text-[#c5a880]">
+								<HelpCircle className="w-5 h-5" />
+							</div>
+							<h2 className="text-2xl font-bold text-white">How to use MaatramMARK</h2>
+						</div>
+
+						{guidePage === 1 ? (
+							<>
+								<div className="space-y-4 text-slate-300 text-sm overflow-y-auto max-h-[60vh] no-scrollbar">
+									<div className="bg-slate-900/30 border border-slate-800/50 rounded-xl p-4">
+										<h3 className="font-semibold text-white mb-1.5 flex items-center gap-2">
+											<span className="w-5 h-5 rounded-full bg-[#c5a880]/15 text-[#c5a880] text-xs flex items-center justify-center font-bold">1</span>
+											Image & Logo Generation
+										</h3>
+										<p className="text-slate-400 text-xs leading-relaxed">
+											Navigate to the "Image & Logo Generation" hub. AI will create tailored visual templates for posters or logos which you can customize by writing edits.
+										</p>
+									</div>
+
+									<div className="bg-slate-900/30 border border-slate-800/50 rounded-xl p-4">
+										<h3 className="font-semibold text-white mb-1.5 flex items-center gap-2">
+											<span className="w-5 h-5 rounded-full bg-[#c5a880]/15 text-[#c5a880] text-xs flex items-center justify-center font-bold">2</span>
+											Review and Save Your Assets
+										</h3>
+										<p className="text-slate-400 text-xs leading-relaxed">
+											Confirm your visual creations to save them in your "Brand Assets" Gallery. You can download them directly to your device.
+										</p>
+									</div>
+
+									<div className="bg-slate-900/30 border border-slate-800/50 rounded-xl p-4">
+										<h3 className="font-semibold text-white mb-1.5 flex items-center gap-2">
+											<span className="w-5 h-5 rounded-full bg-[#c5a880]/15 text-[#c5a880] text-xs flex items-center justify-center font-bold">3</span>
+											Train the AI with Performance Metrics
+										</h3>
+										<p className="text-slate-400 text-xs leading-relaxed">
+											Hover over any poster in the Gallery and click "Feedback" to submit real-world performance metrics (Likes, comments, shares). The AI runs continuous analysis on this data.
+										</p>
+									</div>
+
+									<div className="bg-slate-900/30 border border-slate-800/50 rounded-xl p-4">
+										<h3 className="font-semibold text-white mb-1.5 flex items-center gap-2">
+											<span className="w-5 h-5 rounded-full bg-[#c5a880]/15 text-[#c5a880] text-xs flex items-center justify-center font-bold">4</span>
+											View Strategic Insights
+										</h3>
+										<p className="text-slate-400 text-xs leading-relaxed">
+											Open the "AI Feedback Feed" to review optimized posting schedules, successful content structures, and top-converting hashtag trends calculated from your inputs.
+										</p>
+									</div>
+								</div>
+
+								<div className="flex justify-between items-center mt-6 pt-4 border-t border-slate-800/40">
+									<span className="text-xs text-slate-500 font-semibold uppercase tracking-wider">Page 1 of 2</span>
+									<button
+										onClick={() => setGuidePage(2)}
+										className="px-4 py-2 bg-[#c5a880]/15 hover:bg-[#c5a880]/25 text-[#c5a880] border border-[#c5a880]/30 rounded-lg text-xs font-bold transition-colors flex items-center gap-1.5 cursor-pointer"
+									>
+										Next Page: Reels & History →
+									</button>
+								</div>
+							</>
+						) : (
+							<>
+								<div className="space-y-4 text-slate-300 text-sm overflow-y-auto max-h-[60vh] no-scrollbar">
+									<div className="bg-slate-900/30 border border-slate-800/50 rounded-xl p-4">
+										<h3 className="font-semibold text-white mb-1.5 flex items-center gap-2">
+											<span className="w-5 h-5 rounded-full bg-[#c5a880]/15 text-[#c5a880] text-xs flex items-center justify-center font-bold">1</span>
+											Reels Generation
+										</h3>
+										<p className="text-slate-400 text-xs leading-relaxed">
+											Navigate to the "Reels Generation" hub. Produce captivating short-form videos tailored to your audience. Keep your social feeds consistently active with highly engaging AI-generated reels.
+										</p>
+									</div>
+
+									<div className="bg-slate-900/30 border border-slate-800/50 rounded-xl p-4">
+										<h3 className="font-semibold text-white mb-1.5 flex items-center gap-2">
+											<span className="w-5 h-5 rounded-full bg-[#c5a880]/15 text-[#c5a880] text-xs flex items-center justify-center font-bold">2</span>
+											Reels Scripts & Brand Assets
+										</h3>
+										<p className="text-slate-400 text-xs leading-relaxed">
+											Go to the "Brand Assets" or "Reels Scripts" sections from the dashboard. View, manage, download, or review your previously generated logos, posters, and scripts.
+										</p>
+									</div>
+								</div>
+
+								<div className="flex justify-between items-center mt-6 pt-4 border-t border-slate-800/40">
+									<span className="text-xs text-slate-500 font-semibold uppercase tracking-wider">Page 2 of 2</span>
+									<button
+										onClick={() => setGuidePage(1)}
+										className="px-4 py-2 bg-[#c5a880]/15 hover:bg-[#c5a880]/25 text-[#c5a880] border border-[#c5a880]/30 rounded-lg text-xs font-bold transition-colors flex items-center gap-1.5 cursor-pointer"
+									>
+										← Previous Page
+									</button>
+								</div>
+							</>
+						)}
+					</div>
+				</div>
+			)}
 		</div>
 	)
 }

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ArrowLeft, Download, Image as ImageIcon, Briefcase, RefreshCw, AlertCircle, Clock } from 'lucide-react';
+import { ArrowLeft, Download, Image as ImageIcon, Briefcase, RefreshCw, AlertCircle, Clock, Send } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import api from '../lib/api.ts';
 import useStore from '../store/useStore.ts';
@@ -38,7 +38,7 @@ export default function BrandAssets() {
       }));
 
       const posters: AssetItem[] = (postersRes.data || []).map((item: any) => ({
-        id: item.id || `poster-${item.created_at}`,
+        id: item.post_id || item.id || `poster-${item.created_at}`,
         image_url: item.image_url,
         prompt: item.prompt || 'Poster',
         created_at: item.created_at,
@@ -195,9 +195,20 @@ export default function BrandAssets() {
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                       loading="lazy"
                     />
-                    <div className="absolute top-3 left-3 px-2 py-1 bg-black/60 backdrop-blur-md rounded text-xs font-medium text-white border border-white/10 uppercase tracking-wider">
+                    <div className="absolute top-3 left-3 px-2 py-1 bg-black/60 backdrop-blur-md rounded text-xs font-medium text-white border border-white/10 uppercase tracking-wider z-10">
                       {asset.type}
                     </div>
+                    {/* Hover Feedback Button - only for posters */}
+                    {asset.type === 'poster' && (
+                      <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-20">
+                        <Link 
+                          to={`/app/assets/feedback?post_id=${asset.id}`} 
+                          className="px-4 py-2 bg-[#c5a880] hover:bg-[#ebdcb9] text-black font-bold rounded-lg text-xs uppercase tracking-wider transition-all shadow-[0_0_20px_-5px_rgba(197,168,128,0.5)] flex items-center gap-1.5"
+                        >
+                          <Send className="w-3.5 h-3.5" /> Feedback
+                        </Link>
+                      </div>
+                    )}
                   </div>
                   <div className="p-4">
                     <p className="text-xs text-slate-400 mb-3 truncate" title={asset.prompt}>

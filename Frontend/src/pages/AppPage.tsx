@@ -30,7 +30,6 @@ export function AppHome() {
 
 	const [loading, setLoading] = useState(false)
 	const [error, setError] = useState('')
-	const [showContent, setShowContent] = useState(false)
 
 	useEffect(() => {
 		const loadInitialData = async () => {
@@ -77,16 +76,12 @@ export function AppHome() {
 				user_id: userId || storedUserId,
 			})
 			setDaily(response.data)
-			setShowContent(true)
+			navigate('/app/todays-content')
 		} catch (err: any) {
 			setError(err?.response?.data?.detail || 'Failed to generate content')
 		} finally {
 			setLoading(false)
 		}
-	}
-
-	if (showContent && daily) {
-		return <DailyContentView daily={daily} onBack={() => setShowContent(false)} />
 	}
 
 	return (
@@ -123,7 +118,7 @@ export function AppHome() {
 					{daily ? (
 						<div className="flex flex-col sm:flex-row gap-4">
 							<button
-								onClick={() => setShowContent(true)}
+								onClick={() => navigate('/app/todays-content')}
 								className="flex-[2] px-8 py-4 bg-gradient-to-r from-white to-slate-200 hover:from-white hover:to-white text-black rounded-xl font-bold text-lg transition-all shadow-[0_0_30px_-5px_rgba(197,168,128,0.4)] flex items-center justify-center gap-3 group"
 							>
 								<Sparkles className="w-5 h-5 text-amber-600 group-hover:scale-110 transition-transform" />
@@ -247,143 +242,7 @@ export function AppHome() {
 	)
 }
 
-interface DailyContent {
-	date?: string
-	context?: string
-	ideas?: string[]
-	captions?: string[]
-	hashtags?: string[]
-}
 
-function DailyContentView({ daily, onBack }: { daily: DailyContent, onBack: () => void }) {
-	const navigate = useNavigate()
-	const [copiedCaption, setCopiedCaption] = useState<number | null>(null)
-
-	const handleCopyCaption = (text: string, index: number) => {
-		navigator.clipboard.writeText(text)
-		setCopiedCaption(index)
-		setTimeout(() => setCopiedCaption(null), 2000)
-	}
-
-	return (
-		<div className="container mx-auto px-6 py-12">
-			<div className="max-w-4xl mx-auto">
-				{/* Header */}
-				<div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
-					<div>
-						<h1 className="text-2xl md:text-3xl font-semibold text-white mb-2">Today's Content</h1>
-						<p className="text-slate-400">AI-generated strategy for maximum impact</p>
-					</div>
-					<button
-						onClick={onBack}
-						className="px-6 py-2 bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 rounded-lg text-sm font-medium transition-colors flex items-center gap-2"
-					>
-						<ArrowLeft className="w-4 h-4" /> Back
-					</button>
-				</div>
-
-				{/* Context Section */}
-				{daily.context && (
-					<div className="bg-[#121212]/50 backdrop-blur-md border border-[#c5a880]/30 rounded-lg p-6 mb-8">
-						<h2 className="text-xl font-semibold text-[#c5a880] mb-3 flex items-center gap-2">
-							<Pin className="w-5 h-5" /> Today's Context
-						</h2>
-						<p className="text-slate-200 leading-relaxed">{daily.context}</p>
-					</div>
-				)}
-
-				{/* Ideas Section */}
-				{daily.ideas && daily.ideas.length > 0 && (
-					<div className="mb-8">
-						<h2 className="text-xl font-semibold text-white mb-4">💡 Content Ideas</h2>
-						<div className="grid md:grid-cols-2 gap-4">
-							{daily.ideas.map((idea, idx) => (
-								<div
-									key={idx}
-									className="bg-[#121212]/40 backdrop-blur-md border border-slate-800/60 hover:border-[#c5a880]/40 hover:bg-[#161616]/60 rounded-lg p-5 transition-all group cursor-pointer"
-								>
-									<div className="w-8 h-8 rounded-md bg-amber-950/20 border border-amber-900/30 flex items-center justify-center text-[#c5a880] mb-3">
-										<Sparkles className="w-4 h-4" />
-									</div>
-									<p className="text-slate-200 group-hover:text-white transition-colors">{idea}</p>
-								</div>
-							))}
-						</div>
-					</div>
-				)}
-
-				{/* Captions Section */}
-				{daily.captions && daily.captions.length > 0 && (
-					<div className="mb-8">
-						<h2 className="text-xl font-semibold text-white mb-4">📝 Ready-to-Use Captions</h2>
-						<div className="space-y-4">
-							{daily.captions.map((caption, idx) => (
-								<div
-									key={idx}
-									className="bg-[#121212]/40 backdrop-blur-md border border-slate-800/60 hover:border-[#c5a880]/40 hover:bg-[#161616]/60 rounded-lg p-5 transition-all group"
-								>
-									<div className="flex items-start justify-between">
-										<p className="text-slate-200 group-hover:text-white transition-colors flex-1">{caption}</p>
-										<button
-											onClick={() => handleCopyCaption(caption, idx)}
-											className={`ml-4 px-3 py-1 rounded text-xs font-medium transition-all whitespace-nowrap ${
-												copiedCaption === idx 
-												? 'bg-[#c5a880]/10 text-[#ebdcb9] border border-[#c5a880]/40' 
-												: 'bg-amber-950/20 hover:bg-amber-900/30 text-[#c5a880] border border-transparent hover:border-[#c5a880]/30'
-											}`}
-										>
-											{copiedCaption === idx ? 'Copied!' : 'Copy'}
-										</button>
-									</div>
-								</div>
-							))}
-						</div>
-					</div>
-				)}
-
-				{/* Hashtags Section */}
-				{daily.hashtags && daily.hashtags.length > 0 && (
-					<div className="mb-8">
-						<h2 className="text-xl font-semibold text-white mb-4">🏷️ Recommended Hashtags</h2>
-						<div className="bg-[#121212]/40 backdrop-blur-md border border-slate-800/60 rounded-lg p-6">
-							<div className="flex flex-wrap gap-3">
-								{daily.hashtags.map((tag, idx) => (
-									<button
-										key={idx}
-										onClick={() => navigator.clipboard.writeText(tag)}
-										className="px-4 py-2 bg-amber-950/20 hover:bg-amber-900/30 text-[#c5a880] rounded-md text-sm font-medium transition-colors border border-amber-900/30 hover:border-[#c5a880]/50"
-									>
-										{tag}
-									</button>
-								))}
-							</div>
-							<p className="text-sm text-slate-400 mt-4">Click any hashtag to copy</p>
-						</div>
-					</div>
-				)}
-
-				{/* CTA Section */}
-				<div className="bg-gradient-to-r from-amber-950/5 to-amber-900/5 backdrop-blur-md rounded-lg p-8 border border-[#c5a880]/20 text-center shadow-lg shadow-[#c5a880]/3">
-					<h3 className="text-xl font-bold text-white mb-4">Ready to create content?</h3>
-					<div className="flex flex-col sm:flex-row justify-center gap-4">
-						<button
-							onClick={() => navigate('/app/generate-images')}
-							className="px-8 py-3 bg-white hover:bg-slate-200 text-black rounded-lg font-bold transition-all shadow-[0_0_25px_-5px_rgba(197,168,128,0.5)] flex items-center justify-center gap-2"
-						>
-							<Image className="w-5 h-5" /> Generate Images
-						</button>
-						<button
-							onClick={() => navigate('/app/generate-reels')}
-							className="px-8 py-3 bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 rounded-lg font-bold transition-all flex items-center justify-center gap-2"
-						>
-							<Video className="w-5 h-5 text-[#c5a880]" /> Generate Reels
-						</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	)
-}
 
 export function AppSettings() {
 	const business = useStore((s) => s.business)

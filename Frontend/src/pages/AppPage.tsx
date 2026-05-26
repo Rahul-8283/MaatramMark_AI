@@ -165,22 +165,6 @@ export function AppHome() {
 
 				{/* Quick Actions Grid */}
 				<div className="grid md:grid-cols-3 gap-6">
-					<button 
-						onClick={() => navigate('/app/assets/reels')}
-						className="text-left bg-[#121212]/40 backdrop-blur-md rounded-lg p-6 border border-slate-800/60 hover:border-blue-500/40 hover:bg-[#161616]/60 transition-all hover:shadow-[0_10px_30px_-15px_rgba(59,130,246,0.3)] group block w-full"
-					>
-						<div className="flex items-center justify-between mb-3">
-							<div className="w-10 h-10 rounded-md bg-blue-950/20 border border-blue-900/30 flex items-center justify-center text-blue-400 group-hover:scale-110 transition-transform">
-								<Video className="w-5 h-5" />
-							</div>
-							<div className="px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-bold rounded-md border border-blue-500/30">
-								History
-							</div>
-						</div>
-						<h3 className="text-lg font-semibold text-white mb-1 group-hover:text-blue-400 transition-colors">Reels Scripts</h3>
-						<p className="text-sm text-slate-400 mt-2">View your past generated reels & scripts.</p>
-					</button>
-
 					<div className="bg-[#121212]/40 backdrop-blur-md rounded-lg p-6 border border-slate-800/60 hover:border-[#c5a880]/40 hover:bg-[#161616]/60 transition-all hover:shadow-[0_10px_30px_-15px_rgba(0,0,0,0.7)]">
 						<div className="w-10 h-10 rounded-md bg-amber-950/20 border border-amber-900/30 flex items-center justify-center text-[#c5a880] mb-3">
 							<Lightbulb className="w-5 h-5" />
@@ -205,6 +189,22 @@ export function AppHome() {
 						<h3 className="text-lg font-semibold text-white mb-1 group-hover:text-[#c5a880] transition-colors">Brand Assets</h3>
 						<p className="text-sm text-slate-400 mt-2">View & download your generated logos and posters.</p>
 					</button>
+
+					<button 
+						onClick={() => navigate('/app/assets/reels')}
+						className="text-left bg-[#121212]/40 backdrop-blur-md rounded-lg p-6 border border-slate-800/60 hover:border-blue-500/40 hover:bg-[#161616]/60 transition-all hover:shadow-[0_10px_30px_-15px_rgba(59,130,246,0.3)] group block w-full"
+					>
+						<div className="flex items-center justify-between mb-3">
+							<div className="w-10 h-10 rounded-md bg-blue-950/20 border border-blue-900/30 flex items-center justify-center text-blue-400 group-hover:scale-110 transition-transform">
+								<Video className="w-5 h-5" />
+							</div>
+							<div className="px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-bold rounded-md border border-blue-500/30">
+								History
+							</div>
+						</div>
+						<h3 className="text-lg font-semibold text-white mb-1 group-hover:text-blue-400 transition-colors">Reels Scripts</h3>
+						<p className="text-sm text-slate-400 mt-2">View your past generated reels & scripts.</p>
+					</button>
 				</div>
 
 				{/* Agent Results Brand Blueprint */}
@@ -220,7 +220,7 @@ export function AppHome() {
 						<div className="w-12 h-12 rounded-full bg-amber-950/30 border border-amber-900/50 flex items-center justify-center text-[#c5a880] mb-5 group-hover:scale-110 transition-transform shadow-inner">
 							<Image className="w-6 h-6" />
 						</div>
-						<h3 className="text-xl font-bold text-white mb-3 group-hover:text-[#c5a880] transition-colors">Image Generation</h3>
+						<h3 className="text-xl font-bold text-white mb-3 group-hover:text-[#c5a880] transition-colors">Image & Logo Generation</h3>
 						<p className="text-slate-400 text-sm leading-relaxed mb-8 flex-grow">
 							Create stunning, brand-aligned visual assets instantly. From promotional posters to elegant logos, let our AI handle your daily design needs seamlessly.
 						</p>
@@ -228,7 +228,7 @@ export function AppHome() {
 							onClick={() => navigate('/app/generate-images')}
 							className="w-full px-6 py-4 bg-[#c5a880] hover:bg-[#ebdcb9] text-black rounded-xl text-sm font-bold transition-all shadow-[0_0_20px_-5px_rgba(197,168,128,0.4)] flex items-center justify-center gap-2"
 						>
-							<Sparkles className="w-4 h-4" /> Create Visuals
+							<Sparkles className="w-4 h-4" /> Create Visuals & Logos
 						</button>
 					</div>
 

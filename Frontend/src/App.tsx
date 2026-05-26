@@ -88,6 +88,7 @@ export default function App() {
 						<Route path="assets/history" element={<ImageHistory />} />
 						<Route path="assets/history/:id" element={<ImageHistoryDetail />} />
 						<Route path="assets/reels" element={<ReelsHistory />} />
+						<Route path="reels-history" element={<ReelsHistory />} />
 				</Route>
 
 				{/* Fallback */}

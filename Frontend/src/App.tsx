@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import supabase from './lib/supabaseClient.ts';
 import useStore from './store/useStore.ts';
 import Home from './pages/Home.tsx';
@@ -13,6 +13,7 @@ import TodaysContent from './pages/TodaysContent.tsx';
 import BrandAssets from './pages/BrandAssets.tsx';
 import ImageHistory from './pages/ImageHistory.tsx';
 import ImageHistoryDetail from './pages/ImageHistoryDetail.tsx';
+import NotFound from './pages/NotFound.tsx';
 import ProtectedRoute from './components/ProtectedRoute.tsx';
 import ErrorBoundary from './components/ErrorBoundary.tsx';
 import Navbar from './components/Navbar.tsx';
@@ -88,7 +89,7 @@ export default function App() {
 				</Route>
 
 				{/* Fallback */}
-				<Route path="*" element={<Navigate to="/" replace />} />
+				<Route path="*" element={<NotFound />} />
 			</Routes>
 		</BrowserRouter>
 	</ErrorBoundary>

@@ -191,18 +191,18 @@ export function AppHome() {
 					</button>
 
 					<button 
-						onClick={() => navigate('/app/assets/reels')}
-						className="text-left bg-[#121212]/40 backdrop-blur-md rounded-lg p-6 border border-slate-800/60 hover:border-blue-500/40 hover:bg-[#161616]/60 transition-all hover:shadow-[0_10px_30px_-15px_rgba(59,130,246,0.3)] group block w-full"
+						onClick={() => navigate('/app/reels-history')}
+						className="text-left bg-[#121212]/40 backdrop-blur-md rounded-lg p-6 border border-[#c5a880]/30 hover:border-[#c5a880] hover:bg-[#161616]/80 transition-all hover:shadow-[0_10px_30px_-15px_rgba(197,168,128,0.5)] group block w-full"
 					>
 						<div className="flex items-center justify-between mb-3">
-							<div className="w-10 h-10 rounded-md bg-blue-950/20 border border-blue-900/30 flex items-center justify-center text-blue-400 group-hover:scale-110 transition-transform">
+							<div className="w-10 h-10 rounded-md bg-amber-950/30 border border-amber-900/50 flex items-center justify-center text-[#c5a880] group-hover:scale-110 transition-transform">
 								<Video className="w-5 h-5" />
 							</div>
-							<div className="px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-bold rounded-md border border-blue-500/30">
+							<div className="px-3 py-1 bg-[#c5a880]/20 text-[#c5a880] text-xs font-bold rounded-md border border-[#c5a880]/30">
 								History
 							</div>
 						</div>
-						<h3 className="text-lg font-semibold text-white mb-1 group-hover:text-blue-400 transition-colors">Reels Scripts</h3>
+						<h3 className="text-lg font-semibold text-white mb-1 group-hover:text-[#c5a880] transition-colors">Reels Scripts</h3>
 						<p className="text-sm text-slate-400 mt-2">View your past generated reels & scripts.</p>
 					</button>
 				</div>
@@ -233,19 +233,19 @@ export function AppHome() {
 					</div>
 
 					{/* Reels Generation Box */}
-					<div className="bg-[#121212]/30 backdrop-blur-md rounded-xl p-8 border border-slate-800/40 hover:border-blue-500/30 transition-all flex flex-col h-full group hover:shadow-[0_10px_30px_-15px_rgba(59,130,246,0.15)]">
-						<div className="w-12 h-12 rounded-full bg-blue-950/30 border border-blue-900/50 flex items-center justify-center text-blue-400 mb-5 group-hover:scale-110 transition-transform shadow-inner">
+					<div className="bg-[#121212]/30 backdrop-blur-md rounded-xl p-8 border border-slate-800/40 hover:border-[#c5a880]/40 transition-all flex flex-col h-full group hover:shadow-[0_10px_30px_-15px_rgba(197,168,128,0.2)]">
+						<div className="w-12 h-12 rounded-full bg-amber-950/30 border border-amber-900/50 flex items-center justify-center text-[#c5a880] mb-5 group-hover:scale-110 transition-transform shadow-inner">
 							<Video className="w-6 h-6" />
 						</div>
-						<h3 className="text-xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors">Reels Generation</h3>
+						<h3 className="text-xl font-bold text-white mb-3 group-hover:text-[#c5a880] transition-colors">Reels Generation</h3>
 						<p className="text-slate-400 text-sm leading-relaxed mb-8 flex-grow">
 							Produce captivating short-form videos tailored to your audience. Keep your social feeds consistently active with highly engaging AI-generated reels.
 						</p>
 						<button
 							onClick={() => navigate('/app/generate-reels')}
-							className="w-full px-6 py-4 bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 hover:border-slate-600 rounded-xl text-sm font-bold transition-all flex items-center justify-center gap-2"
+							className="w-full px-6 py-4 bg-slate-800 hover:bg-[#ebdcb9] hover:text-black text-white border border-slate-700 hover:border-[#c5a880] rounded-xl text-sm font-bold transition-all flex items-center justify-center gap-2"
 						>
-							<Video className="w-4 h-4 text-[#c5a880]" /> Create Reels
+							<Video className="w-4 h-4 text-[#c5a880] group-hover:text-black" /> Create Reels
 						</button>
 					</div>
 				</div>

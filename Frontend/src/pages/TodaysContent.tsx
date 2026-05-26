@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import useStore from '../store/useStore.ts'
 import supabase from '../lib/supabaseClient.ts'
-import { ArrowLeft, Pin, Sparkles, Video, Image, Check, Copy } from 'lucide-react'
+import { ArrowLeft, Pin, Sparkles, Video, Image } from 'lucide-react'
 
 export default function TodaysContent() {
 	const navigate = useNavigate()

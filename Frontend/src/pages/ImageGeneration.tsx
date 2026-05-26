@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import useStore from '../store/useStore.ts'
 import api from '../lib/api.ts'
-import { HelpCircle, Target, Smartphone, Award, Star, Palette, Check, Send, Sparkles, ArrowLeft } from 'lucide-react'
+import { HelpCircle, Target, Smartphone, Award, Palette, Check, Send, Sparkles, ArrowLeft } from 'lucide-react'
 
 // Step Indicator
 function StepIndicator({ steps, currentStep }: { steps: string[], currentStep: number }) {
@@ -56,10 +56,13 @@ export default function ImageGeneration() {
 
 	// Confirm step
 	const [postType, setPostType] = useState<'poster' | 'logo'>('poster')
+	const [confirmedPostId, setConfirmedPostId] = useState('')
 
-	// Feedback step
-	const [rating, setRating] = useState(5)
-	const [feedbackText, setFeedbackText] = useState('')
+	// Feedback/Analytics step inputs
+	const [likes, setLikes] = useState<number | ''>('')
+	const [comments, setComments] = useState<number | ''>('')
+	const [shares, setShares] = useState<number | ''>('')
+	const [reach, setReach] = useState<number | ''>('')
 
 	const handleGenerateConcept = async () => {
 		setLoading(true)
@@ -136,10 +139,13 @@ export default function ImageGeneration() {
 		setError('')
 		try {
 			const endpoint = postType === 'poster' ? '/confirm-poster' : '/confirm-logo'
-			await api.post(endpoint, {
+			const response = await api.post(endpoint, {
 				generation_id: generationId,
 				caption: concept,
 			})
+			if (response.data && response.data.post_id) {
+				setConfirmedPostId(response.data.post_id)
+			}
 			setStep(4)
 		} catch (err: any) {
 			setError(err?.response?.data?.detail || 'Failed to confirm post')
@@ -152,13 +158,18 @@ export default function ImageGeneration() {
 		setLoading(true)
 		setError('')
 		try {
-			// Backend /submit-feedback is for social media metrics, not UI ratings.
-			// Simulate a successful submission for the UI flow instead of throwing a 422 error.
-			await new Promise(resolve => setTimeout(resolve, 1000))
-			// Success - show completion
+			if (postType === 'poster' && confirmedPostId) {
+				await api.post('/submit-feedback', {
+					post_id: String(confirmedPostId),
+					likes: Number(likes) || 0,
+					comments: Number(comments) || 0,
+					shares: Number(shares) || 0,
+					reach: Number(reach) || 0
+				})
+			}
 			navigate('/app')
 		} catch (err: any) {
-			setError(err?.message || 'Failed to submit feedback')
+			setError(err?.response?.data?.detail || err?.message || 'Failed to submit feedback')
 		} finally {
 			setLoading(false)
 		}
@@ -394,70 +405,103 @@ export default function ImageGeneration() {
 
 				{/* Step 4: Feedback */}
 				{step === 4 && (
-					<div className="space-y-8">
-						<div className="text-center mb-12">
-							<h1 className="text-4xl font-bold text-white mb-3">Share Your Feedback</h1>
-							<p className="text-slate-400">Help us improve our image generation</p>
+					<div className="space-y-8 animate-in fade-in duration-300">
+						<div className="text-center mb-8">
+							<h1 className="text-3xl md:text-4xl font-bold text-white mb-3">Post Performance Analytics</h1>
+							<p className="text-slate-400 max-w-lg mx-auto">
+								Enter your post's metrics to run AI analysis and automatically optimize future branding strategies
+							</p>
 						</div>
 
-						<div className="bg-[#121212]/50 backdrop-blur-xl rounded-md p-8 border border-[#c5a880]/20 space-y-8">
-							{/* Rating */}
-							<div>
-								<label className="block text-lg font-semibold text-white mb-4">How satisfied are you?</label>
-								<div className="flex gap-3 justify-center md:justify-start mb-4">
-									{[1, 2, 3, 4, 5].map((star) => (
-										<button
-											key={star}
-											onClick={() => setRating(star)}
-											className="transition-all hover:scale-125 focus:outline-none"
-										>
-											<Star 
-												className={`w-8 h-8 transition-colors ${
-													star <= rating 
-														? 'fill-yellow-400 text-yellow-400' 
-														: 'text-slate-600 hover:text-slate-500'
-												}`} 
-											/>
-										</button>
-									))}
+						<div className="bg-[#121212]/50 backdrop-blur-xl rounded-xl p-8 border border-[#c5a880]/30 space-y-6 shadow-2xl">
+							{postType === 'logo' ? (
+								<div className="text-center py-6">
+									<p className="text-slate-300 mb-6">
+										Since this is a business logo, social media performance tracking is not required. You can complete the process now.
+									</p>
+									<button
+										onClick={() => navigate('/app')}
+										className="w-full px-6 py-4 bg-white hover:bg-slate-200 text-black rounded-lg font-bold transition-all shadow-[0_0_20px_-5px_rgba(197,168,128,0.4)]"
+									>
+										Finish & Return to Dashboard
+									</button>
 								</div>
-								<p className="text-sm text-slate-400">
-									{rating === 5 && "Excellent! We're thrilled!"}
-									{rating === 4 && "Great! Thanks for your feedback"}
-									{rating === 3 && "Good! We'll improve"}
-									{rating === 2 && "We can do better"}
-									{rating === 1 && "We'll work hard to improve"}
-								</p>
-							</div>
+							) : (
+								<>
+									<div className="grid grid-cols-2 gap-4">
+										<div>
+											<label className="block text-xs font-semibold text-slate-300 mb-2 ml-1">Likes</label>
+											<input
+												type="number"
+												min="0"
+												value={likes}
+												onChange={(e) => setLikes(e.target.value === '' ? '' : Number(e.target.value))}
+												placeholder="0"
+												className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-md text-white placeholder-slate-500 focus:border-[#c5a880] focus:outline-none focus:ring-2 focus:ring-[#c5a880]/20 transition-all text-sm"
+											/>
+										</div>
+										<div>
+											<label className="block text-xs font-semibold text-slate-300 mb-2 ml-1">Comments</label>
+											<input
+												type="number"
+												min="0"
+												value={comments}
+												onChange={(e) => setComments(e.target.value === '' ? '' : Number(e.target.value))}
+												placeholder="0"
+												className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-md text-white placeholder-slate-500 focus:border-[#c5a880] focus:outline-none focus:ring-2 focus:ring-[#c5a880]/20 transition-all text-sm"
+											/>
+										</div>
+										<div>
+											<label className="block text-xs font-semibold text-slate-300 mb-2 ml-1">Shares</label>
+											<input
+												type="number"
+												min="0"
+												value={shares}
+												onChange={(e) => setShares(e.target.value === '' ? '' : Number(e.target.value))}
+												placeholder="0"
+												className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-md text-white placeholder-slate-500 focus:border-[#c5a880] focus:outline-none focus:ring-2 focus:ring-[#c5a880]/20 transition-all text-sm"
+											/>
+										</div>
+										<div>
+											<label className="block text-xs font-semibold text-slate-300 mb-2 ml-1">Reach</label>
+											<input
+												type="number"
+												min="0"
+												value={reach}
+												onChange={(e) => setReach(e.target.value === '' ? '' : Number(e.target.value))}
+												placeholder="0"
+												className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-md text-white placeholder-slate-500 focus:border-[#c5a880] focus:outline-none focus:ring-2 focus:ring-[#c5a880]/20 transition-all text-sm"
+											/>
+										</div>
+									</div>
 
-							{/* Feedback Text */}
-							<div>
-								<label className="block text-lg font-semibold text-white mb-3">Tell us more (optional)</label>
-								<textarea
-									value={feedbackText}
-									onChange={(e) => setFeedbackText(e.target.value)}
-									placeholder="What could we improve? What did you love?"
-									className="w-full px-4 py-3 bg-slate-900/50 border border-slate-700 rounded-md text-white placeholder-slate-500 focus:border-[#c5a880] focus:outline-none focus:ring-2 focus:ring-[#c5a880]/20 transition-all resize-none h-24"
-								/>
-							</div>
-
-							{/* Submit */}
-							<button
-								onClick={handleSubmitFeedback}
-								disabled={loading}
-								className="w-full px-8 py-4 bg-white hover:bg-slate-200 text-black rounded-lg font-bold text-lg transition-all shadow-[0_0_25px_-5px_rgba(197,168,128,0.5)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-							>
-								{loading ? 'Submitting...' : (
-									<span className="flex items-center justify-center gap-2">
-										<Send className="w-5 h-5" /> Submit Feedback & Return
-									</span>
-								)}
-							</button>
+									<div className="flex flex-col sm:flex-row gap-4 pt-4">
+										<button
+											onClick={handleSubmitFeedback}
+											disabled={loading}
+											className="flex-1 px-8 py-4 bg-white hover:bg-slate-200 text-black rounded-lg font-bold text-base transition-all shadow-[0_0_25px_-5px_rgba(197,168,128,0.5)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+										>
+											{loading ? 'Submitting...' : (
+												<span className="flex items-center justify-center gap-2">
+													<Send className="w-5 h-5" /> Submit Analytics
+												</span>
+											)}
+										</button>
+										<button
+											onClick={() => navigate('/app')}
+											disabled={loading}
+											className="flex-1 px-8 py-4 bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 rounded-lg font-semibold text-base transition-all"
+										>
+											Skip
+										</button>
+									</div>
+								</>
+							)}
 						</div>
 
 						<div className="text-center">
 							<p className="text-slate-400 text-sm">
-								Your feedback helps us create better AI-generated content for your business
+								Your real-world metrics train the AI model to suggest even higher-converting content and ideal times
 							</p>
 						</div>
 					</div>

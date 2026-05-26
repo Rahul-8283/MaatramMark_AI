@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import { ArrowLeft, Download, Image as ImageIcon, Briefcase, RefreshCw, AlertCircle } from 'lucide-react';
+import { ArrowLeft, Download, Image as ImageIcon, Briefcase, RefreshCw, AlertCircle, Clock } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import api from '../lib/api';
-import useStore from '../store/useStore';
+import api from '../lib/api.ts';
+import useStore from '../store/useStore.ts';
 
 interface AssetItem {
   id: string;
@@ -127,14 +127,23 @@ export default function BrandAssets() {
             <h2 className="text-xl font-semibold text-white flex items-center gap-2">
               <Briefcase className="w-5 h-5 text-amber-500" /> Your Collection
             </h2>
-            <button 
-              onClick={fetchAssets}
-              disabled={loading}
-              className="text-sm text-slate-400 hover:text-[#c5a880] flex items-center gap-2 transition-colors"
-            >
-              <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
-              Refresh
-            </button>
+            <div className="flex items-center gap-4">
+              <Link 
+                to="/app/assets/history"
+                className="text-sm px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white rounded-lg flex items-center gap-2 transition-colors border border-slate-700"
+              >
+                <Clock className="w-4 h-4" />
+                History
+              </Link>
+              <button 
+                onClick={fetchAssets}
+                disabled={loading}
+                className="text-sm text-slate-400 hover:text-[#c5a880] flex items-center gap-2 transition-colors"
+              >
+                <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
+                Refresh
+              </button>
+            </div>
           </div>
 
           {error && (

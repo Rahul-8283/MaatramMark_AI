@@ -11,6 +11,7 @@ import ImageGeneration from './pages/ImageGeneration.tsx';
 import ReelsGeneration from './pages/ReelsGeneration.tsx';
 import TodaysContent from './pages/TodaysContent.tsx';
 import BrandAssets from './pages/BrandAssets.tsx';
+import ImageHistory from './pages/ImageHistory.tsx';
 import ProtectedRoute from './components/ProtectedRoute.tsx';
 import ErrorBoundary from './components/ErrorBoundary.tsx';
 import Navbar from './components/Navbar.tsx';
@@ -81,6 +82,7 @@ export default function App() {
 						<Route path="generate-reels" element={<ReelsGeneration />} />
 						<Route path="todays-content" element={<TodaysContent />} />
 						<Route path="assets" element={<BrandAssets />} />
+						<Route path="assets/history" element={<ImageHistory />} />
 				</Route>
 
 				{/* Fallback */}

@@ -57,7 +57,7 @@ export default function Navbar() {
               </Link>
               <Link 
                 to="/app/assets" 
-                className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-amber-500 hover:text-amber-400 hover:bg-amber-950/30 rounded-lg transition-all"
+                className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-[#c5a880] hover:text-[#ebdcb9] hover:bg-[#c5a880]/10 rounded-lg transition-all"
               >
                 <Briefcase className="w-4 h-4" />
                 <span className="hidden sm:inline">Assets</span>

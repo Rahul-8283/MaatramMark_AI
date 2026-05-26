@@ -3,7 +3,7 @@ import { Outlet, useNavigate, Link } from 'react-router-dom'
 import useStore from '../store/useStore.ts'
 import api from '../lib/api.ts'
 import supabase from '../lib/supabaseClient.ts'
-import { ArrowLeft, FileText, BarChart3, Lightbulb, Target, Sparkles, Save, LogOut, Zap, Flame, Pin, RefreshCw, Video, Image } from 'lucide-react'
+import { ArrowLeft, FileText, BarChart3, Lightbulb, Target, Sparkles, Save, LogOut, Zap, Flame, RefreshCw, Video, Image, Briefcase } from 'lucide-react'
 import AgentResults from '../components/AgentResults.tsx'
 
 export default function AppPage() {
@@ -223,6 +223,12 @@ export function AppHome() {
 								className="flex-1 px-4 py-3 bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 rounded-lg text-sm font-semibold transition-all flex items-center justify-center gap-2"
 							>
 								<Video className="w-4 h-4 text-[#c5a880]" /> Reels
+							</button>
+							<button
+								onClick={() => navigate('/app/assets')}
+								className="flex-1 px-4 py-3 bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 rounded-lg text-sm font-semibold transition-all flex items-center justify-center gap-2"
+							>
+								<Briefcase className="w-4 h-4 text-amber-500" /> Assets
 							</button>
 						</div>
 					</div>

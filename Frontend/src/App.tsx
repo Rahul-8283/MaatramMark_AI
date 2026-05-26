@@ -20,6 +20,7 @@ import ErrorBoundary from './components/ErrorBoundary.tsx';
 import Navbar from './components/Navbar.tsx';
 import ScrollToTop from './components/ScrollToTop.tsx';
 import AssetFeedback from './pages/AssetFeedback.tsx';
+import ViewFeedback from './pages/ViewFeedback.tsx';
 
 export default function App() {
   const setSession = useStore((s) => s.setSession)
@@ -87,6 +88,7 @@ export default function App() {
 						<Route path="todays-content" element={<TodaysContent />} />
 						<Route path="assets" element={<BrandAssets />} />
 						<Route path="assets/feedback" element={<AssetFeedback />} />
+						<Route path="view-feedback" element={<ViewFeedback />} />
 						<Route path="assets/history" element={<ImageHistory />} />
 						<Route path="assets/history/:id" element={<ImageHistoryDetail />} />
 						<Route path="assets/reels" element={<ReelsHistory />} />

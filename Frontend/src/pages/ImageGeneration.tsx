@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import useStore from '../store/useStore.ts'
 import api from '../lib/api.ts'
-import { HelpCircle, Target, Smartphone, Award, Palette, Check, Send, Sparkles, ArrowLeft } from 'lucide-react'
+import { HelpCircle, Smartphone, Award, Palette, Check, Send, Sparkles, ArrowLeft, Lightbulb } from 'lucide-react'
 
 // Step Indicator
 function StepIndicator({ steps, currentStep }: { steps: string[], currentStep: number }) {
@@ -43,7 +43,7 @@ export default function ImageGeneration() {
 
 	// Concept step
 	const [concept, setConcept] = useState('')
-	const [concepts, setConcepts] = useState<string[]>([])
+	const [selectedConceptText, setSelectedConceptText] = useState('')
 
 	// Generate step
 	const [_generatedImage, setGeneratedImage] = useState('')
@@ -72,7 +72,8 @@ export default function ImageGeneration() {
 				user_id: userId || storedUserId,
 				type: postType
 			})
-			setConcepts(response.data.concept ? [response.data.concept] : [])
+			const generated = response.data.concept || ''
+			setSelectedConceptText(generated)
 			setStep(1)
 		} catch (err: any) {
 			setError(err?.response?.data?.detail || 'Failed to generate concepts')
@@ -270,29 +271,59 @@ export default function ImageGeneration() {
 				)}
 
 				{/* Step 1: Concept Selection */}
-				{step === 1 && concepts.length > 0 && (
-					<div className="space-y-8">
+				{step === 1 && (
+					<div className="space-y-8 animate-in fade-in duration-300">
 						<div className="text-center mb-8">
-							<h2 className="text-3xl font-bold text-white mb-2">Choose Your Concept</h2>
-							<p className="text-slate-400">Select a concept to bring to life</p>
+							<h2 className="text-3xl font-bold text-white mb-2">Review & Edit Concept</h2>
+							<p className="text-slate-400">Customize the AI-generated concept below before creating the final image</p>
 						</div>
 
-						<div className="grid md:grid-cols-2 gap-4">
-							{concepts.map((c, idx) => (
-								<button
-									key={idx}
-									onClick={() => handleSelectConcept(c)}
-									disabled={loading}
-									className="text-left p-6 bg-[#121212]/40 backdrop-blur-md rounded-lg border border-slate-800/60 hover:border-[#c5a880]/50 hover:bg-[#161616]/60 transition-all hover:shadow-[0_15px_35px_-10px_rgba(0,0,0,0.6)] disabled:opacity-50 disabled:cursor-not-allowed group"
-								>
-									<div className="w-10 h-10 rounded-md bg-amber-950/20 border border-amber-900/30 flex items-center justify-center text-[#c5a880] mb-3">
-										<Target className="w-5 h-5" />
+						<div className="bg-[#121212]/50 backdrop-blur-xl rounded-xl p-8 border border-[#c5a880]/30 space-y-6 shadow-2xl">
+							<div className="space-y-3">
+								<div className="flex items-center gap-2 text-[#c5a880] ml-1">
+									<div className="w-6 h-6 rounded bg-amber-950/20 border border-amber-900/30 flex items-center justify-center">
+										<Lightbulb className="w-3.5 h-3.5" />
 									</div>
-									<p className="text-slate-200 group-hover:text-white transition-colors leading-relaxed">
-										{c}
-									</p>
+									<span className="text-xs font-bold uppercase tracking-wider">Concept Blueprint</span>
+								</div>
+								<div className="relative group/textarea">
+									<textarea
+										value={selectedConceptText}
+										onChange={(e) => setSelectedConceptText(e.target.value)}
+										placeholder="Describe the image concept you want to generate..."
+										className="w-full px-5 py-5 bg-[#0d0d0d]/80 border border-[#c5a880]/30 focus:border-[#c5a880] rounded-xl text-slate-100 placeholder-slate-600 focus:outline-none focus:ring-1 focus:ring-[#c5a880]/30 transition-all resize-none h-52 leading-relaxed text-sm shadow-inner shadow-black/50"
+									/>
+									<div className="absolute bottom-3 right-3 text-[10px] text-slate-500 pointer-events-none uppercase tracking-wider font-semibold">
+										Editable Prompt
+									</div>
+								</div>
+							</div>
+
+							<div className="flex flex-col sm:flex-row gap-4 pt-2">
+								<button
+									onClick={() => handleSelectConcept(selectedConceptText)}
+									disabled={loading || !selectedConceptText.trim()}
+									className="flex-1 px-8 py-4 bg-white hover:bg-slate-200 text-black rounded-lg font-bold text-base transition-all shadow-[0_0_25px_-5px_rgba(197,168,128,0.5)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+								>
+									{loading ? (
+										<div className="flex items-center justify-center gap-3">
+											<div className="animate-spin w-5 h-5 border-2 border-black border-t-transparent rounded-full" />
+											Generating Image...
+										</div>
+									) : (
+										<span className="flex items-center justify-center gap-2">
+											<Sparkles className="w-5 h-5" /> Generate Image
+										</span>
+									)}
 								</button>
-							))}
+								<button
+									onClick={() => setStep(0)}
+									disabled={loading}
+									className="px-8 py-4 bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 rounded-lg font-semibold text-base transition-all"
+								>
+									Back
+								</button>
+							</div>
 						</div>
 					</div>
 				)}
@@ -349,7 +380,7 @@ export default function ImageGeneration() {
 									<button
 										onClick={handleRefineImage}
 										disabled={loading || !refinementPrompt.trim()}
-										className="flex-1 px-6 py-3 bg-white hover:bg-slate-200 text-black rounded-md font-bold transition-all shadow-[0_0_20px_-5px_rgba(197,168,128,0.4)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+										className="flex-[2] px-6 py-3 bg-white hover:bg-slate-200 text-black rounded-md font-bold transition-all shadow-[0_0_20px_-5px_rgba(197,168,128,0.4)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
 									>
 										{loading ? 'Refining...' : (
 											<span className="flex items-center justify-center gap-2">
@@ -363,6 +394,13 @@ export default function ImageGeneration() {
 										className="flex-1 px-6 py-3 bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 rounded-md font-semibold transition-all"
 									>
 										→ Next
+									</button>
+									<button
+										onClick={() => setStep(1)}
+										disabled={loading}
+										className="px-6 py-3 bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 rounded-md font-semibold transition-all"
+									>
+										Back
 									</button>
 								</div>
 							</div>
@@ -389,17 +427,26 @@ export default function ImageGeneration() {
 							)}
 						</div>
 
-						<button
-							onClick={handleConfirmPost}
-							disabled={loading}
-							className="w-full px-8 py-4 bg-white hover:bg-slate-200 text-black rounded-md font-bold text-lg transition-all shadow-[0_0_25px_-5px_rgba(197,168,128,0.5)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-						>
-							{loading ? 'Confirming...' : (
-								<span className="flex items-center justify-center gap-2">
-									<Check className="w-5 h-5 text-emerald-500" /> Confirm & Continue
-								</span>
-							)}
-						</button>
+						<div className="flex flex-col sm:flex-row gap-4">
+							<button
+								onClick={handleConfirmPost}
+								disabled={loading}
+								className="flex-[2] px-8 py-4 bg-white hover:bg-slate-200 text-black rounded-md font-bold text-lg transition-all shadow-[0_0_25px_-5px_rgba(197,168,128,0.5)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+							>
+								{loading ? 'Confirming...' : (
+									<span className="flex items-center justify-center gap-2">
+										<Check className="w-5 h-5 text-emerald-500" /> Confirm & Continue
+									</span>
+								)}
+							</button>
+							<button
+								onClick={() => setStep(2)}
+								disabled={loading}
+								className="flex-1 px-8 py-4 bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 rounded-md font-semibold text-lg transition-all"
+							>
+								Back
+							</button>
+						</div>
 					</div>
 				)}
 
@@ -419,12 +466,21 @@ export default function ImageGeneration() {
 									<p className="text-slate-300 mb-6">
 										Since this is a business logo, social media performance tracking is not required. You can complete the process now.
 									</p>
-									<button
-										onClick={() => navigate('/app')}
-										className="w-full px-6 py-4 bg-white hover:bg-slate-200 text-black rounded-lg font-bold transition-all shadow-[0_0_20px_-5px_rgba(197,168,128,0.4)]"
-									>
-										Finish & Return to Dashboard
-									</button>
+									<div className="flex flex-col sm:flex-row gap-4">
+										<button
+											onClick={() => navigate('/app')}
+											className="flex-1 px-6 py-4 bg-white hover:bg-slate-200 text-black rounded-lg font-bold transition-all shadow-[0_0_20px_-5px_rgba(197,168,128,0.4)]"
+										>
+											Finish & Return to Dashboard
+										</button>
+										<button
+											onClick={() => setStep(3)}
+											disabled={loading}
+											className="px-6 py-4 bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 rounded-lg font-semibold text-base transition-all"
+										>
+											Back
+										</button>
+									</div>
 								</div>
 							) : (
 								<>
@@ -479,7 +535,7 @@ export default function ImageGeneration() {
 										<button
 											onClick={handleSubmitFeedback}
 											disabled={loading}
-											className="flex-1 px-8 py-4 bg-white hover:bg-slate-200 text-black rounded-lg font-bold text-base transition-all shadow-[0_0_25px_-5px_rgba(197,168,128,0.5)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+											className="flex-[2] px-8 py-4 bg-white hover:bg-slate-200 text-black rounded-lg font-bold text-base transition-all shadow-[0_0_25px_-5px_rgba(197,168,128,0.5)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
 										>
 											{loading ? 'Submitting...' : (
 												<span className="flex items-center justify-center gap-2">
@@ -493,6 +549,13 @@ export default function ImageGeneration() {
 											className="flex-1 px-8 py-4 bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 rounded-lg font-semibold text-base transition-all"
 										>
 											Skip
+										</button>
+										<button
+											onClick={() => setStep(3)}
+											disabled={loading}
+											className="px-8 py-4 bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 rounded-lg font-semibold text-base transition-all"
+										>
+											Back
 										</button>
 									</div>
 								</>

@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom'
 import useStore from '../store/useStore.ts'
 import { motion, type Variants } from 'framer-motion'
-import { Sparkles, ArrowRight } from 'lucide-react'
-// import { Sparkles, BrainCircuit, Image as ImageIcon, LineChart, ArrowRight, Zap, RefreshCw, BarChart, Compass, Film, Cpu, Target } from 'lucide-react'
+// import { Sparkles, ArrowRight } from 'lucide-react'
+import { Sparkles, BrainCircuit, Image as ImageIcon, LineChart, ArrowRight, Zap, RefreshCw, BarChart, Compass, Film, Cpu, Target } from 'lucide-react'
 import Footer from '../components/Footer.tsx'
 
 export default function Home() {

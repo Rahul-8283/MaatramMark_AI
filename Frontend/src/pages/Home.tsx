@@ -121,7 +121,7 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#c5a880]/10 text-[#c5a880] text-xs font-semibold uppercase tracking-widest mb-4 border border-[#c5a880]/20"
+                className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-[#c5a880]/10 text-[#c5a880] text-xs font-semibold uppercase tracking-widest mb-4 border border-[#c5a880]/20"
               >
                 <span>Discover Maatram Mark</span>
               </motion.div>
@@ -178,9 +178,13 @@ export default function Home() {
                     <motion.div 
                       animate={{ scale: [1, 1.05, 1] }}
                       transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                      className="w-28 h-28 rounded-full bg-[#181818] border border-slate-800 flex items-center justify-center shadow-[0_0_30px_-5px_rgba(197,168,128,0.3)] z-10"
+                      className="w-28 h-28 rounded-full bg-[#181818] border border-slate-800 flex items-center justify-center shadow-[0_0_20px_-5px_rgba(0,0,0,0.5)] z-10 p-3"
                     >
-                      <Sparkles className="w-12 h-12 text-[#c5a880]" />
+                      <img 
+                        src="/favicon.png" 
+                        alt="Maatram Mark Logo"
+                        className="w-16 h-16 object-contain"
+                      />
                     </motion.div>
                   </div>
                 </div>
@@ -199,7 +203,7 @@ export default function Home() {
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-[#c5a880]/5 rounded-full blur-[100px] pointer-events-none z-0" />
               
               <div className="relative z-10 flex flex-col items-center text-center max-w-4xl mx-auto">
-                <span className="text-[#c5a880] text-xs font-semibold uppercase tracking-widest mb-4 px-3 py-1 rounded-full bg-[#c5a880]/10 border border-[#c5a880]/20">
+                <span className="text-[#c5a880] text-xs font-semibold uppercase tracking-widest mb-4 px-3 py-1 rounded-md bg-[#c5a880]/10 border border-[#c5a880]/20">
                   The Story Behind the Name
                 </span>
                 
@@ -213,13 +217,14 @@ export default function Home() {
                 <div className="grid md:grid-cols-2 gap-8 w-full items-stretch mb-8">
                   {/* Left Side: Maatram */}
                   <motion.div 
-                    whileHover={{ scale: 1.03 }}
-                    className="p-6 md:p-8 rounded-xl bg-black/40 border border-slate-800 hover:border-[#c5a880]/40 transition-all flex flex-col items-center justify-center text-center relative overflow-hidden group/card"
+                    whileHover={{ scale: 1.01, y: -2 }}
+                    transition={{ type: "tween", duration: 0.4, ease: "easeOut" }}
+                    className="p-6 md:p-8 rounded-xl bg-black/40 border border-slate-800 hover:border-[#c5a880]/40 transition-colors duration-500 flex flex-col items-center justify-center text-center relative overflow-hidden group/card shadow-lg"
                   >
-                    <div className="absolute top-0 right-0 w-24 h-24 bg-[#c5a880]/5 rounded-bl-full pointer-events-none transition-transform group-hover/card:scale-110" />
+                    <div className="absolute top-0 right-0 w-24 h-24 bg-[#c5a880]/5 rounded-bl-full pointer-events-none transition-transform duration-700 ease-out group-hover/card:scale-110" />
                     
                     {/* Big Tamil word */}
-                    <div className="text-4xl md:text-5xl font-black text-[#c5a880]/30 mb-2 font-sans select-none">
+                    <div className="text-4xl md:text-5xl font-black text-[#c5a880]/30 mb-2 font-sans select-none transition-colors duration-500 group-hover/card:text-[#c5a880]/50">
                       மாற்றம்
                     </div>
                     <div className="text-2xl md:text-3xl font-extrabold text-[#c5a880] tracking-wider mb-2 font-mono">
@@ -235,10 +240,11 @@ export default function Home() {
 
                   {/* Right Side: Mark */}
                   <motion.div 
-                    whileHover={{ scale: 1.03 }}
-                    className="p-6 md:p-8 rounded-xl bg-black/40 border border-slate-800 hover:border-[#ebdcb9]/40 transition-all flex flex-col items-center justify-center text-center relative overflow-hidden group/card"
+                    whileHover={{ scale: 1.01, y: -2 }}
+                    transition={{ type: "tween", duration: 0.4, ease: "easeOut" }}
+                    className="p-6 md:p-8 rounded-xl bg-black/40 border border-slate-800 hover:border-[#ebdcb9]/40 transition-colors duration-500 flex flex-col items-center justify-center text-center relative overflow-hidden group/card shadow-lg"
                   >
-                    <div className="absolute top-0 left-0 w-24 h-24 bg-[#ebdcb9]/5 rounded-br-full pointer-events-none transition-transform group-hover/card:scale-110" />
+                    <div className="absolute top-0 left-0 w-24 h-24 bg-[#ebdcb9]/5 rounded-br-full pointer-events-none transition-transform duration-700 ease-out group-hover/card:scale-110" />
                     
                     {/* Visual icon representation */}
                     <div className="text-4xl md:text-5xl font-black text-white/20 mb-2 font-mono select-none">
@@ -259,7 +265,7 @@ export default function Home() {
                 <div className="w-full h-px bg-gradient-to-r from-transparent via-slate-800 to-transparent my-4" />
 
                 <p className="text-lg text-slate-400 max-w-3xl leading-relaxed font-normal font-sans">
-                  Together, <span className="text-[#c5a880] font-semibold">Maatram Mark</span> stands as a powerful symbol of <span className="text-white font-medium">Transformative Marketing</span> — combining autonomous artificial intelligence, customized brand guidelines, and performance metrics to help any business reach its full digital potential.
+                  Together, <span className="text-[#c5a880] font-semibold">Maatram Mark</span> stands as a powerful symbol of <span className="text-white font-medium">Transformative Marketing</span> - combining autonomous artificial intelligence, customized brand guidelines, and performance metrics to help any business reach its full digital potential.
                 </p>
               </div>
             </motion.div>
@@ -414,9 +420,8 @@ export default function Home() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.5 }}
                 whileHover={{ y: -5, borderColor: 'rgba(197,168,128,0.4)' }}
-                className="lg:col-span-6 p-8 md:p-10 rounded-xl bg-gradient-to-r from-[#121212]/60 to-[#181818]/60 backdrop-blur-md border border-slate-800/80 hover:border-[#c5a880]/40 transition-all flex flex-col md:flex-row justify-between items-start md:items-center gap-8 shadow-lg overflow-hidden relative group"
+                className="lg:col-span-6 p-8 md:p-10 rounded-xl bg-[#121212]/40 backdrop-blur-md border border-slate-800/80 hover:bg-[#141414]/60 transition-all flex flex-col md:flex-row justify-between items-start md:items-center gap-8 shadow-lg overflow-hidden relative group"
               >
-                <div className="absolute inset-0 bg-[#c5a880]/1 pointer-events-none group-hover:bg-[#c5a880]/3 transition-colors" />
                 <div className="flex-1 max-w-3xl relative z-10">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-10 h-10 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center">
@@ -433,7 +438,7 @@ export default function Home() {
                 <div className="relative z-10 flex-shrink-0">
                   <Link 
                     to={isLoggedIn ? '/app' : '/signup'} 
-                    className="px-6 py-4 bg-gradient-to-r from-[#c5a880] to-[#ebdcb9] hover:from-[#bfa178] hover:to-[#decb9e] text-black font-bold rounded-lg text-sm flex items-center gap-2 shadow-[0_0_30px_-5px_rgba(197,168,128,0.4)] transition-all hover:scale-105"
+                    className="px-6 py-3 rounded-lg font-semibold text-[#c5a880] border border-[#c5a880]/30 bg-[#121212]/80 hover:bg-[#c5a880]/10 hover:border-[#c5a880]/60 transition-colors duration-300 flex items-center gap-2 text-sm backdrop-blur-sm"
                   >
                     <span>Get Started Today</span>
                     <ArrowRight className="w-4 h-4" />

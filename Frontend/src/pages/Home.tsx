@@ -3,6 +3,7 @@ import useStore from '../store/useStore.ts'
 import { motion, type Variants } from 'framer-motion'
 // import { Sparkles, ArrowRight } from 'lucide-react'
 import { Sparkles, BrainCircuit, Image as ImageIcon, LineChart, ArrowRight, Zap, RefreshCw, BarChart, Compass, Film, Cpu, Target } from 'lucide-react'
+import { ReactLenis } from 'lenis/react'
 import Footer from '../components/Footer.tsx'
 
 export default function Home() {
@@ -25,7 +26,8 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0d0d0d] text-slate-200 overflow-hidden relative selection:bg-amber-500/20">
+    <ReactLenis root options={{ lerp: 0.1, duration: 1.5, smoothWheel: true }}>
+    <div className="min-h-screen bg-[#0d0d0d] text-slate-200 overflow-x-hidden relative selection:bg-amber-500/20">
       <div className="relative z-10">
         
         {/* --- HERO SECTION --- */}
@@ -538,5 +540,6 @@ export default function Home() {
 
       </div>
     </div>
+    </ReactLenis>
   )
 }

@@ -26,7 +26,8 @@ export default function Home() {
   }
 
   return (
-    <ReactLenis root options={{ lerp: 0.1, duration: 1.5, smoothWheel: true }}>
+    <ReactLenis root>
+    {/* <ReactLenis root options={{ lerp: 0.1, duration: 1.5, smoothWheel: true }}> */}
     <div className="min-h-screen bg-[#0d0d0d] text-slate-200 overflow-x-hidden relative selection:bg-amber-500/20">
       <div className="relative z-10">
         
